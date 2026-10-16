@@ -73,7 +73,7 @@ La clé API Brevo doit rester un secret. Ne jamais committer `.dev.vars` ni `.en
 ## Déploiement
 
 - **Cloudflare Workers** : `npm run deploy`, puis `npx wrangler secret put BREVO_API_KEY` (et ajouter les autres variables dans **Settings → Variables and Secrets**). `keep_vars = true` évite que le déploiement n'efface les variables saisies dans le tableau de bord.
-- **Vercel** : importer le dépôt et ajouter les variables d'environnement ci-dessus. `vercel.json` redirige toutes les routes vers `api/index.ts` (Edge) ; les fichiers de `public/` sont servis en statique.
+- **Vercel** : importer le dépôt et ajouter les variables d'environnement ci-dessus. `vercel.json` redirige toutes les routes vers `api/index.ts` (Node.js) ; les fichiers de `public/` sont servis en statique. Le runtime Node.js est utilisé côté Vercel pour accepter les sous-modules Hono JSX ; Cloudflare reste déployé nativement en Worker.
 
 ## Logo officiel
 

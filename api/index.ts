@@ -2,6 +2,8 @@
 import { handle } from "hono/vercel";
 import app from "../src/app";
 
-export const config = { runtime: "edge" };
+// Vercel Node.js accepte les sous-modules Hono JSX sans la restriction Edge
+// sur les modules externes. Cloudflare conserve son runtime Worker séparé.
+export const config = { runtime: "nodejs" };
 
 export default handle(app);
