@@ -432,3 +432,47 @@ button,
   .notfound-section { padding: 56px 0; }
   .notfound-code { font-size: 5rem; }
 }
+
+
+/* ============================================================
+   Correctifs mobile finalisés — Parents, tarifs, accueil et filtres
+   ============================================================ */
+@media (max-width: 1024px) {
+  .parents-banner-grid { grid-template-columns: minmax(0, 1fr); }
+  .parents-banner-grid > *, .advantages-grid > * { min-width: 0; }
+}
+
+@media (max-width: 768px) {
+  .parents-banner-grid { width: 100%; }
+  .parents-contact-cta { width: 100%; max-width: 100%; min-width: 0; }
+  .advantages-grid { grid-template-columns: minmax(0, 1fr); width: 100%; }
+  .advantage-card { min-width: 0; width: 100%; }
+  .promo-countdown { width: 100%; max-width: 100%; padding: 14px 10px; gap: 9px; }
+  .pc-label { text-align: center; max-width: 100%; overflow-wrap: anywhere; }
+  .pc-units { width: 100%; justify-content: center; gap: 4px; }
+  .pc-units strong { min-width: 0; width: clamp(40px, 17vw, 56px); padding: 7px 4px; font-size: clamp(1.25rem, 7vw, 2rem); }
+  .pc-units span { font-size: .58rem; letter-spacing: 0; }
+  .filter-tabs-row { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+  .filter-tab-btn { flex: 0 0 auto; }
+  .country-pricing-widget { padding: 18px 14px; overflow: hidden; }
+  .country-display-grid { grid-template-columns: minmax(0, 1fr); padding: 14px; gap: 16px; }
+  .country-pack-col { min-width: 0; width: 100%; padding: 18px 14px; overflow-wrap: anywhere; }
+  .country-pack-price { font-size: clamp(1.65rem, 9vw, 2.2rem); }
+}
+
+@media (max-width: 480px) {
+  .promo-countdown { padding-left: 6px; padding-right: 6px; }
+  .pc-units strong { width: 42px; font-size: 1.25rem; }
+  .pc-units span { font-size: .52rem; }
+  .country-display-grid { padding: 10px; }
+}
+
+
+@media (max-width: 768px) {
+  .hero-glow-circle-1, .cta-band-glow { display: none; }
+  .pricing-grid { width: 100%; max-width: 100%; grid-template-columns: minmax(0, 1fr); }
+  .pricing-card, .pricing-card.featured { width: 100%; min-width: 0; transform: none; overflow: hidden; }
+  .promo-ribbon-bar { flex-wrap: wrap; gap: 10px; padding: 14px 16px; }
+  .promo-ribbon-text { min-width: 0; flex: 1 1 180px; }
+  .promo-badge-pct { flex: 0 0 auto; font-size: 1rem; padding: 7px 11px; }
+}
