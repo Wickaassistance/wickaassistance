@@ -2072,10 +2072,10 @@ button {
    FOOTER
    ============================================================ */
 .site-footer {
-  background-color: var(--slate-950);
+  background: linear-gradient(135deg, var(--rose-900) 0%, var(--slate-950) 75%);
   color: var(--slate-300);
   padding: 80px 0 30px;
-  border-top: 4px solid var(--rose-800);
+  border-top: 4px solid var(--rose-500);
 }
 
 .footer-grid {
@@ -3440,3 +3440,11 @@ button {
 
 /* Le sous-titre du footer reprend la couleur de son titre sur fond sombre. */
 .footer-brand .brand-subtitle { color: var(--white); }
+
+
+/* Aucun toast promotionnel ou de retour d’action ne doit recouvrir l’écran. */
+.social-proof-container,
+.social-proof-toast,
+.global-feedback-toast {
+  display: none !important;
+}

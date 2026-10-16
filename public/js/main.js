@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initFaqAccordion();
   initTestimonials();
-  initSocialProofToasts();
   initModals();
   initPromoCountdown();
   initCookieBanner();
@@ -846,73 +845,17 @@ function initTestimonials() {
   }).join('');
 }
 
-/* ============================================================
-   9. NOTIFICATIONS DE PREUVE SOCIALE
-   ============================================================ */
-function initSocialProofToasts() {
-  const toastContainer = document.createElement('div');
-  toastContainer.className = 'social-proof-container';
-  document.body.appendChild(toastContainer);
-
-  const notifications = [
-    { name: "Moussa D.", city: "Dakar 🇸🇳", action: "a validé son admission à l'UEMF Euromed Fès", time: "Il y a 2 min" },
-    { name: "Sylvie K.", city: "Abidjan 🇨🇮", action: "a réservé le Pack VIP avec navette aéroport", time: "Il y a 6 min" },
-    { name: "Patrick M.", city: "Douala 🇨🇲", action: "a obtenu sa lettre d'admission à l'ESTEM Casablanca", time: "Il y a 11 min" },
-    { name: "Aimé N.", city: "Libreville 🇬🇦", action: "vient de finaliser son inscription en Médecine UIASS", time: "Il y a 18 min" },
-    { name: "Fatou B.", city: "Conakry 🇬🇳", action: "a reçu son diagnostic d'orientation par WhatsApp", time: "Il y a 25 min" }
-  ];
-
-  let index = 0;
-
-  const showNextToast = () => {
-    const item = notifications[index % notifications.length];
-    index++;
-
-    const toast = document.createElement('div');
-    toast.className = 'social-proof-toast';
-    toast.innerHTML = `
-      <div class="toast-icon"><i class="fas fa-graduation-cap"></i></div>
-      <div class="toast-content">
-        <p class="toast-title"><strong>${item.name}</strong> (${item.city})</p>
-        <p class="toast-desc">${item.action}</p>
-        <span class="toast-time">${item.time}</span>
-      </div>
-      <button class="toast-close-btn" onclick="this.parentElement.remove()">&times;</button>
-    `;
-
-    toastContainer.appendChild(toast);
-
-    setTimeout(() => {
-      toast.classList.add('visible');
-    }, 100);
-
-    setTimeout(() => {
-      toast.classList.remove('visible');
-      setTimeout(() => toast.remove(), 400);
-    }, 6000);
-  };
-
-  setTimeout(() => {
-    showNextToast();
-    setInterval(showNextToast, 28000);
-  }, 4000);
-}
-
-window.showToastNotification = function(msg, type = 'info') {
-  let toast = document.getElementById('globalFeedbackToast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'globalFeedbackToast';
-    toast.className = 'global-feedback-toast';
-    document.body.appendChild(toast);
+window.showToastNotification = function(msg) {
+  let status = document.getElementById('globalFeedbackStatus');
+  if (!status) {
+    status = document.createElement('div');
+    status.id = 'globalFeedbackStatus';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.style.cssText = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
+    document.body.appendChild(status);
   }
-
-  toast.innerHTML = `<span>${msg}</span>`;
-  toast.className = `global-feedback-toast active type-${type}`;
-
-  setTimeout(() => {
-    toast.classList.remove('active');
-  }, 4000);
+  status.textContent = msg;
 };
 
 /* ============================================================
