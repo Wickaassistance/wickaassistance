@@ -333,7 +333,7 @@ button {
 
 .brand-subtitle {
   font-size: 0.72rem;
-  color: var(--slate-500);
+  color: var(--rose-900);
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -3426,3 +3426,17 @@ button {
   gap: 14px;
   margin-top: 28px;
 }
+
+
+/* Pages informatives : fond identique au dégradé de la page d’accueil. */
+.brand-light-section {
+  background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%);
+  color: var(--slate-700);
+}
+.brand-light-section .section-title { color: var(--slate-900); }
+.brand-light-section .section-subtitle { color: var(--slate-600); }
+.brand-light-section .legal-back a { color: var(--rose-800); }
+.brand-light-section .legal-back a:hover { color: var(--rose-600); }
+
+/* Le sous-titre du footer reprend la couleur de son titre sur fond sombre. */
+.footer-brand .brand-subtitle { color: var(--white); }

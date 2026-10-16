@@ -370,7 +370,7 @@ button,
 
 @media (max-width: 480px) {
   .container { padding-left: 14px; padding-right: 14px; }
-  .brand-subtitle { display: block; font-size: .58rem; letter-spacing: .08em; line-height: 1.2; }
+  .brand-subtitle { display: block; font-size: .62rem; letter-spacing: .04em; line-height: 1.25; }
   .hero-headline { font-size: clamp(1.8rem, 10vw, 2.25rem); line-height: 1.12; }
   .hero-description { font-size: .95rem; }
   .hero-cta-group .btn-primary,

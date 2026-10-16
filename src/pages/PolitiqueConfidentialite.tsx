@@ -6,7 +6,7 @@ export const politiqueConfidentialiteMeta = {
 };
 
 export const PolitiqueConfidentialite = () => (
-  <section class="application-section">
+  <section class="application-section brand-light-section">
     <div class="container">
       <div class="section-header">
         <span class="section-badge">

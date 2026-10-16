@@ -12,7 +12,7 @@ export const Footer = () => (
               <span class="brand-title">
                 WICKA<span class="text-rose">.</span>
               </span>
-              <span class="brand-subtitle" style="color: var(--rose-300);">
+              <span class="brand-subtitle">
                 {SITE.tagline}
               </span>
             </div>

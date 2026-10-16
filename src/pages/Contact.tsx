@@ -7,7 +7,7 @@ export const contactMeta = {
 };
 
 export const Contact = () => (
-  <section class="application-section">
+  <section class="application-section brand-light-section">
     <div class="container">
       <div class="section-header">
         <span class="section-badge">

@@ -4144,7 +4144,7 @@ var contactMeta = {
   description: "Une question sur les \xE9tudes, l\u2019admission, le visa ou la vie \xE9tudiante au Maroc ? Contactez l\u2019\xE9quipe Wicka Assistance.",
   keywords: "contact \xE9tudes Maroc, conseiller \xE9tudiant Maroc, admission internationale, visa \xE9tudiant Maroc, orientation scolaire, Wicka Assistance"
 };
-var Contact = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+var Contact = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section brand-light-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
   /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
     /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
       /* @__PURE__ */ jsxDEV("i", { class: "fas fa-envelope" }),
@@ -4256,7 +4256,7 @@ var mentionsLegalesMeta = {
   description: "Consultez les mentions l\xE9gales du site Wicka Assistance, service d\u2019orientation et d\u2019accompagnement pour les \xE9tudes au Maroc.",
   keywords: "mentions l\xE9gales Wicka Assistance, \xE9tudes Maroc, accompagnement \xE9tudiant"
 };
-var MentionsLegales = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+var MentionsLegales = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section brand-light-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
   /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
     /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
       /* @__PURE__ */ jsxDEV("i", { class: "fas fa-scale-balanced" }),
@@ -4297,7 +4297,7 @@ var politiqueConfidentialiteMeta = {
   description: "D\xE9couvrez comment Wicka Assistance collecte, utilise et prot\xE8ge les donn\xE9es transmises via ses formulaires de contact et de candidature.",
   keywords: "politique confidentialit\xE9 \xE9tudiant, donn\xE9es personnelles, formulaires \xE9tudes Maroc, Wicka Assistance"
 };
-var PolitiqueConfidentialite = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+var PolitiqueConfidentialite = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section brand-light-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
   /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
     /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
       /* @__PURE__ */ jsxDEV("i", { class: "fas fa-lock" }),
@@ -4340,7 +4340,7 @@ var cgvMeta = {
   description: "Consultez les conditions g\xE9n\xE9rales applicables aux services d\u2019orientation et d\u2019accompagnement propos\xE9s par Wicka Assistance.",
   keywords: "conditions g\xE9n\xE9rales Wicka Assistance, services \xE9tudes Maroc, accompagnement \xE9tudiant"
 };
-var Cgv = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+var Cgv = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section brand-light-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
   /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
     /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
       /* @__PURE__ */ jsxDEV("i", { class: "fas fa-file-contract" }),
@@ -4952,7 +4952,7 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
             "WICKA",
             /* @__PURE__ */ jsxDEV("span", { class: "text-rose", children: "." })
           ] }),
-          /* @__PURE__ */ jsxDEV("span", { class: "brand-subtitle", style: "color: var(--rose-300);", children: SITE.tagline })
+          /* @__PURE__ */ jsxDEV("span", { class: "brand-subtitle", children: SITE.tagline })
         ] })
       ] }),
       /* @__PURE__ */ jsxDEV("p", { children: "Cabinet d'orientation, d'admission en grandes \xE9coles priv\xE9es et de navette VIP pour les \xE9tudiants internationaux au Maroc." }),
