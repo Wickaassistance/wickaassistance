@@ -3163,17 +3163,6 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
       /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Foire Aux Questions Parents & Candidats" }),
       /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Tout savoir sur les admissions en universit\xE9s priv\xE9es, les visas, le transport s\xE9curis\xE9 et le co\xFBt de la vie au Maroc." })
     ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "faq-search-wrap", children: [
-      /* @__PURE__ */ jsxDEV("i", { class: "fas fa-search" }),
-      /* @__PURE__ */ jsxDEV(
-        "input",
-        {
-          type: "text",
-          id: "faqSearchInput",
-          placeholder: "Rechercher une question (Euromed, navette a\xE9roport, paiement Wave, visa...)"
-        }
-      )
-    ] }),
     /* @__PURE__ */ jsxDEV("div", { class: "faq-accordion-wrap", id: "faqAccordionContainer" }),
     /* @__PURE__ */ jsxDEV("div", { class: "faq-cta-box", children: [
       /* @__PURE__ */ jsxDEV("div", { children: [
@@ -4235,10 +4224,6 @@ var Contact = () => /* @__PURE__ */ jsxDEV("section", { class: "application-sect
       " Envoyer mon message"
     ] }),
     /* @__PURE__ */ jsxDEV("p", { class: "form-status", id: "contactStatus", role: "status", "aria-live": "polite" })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("p", { class: "legal-back", children: /* @__PURE__ */ jsxDEV("a", { href: "/", children: [
-    /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-left" }),
-    " Retour \xE0 l\u2019accueil"
   ] }) })
 ] }) });
 
@@ -4276,11 +4261,7 @@ var MentionsLegales = () => /* @__PURE__ */ jsxDEV("section", { class: "applicat
     /* @__PURE__ */ jsxDEV("h2", { children: "Propri\xE9t\xE9 intellectuelle" }),
     /* @__PURE__ */ jsxDEV("p", { children: "Les textes, \xE9l\xE9ments graphiques, logos et contenus du site ne peuvent pas \xEAtre reproduits ou r\xE9utilis\xE9s sans autorisation, sauf dispositions l\xE9gales applicables." }),
     /* @__PURE__ */ jsxDEV("p", { class: "legal-updated", children: "Derni\xE8re mise \xE0 jour : 15 octobre 2026." })
-  ] }),
-  /* @__PURE__ */ jsxDEV("p", { class: "legal-back", children: /* @__PURE__ */ jsxDEV("a", { href: "/", children: [
-    /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-left" }),
-    " Retour \xE0 l\u2019accueil"
-  ] }) })
+  ] })
 ] }) });
 
 // src/pages/PolitiqueConfidentialite.tsx
@@ -4319,11 +4300,7 @@ var PolitiqueConfidentialite = () => /* @__PURE__ */ jsxDEV("section", { class: 
     /* @__PURE__ */ jsxDEV("p", { children: "Le site n\u2019utilise pas de cookie publicitaire, de cookie de suivi ou d\u2019outil d\u2019analyse comportementale. La banni\xE8re de confidentialit\xE9 m\xE9morise uniquement votre choix dans le stockage local de votre navigateur afin de ne pas vous \xEAtre pr\xE9sent\xE9e \xE0 chaque visite. Vous pouvez effacer cette pr\xE9f\xE9rence depuis les r\xE9glages de votre navigateur." }),
     /* @__PURE__ */ jsxDEV("p", { children: "Les ressources externes \xE9ventuellement charg\xE9es, comme la biblioth\xE8que d\u2019ic\xF4nes ou les polices, peuvent recevoir des informations techniques n\xE9cessaires \xE0 leur fonctionnement selon leurs propres politiques. Aucun service externe n\u2019est utilis\xE9 pour suivre votre navigation \xE0 des fins publicitaires." }),
     /* @__PURE__ */ jsxDEV("p", { class: "legal-updated", children: "Derni\xE8re mise \xE0 jour : 15 octobre 2026." })
-  ] }),
-  /* @__PURE__ */ jsxDEV("p", { class: "legal-back", children: /* @__PURE__ */ jsxDEV("a", { href: "/", children: [
-    /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-left" }),
-    " Retour \xE0 l\u2019accueil"
-  ] }) })
+  ] })
 ] }) });
 
 // src/pages/Cgv.tsx
@@ -4361,11 +4338,7 @@ var Cgv = () => /* @__PURE__ */ jsxDEV("section", { class: "application-section 
       "."
     ] }),
     /* @__PURE__ */ jsxDEV("p", { class: "legal-updated", children: "Derni\xE8re mise \xE0 jour : 15 octobre 2026." })
-  ] }),
-  /* @__PURE__ */ jsxDEV("p", { class: "legal-back", children: /* @__PURE__ */ jsxDEV("a", { href: "/", children: [
-    /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-left" }),
-    " Retour \xE0 l\u2019accueil"
-  ] }) })
+  ] })
 ] }) });
 
 // src/pages/Merci.tsx
@@ -4434,11 +4407,6 @@ var Merci = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
         ] })
       ] })
     ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "thanks-actions", children: /* @__PURE__ */ jsxDEV("a", { href: "/", class: "btn-secondary btn-full", children: [
-      /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-left" }),
-      " ",
-      /* @__PURE__ */ jsxDEV("span", { children: "Retour \xE0 l'accueil" })
-    ] }) }),
     /* @__PURE__ */ jsxDEV("p", { class: "thanks-note", children: [
       /* @__PURE__ */ jsxDEV("i", { class: "fas fa-lock" }),
       " Vos donn\xE9es sont confidentielles et ne servent qu'aux d\xE9marches d'admission."
@@ -4757,12 +4725,8 @@ var NotFound = () => /* @__PURE__ */ jsxDEV("section", { class: "notfound-sectio
   ] }),
   /* @__PURE__ */ jsxDEV("div", { class: "notfound-code", children: "404" }),
   /* @__PURE__ */ jsxDEV("h1", { class: "section-title", children: "Page introuvable" }),
-  /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "La page que vous cherchez n'existe pas ou a \xE9t\xE9 d\xE9plac\xE9e. Retournez \xE0 l'accueil, explorez nos universit\xE9s ou \xE9changez directement avec un conseiller." }),
+  /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "La page que vous cherchez n'existe pas ou a \xE9t\xE9 d\xE9plac\xE9e. Explorez nos universit\xE9s ou \xE9changez directement avec un conseiller." }),
   /* @__PURE__ */ jsxDEV("div", { class: "notfound-actions", children: [
-    /* @__PURE__ */ jsxDEV("a", { href: "/", class: "btn-primary", children: [
-      /* @__PURE__ */ jsxDEV("i", { class: "fas fa-house" }),
-      /* @__PURE__ */ jsxDEV("span", { children: "Retour \xE0 l'accueil" })
-    ] }),
     /* @__PURE__ */ jsxDEV("a", { href: "/universites", class: "btn-secondary", children: [
       /* @__PURE__ */ jsxDEV("i", { class: "fas fa-university" }),
       /* @__PURE__ */ jsxDEV("span", { children: "Voir les universit\xE9s" })

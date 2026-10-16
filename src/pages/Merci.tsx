@@ -81,12 +81,6 @@ export const Merci = () => (
               </div>
             </div>
 
-            <div class="thanks-actions">
-              <a href="/" class="btn-secondary btn-full">
-                <i class="fas fa-arrow-left"></i> <span>Retour à l'accueil</span>
-              </a>
-            </div>
-
             <p class="thanks-note">
               <i class="fas fa-lock"></i> Vos données sont confidentielles et ne servent qu'aux démarches d'admission.
             </p>

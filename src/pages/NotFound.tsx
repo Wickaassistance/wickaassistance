@@ -16,14 +16,10 @@ export const NotFound = () => (
         <div class="notfound-code">404</div>
         <h1 class="section-title">Page introuvable</h1>
         <p class="section-subtitle">
-          La page que vous cherchez n'existe pas ou a été déplacée. Retournez à l'accueil, explorez nos universités ou
+          La page que vous cherchez n'existe pas ou a été déplacée. Explorez nos universités ou
           échangez directement avec un conseiller.
         </p>
         <div class="notfound-actions">
-          <a href="/" class="btn-primary">
-            <i class="fas fa-house"></i>
-            <span>Retour à l'accueil</span>
-          </a>
           <a href="/universites" class="btn-secondary">
             <i class="fas fa-university"></i>
             <span>Voir les universités</span>

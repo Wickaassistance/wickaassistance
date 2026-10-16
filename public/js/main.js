@@ -742,25 +742,11 @@ function showSubmissionSuccessModal(data) {
    ============================================================ */
 function initFaqAccordion() {
   const container = document.getElementById('faqAccordionContainer');
-  const searchInput = document.getElementById('faqSearchInput');
 
   if (!container || !window.WICKA_DATA) return;
 
   const renderFaqs = (filter = '') => {
-    const filteredFaqs = window.WICKA_DATA.faqs.filter(faq => {
-      return faq.q.toLowerCase().includes(filter.toLowerCase()) ||
-             faq.a.toLowerCase().includes(filter.toLowerCase());
-    });
-
-    if (filteredFaqs.length === 0) {
-      container.innerHTML = `
-        <div class="faq-empty">
-          <p>Aucune réponse trouvée pour "${escapeHtml(filter)}". Nos conseillers sont à votre disposition sur WhatsApp.</p>
-        </div>
-      `;
-      return;
-    }
-
+    const filteredFaqs = window.WICKA_DATA.faqs;
     container.innerHTML = filteredFaqs.map((faq, index) => {
       const isOpen = index === 0;
       return `
@@ -797,13 +783,7 @@ function initFaqAccordion() {
     });
   };
 
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      renderFaqs(e.target.value.trim());
-    });
-  }
-
-  renderFaqs();
+renderFaqs();
 }
 
 /* ============================================================

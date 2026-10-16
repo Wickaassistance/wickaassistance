@@ -578,15 +578,6 @@ export const Home = () => (
           </p>
         </div>
 
-        <div class="faq-search-wrap">
-          <i class="fas fa-search"></i>
-          <input
-            type="text"
-            id="faqSearchInput"
-            placeholder="Rechercher une question (Euromed, navette aéroport, paiement Wave, visa...)"
-          />
-        </div>
-
         <div class="faq-accordion-wrap" id="faqAccordionContainer"></div>
 
         <div class="faq-cta-box">

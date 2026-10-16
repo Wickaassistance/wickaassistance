@@ -60,11 +60,6 @@ export const PolitiqueConfidentialite = () => (
         </p>
         <p class="legal-updated">Dernière mise à jour : 15 octobre 2026.</p>
       </article>
-      <p class="legal-back">
-        <a href="/">
-          <i class="fas fa-arrow-left"></i> Retour à l’accueil
-        </a>
-      </p>
     </div>
   </section>
 );

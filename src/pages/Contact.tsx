@@ -103,11 +103,6 @@ export const Contact = () => (
           <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
-      <p class="legal-back">
-        <a href="/">
-          <i class="fas fa-arrow-left"></i> Retour à l’accueil
-        </a>
-      </p>
     </div>
   </section>
 );
