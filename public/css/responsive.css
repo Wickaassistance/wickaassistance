@@ -476,3 +476,35 @@ button,
   .promo-ribbon-text { min-width: 0; flex: 1 1 180px; }
   .promo-badge-pct { flex: 0 0 auto; font-size: 1rem; padding: 7px 11px; }
 }
+
+
+/* CTA mobiles : deux boutons de largeur égale, de hauteur fixe et lisibles. */
+@media (max-width: 768px) {
+  .mobile-sticky-cta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .msc-btn,
+  .msc-wa {
+    flex: initial;
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    height: 56px;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    gap: 6px;
+    font-size: clamp(0.7rem, 2.7vw, 0.82rem);
+    line-height: 1.15;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .msc-btn > i { flex: 0 0 auto; }
+}
