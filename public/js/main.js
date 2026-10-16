@@ -755,7 +755,7 @@ function initFaqAccordion() {
     if (filteredFaqs.length === 0) {
       container.innerHTML = `
         <div class="faq-empty">
-          <p>Aucune réponse trouvée pour "${escapeHtml(filter)}". Nos conseillers sont à votre disposition par WhatsApp au +212 7 89 09 54 98 !</p>
+          <p>Aucune réponse trouvée pour "${escapeHtml(filter)}". Nos conseillers sont à votre disposition sur WhatsApp.</p>
         </div>
       `;
       return;

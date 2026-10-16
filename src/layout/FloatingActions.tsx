@@ -82,7 +82,7 @@ export const FloatingActions = () => (
             style="background: #25D366; border-color: #25D366;"
           >
             <i class="fab fa-whatsapp"></i>
-            <span>Finaliser sur WhatsApp ({SITE.phone})</span>
+            <span>WhatsApp</span>
           </a>
           <button type="button" class="btn-secondary btn-full modal-close-btn-action">
             <span>Fermer cette fenêtre</span>

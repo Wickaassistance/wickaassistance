@@ -23,7 +23,7 @@ export const Header = ({ path }: { path: string }) => (
         </div>
         <div class="notice-right">
           <a href={waLink()} target="_blank" rel="noopener noreferrer" class="notice-contact">
-            <i class="fab fa-whatsapp text-rose-300"></i> {SITE.phone}
+            <i class="fab fa-whatsapp text-rose-300"></i> WhatsApp
           </a>
           <a href={`mailto:${SITE.email}`} class="notice-contact">
             <i class="far fa-envelope"></i> {SITE.email}
@@ -87,7 +87,7 @@ export const Header = ({ path }: { path: string }) => (
           <i class="fas fa-paper-plane"></i> Démarrer ma Candidature
         </a>
         <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn-secondary btn-full">
-          <i class="fab fa-whatsapp text-rose"></i> Conseiller WhatsApp Direct ({SITE.phone})
+          <i class="fab fa-whatsapp text-rose"></i> WhatsApp
         </a>
       </div>
     </div>

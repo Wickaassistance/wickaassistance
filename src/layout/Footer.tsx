@@ -74,9 +74,7 @@ export const Footer = () => (
             ))}
             <div class="contact-line">
               <i class="fab fa-whatsapp"></i>
-              <span>
-                <strong>Ligne Directe :</strong> {SITE.phone}
-              </span>
+              <a href={waLink()} target="_blank" rel="noopener noreferrer">WhatsApp</a>
             </div>
             <div class="contact-line">
               <i class="far fa-envelope"></i>
@@ -88,7 +86,6 @@ export const Footer = () => (
 
       <div class="footer-bottom-bar">
         <span>© {SITE.copyrightYear} {SITE.name}. Tous droits réservés.</span>
-        <span>Plateforme officielle pour la mobilité et l'admission universitaire au Royaume du Maroc.</span>
       </div>
     </div>
   </footer>

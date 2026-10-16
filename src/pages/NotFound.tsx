@@ -1,4 +1,4 @@
-import { SITE, waLink } from "../config/site";
+import { waLink } from "../config/site";
 
 export const notFoundMeta = {
   title: "Page introuvable | Wicka Assistance",
@@ -35,7 +35,7 @@ export const NotFound = () => (
             class="btn-secondary"
           >
             <i class="fab fa-whatsapp text-rose"></i>
-            <span>WhatsApp : {SITE.phone}</span>
+            <span>WhatsApp</span>
           </a>
         </div>
       </div>

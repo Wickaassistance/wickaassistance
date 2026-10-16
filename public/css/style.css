@@ -3438,8 +3438,8 @@ button {
 .brand-light-section .legal-back a { color: var(--rose-800); }
 .brand-light-section .legal-back a:hover { color: var(--rose-600); }
 
-/* Le sous-titre du footer reprend la couleur de son titre sur fond sombre. */
-.footer-brand .brand-subtitle { color: var(--white); }
+/* Le sous-titre du footer reprend la couleur de son titre. */
+.footer-brand .brand-subtitle { color: var(--rose-900); }
 
 
 /* Aucun toast promotionnel ou de retour d’action ne doit recouvrir l’écran. */
@@ -3448,3 +3448,33 @@ button {
 .global-feedback-toast {
   display: none !important;
 }
+
+
+/* Footer clair, cohérent avec le fond rose et blanc du site. */
+.site-footer {
+  background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%);
+  color: var(--slate-700);
+  border-top: 3px solid var(--rose-200);
+}
+.site-footer .footer-brand .brand-title,
+.site-footer .footer-col-title { color: var(--rose-900); }
+.site-footer .footer-brand .brand-subtitle { color: var(--rose-900); }
+.site-footer .footer-brand p,
+.site-footer .footer-contact-info,
+.site-footer .footer-bottom-bar { color: var(--slate-700); }
+.site-footer .footer-links-list a { color: var(--slate-700); }
+.site-footer .footer-links-list a:hover { color: var(--rose-900); }
+.site-footer .social-icon-btn {
+  background: var(--white);
+  color: var(--rose-900);
+  border: 1px solid var(--rose-200);
+  box-shadow: var(--shadow-sm);
+}
+.site-footer .social-icon-btn:hover {
+  background: var(--rose-800);
+  color: var(--white);
+  border-color: var(--rose-800);
+}
+.site-footer .footer-bottom-bar { border-top-color: var(--rose-200); }
+.site-footer .contact-line a { color: var(--rose-800); font-weight: 700; }
+.site-footer .contact-line a:hover { color: var(--rose-600); }

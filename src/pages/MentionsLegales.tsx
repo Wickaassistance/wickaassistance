@@ -22,8 +22,8 @@ export const MentionsLegales = () => (
           étudiants internationaux souhaitant étudier au Maroc.
         </p>
         <p>
-          Contact : <a href="mailto:wickaassistance@gmail.com">wickaassistance@gmail.com</a> — WhatsApp :{" "}
-          <a href="https://wa.me/212789095498">+212 7 89 09 54 98</a>.
+          Contact : <a href="mailto:wickaassistance@gmail.com">wickaassistance@gmail.com</a> —{" "}
+          <a href="https://wa.me/212789095498">WhatsApp</a>.
         </p>
         <h2>Hébergement</h2>
         <p>

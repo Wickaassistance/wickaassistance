@@ -2831,10 +2831,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             ] }),
             /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-secondary", children: [
               /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-              /* @__PURE__ */ jsxDEV("span", { children: [
-                "WhatsApp Conseiller : ",
-                SITE.phone
-              ] })
+              /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
             ] })
           ] }),
           /* @__PURE__ */ jsxDEV("div", { class: "hero-trust-row", children: [
@@ -2928,8 +2925,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             style: "background: #25D366; border-color: #25D366;",
             children: [
               /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-              " Ligne Parents : ",
-              SITE.phone
+              " WhatsApp"
             ]
           }
         )
@@ -3023,11 +3019,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
       ] })) }),
       /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-primary", children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-        /* @__PURE__ */ jsxDEV("span", { children: [
-          "\xC9changer sur WhatsApp (",
-          SITE.phone,
-          ")"
-        ] })
+        /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
       ] })
     ] })
   ] }) }) }),
@@ -4271,9 +4263,9 @@ var MentionsLegales = () => /* @__PURE__ */ jsxDEV("section", { class: "applicat
     /* @__PURE__ */ jsxDEV("p", { children: [
       "Contact : ",
       /* @__PURE__ */ jsxDEV("a", { href: "mailto:wickaassistance@gmail.com", children: "wickaassistance@gmail.com" }),
-      " \u2014 WhatsApp :",
+      " \u2014",
       " ",
-      /* @__PURE__ */ jsxDEV("a", { href: "https://wa.me/212789095498", children: "+212 7 89 09 54 98" }),
+      /* @__PURE__ */ jsxDEV("a", { href: "https://wa.me/212789095498", children: "WhatsApp" }),
       "."
     ] }),
     /* @__PURE__ */ jsxDEV("h2", { children: "H\xE9bergement" }),
@@ -4784,10 +4776,7 @@ var NotFound = () => /* @__PURE__ */ jsxDEV("section", { class: "notfound-sectio
         class: "btn-secondary",
         children: [
           /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-          /* @__PURE__ */ jsxDEV("span", { children: [
-            "WhatsApp : ",
-            SITE.phone
-          ] })
+          /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
         ]
       }
     )
@@ -4891,8 +4880,7 @@ var Header = ({ path }) => /* @__PURE__ */ jsxDEV(Fragment, { children: [
     /* @__PURE__ */ jsxDEV("div", { class: "notice-right", children: [
       /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "notice-contact", children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose-300" }),
-        " ",
-        SITE.phone
+        " WhatsApp"
       ] }),
       /* @__PURE__ */ jsxDEV("a", { href: `mailto:${SITE.email}`, class: "notice-contact", children: [
         /* @__PURE__ */ jsxDEV("i", { class: "far fa-envelope" }),
@@ -4933,9 +4921,7 @@ var Header = ({ path }) => /* @__PURE__ */ jsxDEV(Fragment, { children: [
       ] }),
       /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-secondary btn-full", children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-        " Conseiller WhatsApp Direct (",
-        SITE.phone,
-        ")"
+        " WhatsApp"
       ] })
     ] })
   ] })
@@ -4995,11 +4981,7 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
         ] })),
         /* @__PURE__ */ jsxDEV("div", { class: "contact-line", children: [
           /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-          /* @__PURE__ */ jsxDEV("span", { children: [
-            /* @__PURE__ */ jsxDEV("strong", { children: "Ligne Directe :" }),
-            " ",
-            SITE.phone
-          ] })
+          /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", children: "WhatsApp" })
         ] }),
         /* @__PURE__ */ jsxDEV("div", { class: "contact-line", children: [
           /* @__PURE__ */ jsxDEV("i", { class: "far fa-envelope" }),
@@ -5008,16 +4990,13 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
       ] })
     ] })
   ] }),
-  /* @__PURE__ */ jsxDEV("div", { class: "footer-bottom-bar", children: [
-    /* @__PURE__ */ jsxDEV("span", { children: [
-      "\xA9 ",
-      SITE.copyrightYear,
-      " ",
-      SITE.name,
-      ". Tous droits r\xE9serv\xE9s."
-    ] }),
-    /* @__PURE__ */ jsxDEV("span", { children: "Plateforme officielle pour la mobilit\xE9 et l'admission universitaire au Royaume du Maroc." })
-  ] })
+  /* @__PURE__ */ jsxDEV("div", { class: "footer-bottom-bar", children: /* @__PURE__ */ jsxDEV("span", { children: [
+    "\xA9 ",
+    SITE.copyrightYear,
+    " ",
+    SITE.name,
+    ". Tous droits r\xE9serv\xE9s."
+  ] }) })
 ] }) });
 
 // src/layout/FloatingActions.tsx
@@ -5099,11 +5078,7 @@ var FloatingActions = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             style: "background: #25D366; border-color: #25D366;",
             children: [
               /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-              /* @__PURE__ */ jsxDEV("span", { children: [
-                "Finaliser sur WhatsApp (",
-                SITE.phone,
-                ")"
-              ] })
+              /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
             ]
           }
         ),

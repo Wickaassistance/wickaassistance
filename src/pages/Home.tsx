@@ -182,7 +182,7 @@ export const Home = () => (
               </a>
               <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn-secondary">
                 <i class="fab fa-whatsapp text-rose"></i>
-                <span>WhatsApp Conseiller : {SITE.phone}</span>
+                <span>WhatsApp</span>
               </a>
             </div>
 
@@ -281,7 +281,7 @@ export const Home = () => (
                 class="btn-primary btn-full"
                 style="background: #25D366; border-color: #25D366;"
               >
-                <i class="fab fa-whatsapp"></i> Ligne Parents : {SITE.phone}
+                <i class="fab fa-whatsapp"></i> WhatsApp
               </a>
             </div>
           </div>
@@ -420,7 +420,7 @@ export const Home = () => (
 
             <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn-primary">
               <i class="fab fa-whatsapp"></i>
-              <span>Échanger sur WhatsApp ({SITE.phone})</span>
+              <span>WhatsApp</span>
             </a>
           </div>
         </div>
