@@ -8,6 +8,7 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "dev:vercel": "vercel dev",
+    "build": "npm run typecheck",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
