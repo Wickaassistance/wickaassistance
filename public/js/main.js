@@ -1,6 +1,6 @@
 /**
  * Wicka Assistance - Scripts et Logique Interactive (Version Enrichie)
- * Tarifs par Pays, Simulateur, Filtre Universités d'Élite, Transport Aéroport & Formulaire
+ * Tarifs par Pays, Simulateur, Filtre Universités d'Élite, Transport Aéroport et Formulaire
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,7 +50,7 @@ function initPromoCountdown() {
 }
 
 /* ============================================================
-   1. NAVIGATION & HEADER
+   1. NAVIGATION et HEADER
    ============================================================ */
 function initNavigation() {
   const header = document.querySelector('.site-header');
@@ -171,7 +171,7 @@ function initCountryPricingSwitcher() {
       return `${oldHtml}<span class="price-now">${newP}</span><span class="price-promo-tag">PROMO -50%</span>`;
     };
 
-    if (outCountryTitle) outCountryTitle.innerText = `Tarifs & Moyens de Paiement pour : ${data.name}`;
+    if (outCountryTitle) outCountryTitle.innerText = `Tarifs et Moyens de Paiement pour : ${data.name}`;
     if (outAdmissionPrice) outAdmissionPrice.innerHTML = priceMarkup(data.packAdmissionOld, data.packAdmission);
     if (outVipPrice) outVipPrice.innerHTML = priceMarkup(data.packVIPOld, data.packVIP);
     if (outCountryNote) outCountryNote.innerText = data.note;
@@ -213,7 +213,7 @@ function initCountryPricingSwitcher() {
 }
 
 /* ============================================================
-   4. FILTRES & RECHERCHE DES UNIVERSITÉS D'ÉLITE
+   4. FILTRES et RECHERCHE DES UNIVERSITÉS D'ÉLITE
    ============================================================ */
 function initUniversityFilters() {
   const container = document.getElementById('universitiesGrid');
@@ -381,7 +381,7 @@ window.selectUniversityForApply = function(uniName, domain) {
 };
 
 /* ============================================================
-   5. SIMULATEUR DE BUDGET & ÉTUDE SUR LA VIE AU MAROC
+   5. SIMULATEUR DE BUDGET et ÉTUDE SUR LA VIE AU MAROC
    ============================================================ */
 function initBudgetSimulator() {
   const citySelect = document.getElementById('simCitySelect');
@@ -787,7 +787,7 @@ renderFaqs();
 }
 
 /* ============================================================
-   8. TÉMOIGNAGES & AVIS CLIENTS
+   8. TÉMOIGNAGES et AVIS CLIENTS
    ============================================================ */
 function initTestimonials() {
   const container = document.getElementById('testimonialsGrid');

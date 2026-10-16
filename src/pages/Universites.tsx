@@ -16,7 +16,7 @@ export const Universites = () => (
           <span class="section-badge">
             <i class="fas fa-university"></i> Universités Privées d'Excellence
           </span>
-          <h2 class="section-title">Grandes Écoles & Universités Privées Partenaires</h2>
+          <h2 class="section-title">Grandes Écoles et Universités Privées Partenaires</h2>
           <p class="section-subtitle">
             Wicka Assistance travaille exclusivement avec les meilleures institutions privées accréditées par l'État
             marocain :{" "}
@@ -57,19 +57,19 @@ export const Universites = () => (
               Toutes les Filières
             </button>
             <button type="button" class="filter-tab-btn" data-domain="medecine">
-              🩺 Médecine & Pharmacie (UIASS, UIC)
+              🩺 Médecine et Pharmacie (UIASS, UIC)
             </button>
             <button type="button" class="filter-tab-btn" data-domain="ingenierie">
-              💻 Ingénierie & IA (Euromed, EMSI, UIR)
+              💻 Ingénierie et IA (Euromed, EMSI, UIR)
             </button>
             <button type="button" class="filter-tab-btn" data-domain="business">
-              📈 Business & Finance (ESTEM, ESCA, HEM)
+              📈 Business et Finance (ESTEM, ESCA, HEM)
             </button>
             <button type="button" class="filter-tab-btn" data-domain="architecture">
-              🏛️ Architecture & Urbanisme
+              🏛️ Architecture et Urbanisme
             </button>
             <button type="button" class="filter-tab-btn" data-domain="droit">
-              ⚖️ Droit & Sciences Politiques
+              ⚖️ Droit et Sciences Politiques
             </button>
           </div>
         </div>

@@ -62,7 +62,7 @@ export const Footer = () => (
         </div>
 
         <div>
-          <h4 class="footer-col-title">Contact & Bureaux au Maroc</h4>
+          <h4 class="footer-col-title">Contact et Bureaux au Maroc</h4>
           <div class="footer-contact-info">
             {SITE.offices.map((o) => (
               <div class="contact-line">

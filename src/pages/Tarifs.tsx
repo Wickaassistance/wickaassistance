@@ -1,7 +1,7 @@
 import { waLink } from "../config/site";
 
 export const tarifsMeta = {
-  title: "Tarifs études au Maroc | Packs & accompagnement",
+  title: "Tarifs études au Maroc | Packs et accompagnement",
   description:
     "Découvrez les tarifs d’accompagnement pour étudier au Maroc : orientation, admission, visa, accueil et services adaptés à votre pays.",
   keywords:
@@ -110,18 +110,18 @@ export const Tarifs = () => (
               </a>
             </div>
 
-            {/* Pack VIP & Navette */}
+            {/* Pack VIP et Navette */}
             <div
               class="country-pack-col"
               style="border-color: var(--rose-600); background: linear-gradient(180deg, #ffffff 0%, #fff7f9 100%);"
             >
               <div>
                 <span class="badge-rose-soft" style="background-color: var(--rose-700); color: var(--white);">
-                  🚗 Navette Aéroport & VIP
+                  🚗 Navette Aéroport et VIP
                 </span>
-                <h3 class="country-pack-title">Pack VIP All-Inclusive & Navette</h3>
+                <h3 class="country-pack-title">Pack VIP All-Inclusive et Navette</h3>
                 <p style="font-size: 0.85rem; color: var(--slate-600);">
-                  Admission garantie + Dossier Visa & <strong>Carte Consulaire jusqu'à l'ambassade</strong> +{" "}
+                  Admission garantie + Dossier Visa et <strong>Carte Consulaire jusqu'à l'ambassade</strong> +{" "}
                   <strong>Navette aéroport privée sécurisée</strong> + Carte SIM 4G + <strong>Carte de Séjour</strong>{" "}
                   jusqu'à l'obtention.
                 </p>
@@ -136,7 +136,7 @@ export const Tarifs = () => (
                 class="btn-primary btn-full btn-order-pack"
                 data-pack="Pack VIP All-Inclusive"
               >
-                <i class="fab fa-whatsapp"></i> Réserver le Pack VIP & Navette
+                <i class="fab fa-whatsapp"></i> Réserver le Pack VIP et Navette
               </a>
             </div>
           </div>
@@ -202,13 +202,13 @@ export const Tarifs = () => (
                 </label>
                 <select id="simCitySelect" class="sim-select-styled">
                   <option value="casablanca" selected>
-                    Casablanca (Pôle Économique & Métropole)
+                    Casablanca (Pôle Économique et Métropole)
                   </option>
-                  <option value="rabat">Rabat (Capitale Verte & Cité d'Excellence)</option>
-                  <option value="fes">Fès (Campus Euromed & Coût Très Abordable)</option>
-                  <option value="marrakech">Marrakech (Cadre de Vie Ensoleillé & Dynamique)</option>
-                  <option value="tanger">Tanger (Pôle Industriel & Ouvert sur l'Europe)</option>
-                  <option value="ifrane">Ifrane (Campus Al Akhawayn & Coût le Plus Bas)</option>
+                  <option value="rabat">Rabat (Capitale Verte et Cité d'Excellence)</option>
+                  <option value="fes">Fès (Campus Euromed et Coût Très Abordable)</option>
+                  <option value="marrakech">Marrakech (Cadre de Vie Ensoleillé et Dynamique)</option>
+                  <option value="tanger">Tanger (Pôle Industriel et Ouvert sur l'Europe)</option>
+                  <option value="ifrane">Ifrane (Campus Al Akhawayn et Coût le Plus Bas)</option>
                 </select>
               </div>
 
@@ -230,7 +230,7 @@ export const Tarifs = () => (
                     <input type="radio" name="simUniType" value="prive_excellence" />
                     <div class="sim-radio-content">
                       <i class="fas fa-star"></i>
-                      <span>Pôle d'Élite & Santé</span>
+                      <span>Pôle d'Élite et Santé</span>
                       <small style="font-size: 0.72rem; color: var(--slate-500);">UEMF, UIASS, UIR, UM6P</small>
                     </div>
                   </label>
@@ -263,7 +263,7 @@ export const Tarifs = () => (
                   <div>
                     <h3>Estimation du Budget</h3>
                     <span id="simCityBadgeLabel" style="font-size: 0.78rem; color: var(--rose-200);">
-                      Pôle Économique & Cosmopolite
+                      Pôle Économique et Cosmopolite
                     </span>
                   </div>
                   <div class="currency-chips-wrap">
@@ -293,19 +293,19 @@ export const Tarifs = () => (
                 <div class="sim-breakdown-list">
                   <div class="sim-breakdown-item">
                     <span>
-                      <i class="fas fa-utensils"></i> Alimentation & Courses :
+                      <i class="fas fa-utensils"></i> Alimentation et Courses :
                     </span>
                     <strong id="simOutFood">1 300 DH</strong>
                   </div>
                   <div class="sim-breakdown-item">
                     <span>
-                      <i class="fas fa-train"></i> Transport (Tramway/Taxis) & Forfait 4G :
+                      <i class="fas fa-train"></i> Transport (Tramway/Taxis) et Forfait 4G :
                     </span>
                     <strong id="simOutTransport">250 DH</strong>
                   </div>
                   <div class="sim-breakdown-item">
                     <span>
-                      <i class="fas fa-book"></i> Fournitures & Loisirs :
+                      <i class="fas fa-book"></i> Fournitures et Loisirs :
                     </span>
                     <strong id="simOutLifestyle">450 DH</strong>
                   </div>
@@ -368,8 +368,8 @@ export const Tarifs = () => (
           <div class="pricing-card">
             <div class="pack-header">
               <span class="badge-rose-soft">Pour démarrer</span>
-              <h3 class="pack-name">Pack Diagnostic & Orientation</h3>
-              <p style="font-size: 0.85rem; color: var(--slate-500);">Analyse de dossier & sélection des universités</p>
+              <h3 class="pack-name">Pack Diagnostic et Orientation</h3>
+              <p style="font-size: 0.85rem; color: var(--slate-500);">Analyse de dossier et sélection des universités</p>
               <div class="pack-price-box">
                 <span class="pack-price-old">590 DH</span>
                 <span class="pack-price">290 DH</span>
@@ -397,7 +397,7 @@ export const Tarifs = () => (
             </ul>
 
             <a
-              href={waLink("Bonjour Wicka, je souhaite souscrire au Pack Diagnostic & Orientation (290 DH).")}
+              href={waLink("Bonjour Wicka, je souhaite souscrire au Pack Diagnostic et Orientation (290 DH).")}
               target="_blank"
               rel="noopener noreferrer"
               class="btn-secondary btn-full"
@@ -433,7 +433,7 @@ export const Tarifs = () => (
                 <i class="fas fa-check-circle"></i> Dépôt prioritaire de 3 à 5 candidatures universitaires
               </li>
               <li>
-                <i class="fas fa-check-circle"></i> Rédaction et optimisation de CV & lettres de motivation
+                <i class="fas fa-check-circle"></i> Rédaction et optimisation de CV et lettres de motivation
               </li>
               <li>
                 <i class="fas fa-check-circle"></i> Préparation personnalisée aux oraux d'admission
@@ -467,9 +467,9 @@ export const Tarifs = () => (
           <div class="pricing-card">
             <div class="pack-header">
               <span class="badge-rose-soft" style="background-color: var(--gold-light); color: var(--gold);">
-                🚗 Navette & Sérénité Totale
+                🚗 Navette et Sérénité Totale
               </span>
-              <h3 class="pack-name">Pack VIP & Navette Aéroport</h3>
+              <h3 class="pack-name">Pack VIP et Navette Aéroport</h3>
               <p style="font-size: 0.85rem; color: var(--slate-500);">Prise en charge complète dès l'atterrissage</p>
               <div class="pack-price-box">
                 <span class="pack-price-old">3 890 DH</span>
@@ -516,7 +516,7 @@ export const Tarifs = () => (
               rel="noopener noreferrer"
               class="btn-secondary btn-full"
             >
-              <i class="fab fa-whatsapp text-rose"></i> Choisir le Pack VIP & Navette
+              <i class="fab fa-whatsapp text-rose"></i> Choisir le Pack VIP et Navette
             </a>
           </div>
         </div>

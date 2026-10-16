@@ -1,6 +1,6 @@
 /**
- * Wicka Assistance - Données du site web (Version Enrichie & Spécial Parents)
- * Universités privées d'excellence, Tarifs par Pays, Étude de vie au Maroc & Transport Aéroport
+ * Wicka Assistance - Données du site web (Version Enrichie et Spécial Parents)
+ * Universités privées d'excellence, Tarifs par Pays, Étude de vie au Maroc et Transport Aéroport
  */
 
 const WICKA_DATA = {
@@ -86,7 +86,7 @@ const WICKA_DATA = {
       note: "Accompagnement complet depuis Conakry."
     },
     congo: {
-      name: "Congo & RDC 🇨🇬 🇨🇩",
+      name: "Congo et RDC 🇨🇬 🇨🇩",
       currency: "USD",
       symbol: "$ / FCFA",
       rate: 0.10,
@@ -130,8 +130,8 @@ const WICKA_DATA = {
       food: 1300,
       transport: 250,
       lifestyle: 450,
-      badge: "Pôle Économique & Cosmopolite (Stages & Emplois)",
-      tram: "Réseau Tramway & Busway moderne",
+      badge: "Pôle Économique et Cosmopolite (Stages et Emplois)",
+      tram: "Réseau Tramway et Busway moderne",
       advantages: "Immense vivier de stages, sièges de multinationales, transports 24/7."
     },
     rabat: {
@@ -139,7 +139,7 @@ const WICKA_DATA = {
       food: 1200,
       transport: 200,
       lifestyle: 400,
-      badge: "Capitale Verte & Cité Universitaire d'Excellence",
+      badge: "Capitale Verte et Cité Universitaire d'Excellence",
       tram: "Tramway reliant Rabat et Salé, ville calme et ultra sécurisée",
       advantages: "Atmosphère paisible, ministères, bibliothèques nationales, sécurité maximale."
     },
@@ -148,7 +148,7 @@ const WICKA_DATA = {
       food: 950,
       transport: 150,
       lifestyle: 300,
-      badge: "Capitale Spirituelle & Pôle Académique Euromed",
+      badge: "Capitale Spirituelle et Pôle Académique Euromed",
       tram: "Réseau de bus et taxis très abordables",
       advantages: "Coût de la vie très bas, campus Euromed ultra moderne, riche patrimoine."
     },
@@ -157,7 +157,7 @@ const WICKA_DATA = {
       food: 1100,
       transport: 180,
       lifestyle: 350,
-      badge: "Cadre de Vie Idéal, Climat Ensoleillé & Dynamique",
+      badge: "Cadre de Vie Idéal, Climat Ensoleillé et Dynamique",
       tram: "Bus à haut niveau de service et transports fluides",
       advantages: "Cadre agréable, écoles de commerce et tourisme prestigieuses, aéroport international."
     },
@@ -166,7 +166,7 @@ const WICKA_DATA = {
       food: 1150,
       transport: 200,
       lifestyle: 350,
-      badge: "Pôle Industriel, Tech & Proche de l'Europe",
+      badge: "Pôle Industriel, Tech et Proche de l'Europe",
       tram: "TGV Al Boraq vers Rabat et Casa en 1h20",
       advantages: "Tanger Med, usines automobiles/aéronautiques, ouvert sur le monde."
     },
@@ -175,7 +175,7 @@ const WICKA_DATA = {
       food: 900,
       transport: 120,
       lifestyle: 280,
-      badge: "Campus d'Élite Al Akhawayn & Cadre Nature",
+      badge: "Campus d'Élite Al Akhawayn et Cadre Nature",
       tram: "Petite ville sécurisée, tout accessible à pied",
       advantages: "La « petite Suisse marocaine » : campus américain, air pur, sécurité totale et vie 100% étudiante."
     }
@@ -184,11 +184,11 @@ const WICKA_DATA = {
   // Domaines d'études
   domains: [
     { id: "all", label: "Toutes les filières", icon: "academic-cap" },
-    { id: "medecine", label: "Médecine & Santé", icon: "heart" },
-    { id: "ingenierie", label: "Ingénierie & Informatique", icon: "cpu" },
-    { id: "business", label: "Business & Management", icon: "chart-bar" },
-    { id: "architecture", label: "Architecture & Design", icon: "cube" },
-    { id: "droit", label: "Droit & Sciences Politiques", icon: "scale" }
+    { id: "medecine", label: "Médecine et Santé", icon: "heart" },
+    { id: "ingenierie", label: "Ingénierie et Informatique", icon: "cpu" },
+    { id: "business", label: "Business et Management", icon: "chart-bar" },
+    { id: "architecture", label: "Architecture et Design", icon: "cube" },
+    { id: "droit", label: "Droit et Sciences Politiques", icon: "scale" }
   ],
 
   // Universités et Grandes Écoles privées réputées au Maroc
@@ -200,15 +200,15 @@ const WICKA_DATA = {
       city: "fes",
       cityName: "Fès",
       domain: "ingenierie",
-      domainLabel: "Ingénierie, Pharmacie, IA & Architecture",
-      type: "Excellence & Partenariat Union pour la Méditerranée",
+      domainLabel: "Ingénierie, Pharmacie, IA et Architecture",
+      type: "Excellence et Partenariat Union pour la Méditerranée",
       tuition: "À partir de 50 000 DH/an",
       tuitionYearMAD: 58000,
       admissionRate: "98% avec Wicka",
-      recognized: "Diplômes Reconnus par l'État Marocain & l'Europe",
-      tags: ["Campus Éco-responsable", "Laboratoires 3D & Robotique", "Bourses d'Excellence"],
+      recognized: "Diplômes Reconnus par l'État Marocain et l'Europe",
+      tags: ["Campus Éco-responsable", "Laboratoires 3D et Robotique", "Bourses d'Excellence"],
       description: "Placée sous la Haute Présidence d'Honneur de Sa Majesté le Roi Mohammed VI, l'UEMF est un pôle d'excellence réunissant des étudiants de plus de 30 nationalités avec des doubles diplômes européens.",
-      popularPrograms: ["École d'Ingénierie Digitale & IA (EIDIA)", "Faculté de Pharmacie", "École d'Architecture & Urbanisme (EMADU)"]
+      popularPrograms: ["École d'Ingénierie Digitale et IA (EIDIA)", "Faculté de Pharmacie", "École d'Architecture et Urbanisme (EMADU)"]
     },
     {
       id: "estem_casa",
@@ -217,15 +217,15 @@ const WICKA_DATA = {
       city: "casablanca",
       cityName: "Casablanca (Centre d'Affaires)",
       domain: "business",
-      domainLabel: "Management, Supply Chain & Informatique",
+      domainLabel: "Management, Supply Chain et Informatique",
       type: "Grande École Privée Reconnue par l'État",
       tuition: "À partir de 42 000 DH/an",
       tuitionYearMAD: 46000,
       admissionRate: "100% avec Wicka",
-      recognized: "Équivalence Diplômes État & Doubles Diplômes France",
-      tags: ["Insertion Pro 94%", "Partenariats Écoles Françaises", "Classes Prépa & Masters"],
+      recognized: "Équivalence Diplômes État et Doubles Diplômes France",
+      tags: ["Insertion Pro 94%", "Partenariats Écoles Françaises", "Classes Prépa et Masters"],
       description: "Institution réputée à Casablanca formant depuis plus de 20 ans des managers et des ingénieurs très demandés sur le marché de l'emploi marocain et international.",
-      popularPrograms: ["Audit, Finance & Contrôle de Gestion", "Génie Logiciel & Big Data", "Supply Chain & Commerce International"]
+      popularPrograms: ["Audit, Finance et Contrôle de Gestion", "Génie Logiciel et Big Data", "Supply Chain et Commerce International"]
     },
     {
       id: "uiass_rabat",
@@ -234,12 +234,12 @@ const WICKA_DATA = {
       city: "rabat",
       cityName: "Rabat (Cité Hospitalière)",
       domain: "medecine",
-      domainLabel: "Médecine, Dentaire, Pharmacie & Santé",
+      domainLabel: "Médecine, Dentaire, Pharmacie et Santé",
       type: "Fondation Cheikh Zaïd - Reconnue par l'État",
       tuition: "Frais selon Faculté (Santé)",
       tuitionYearMAD: 85000,
       admissionRate: "96% avec Wicka",
-      recognized: "Diplôme d'État de Docteur & Spécialités",
+      recognized: "Diplôme d'État de Docteur et Spécialités",
       tags: ["Hôpital Universitaire Intégré", "Équipements Chirurgicaux de Pointe", "Internat Médical"],
       description: "Pôle médical d'excellence adossé à l'Hôpital Universitaire Cheikh Zaïd de Rabat, offrant une formation clinique intensive de rang mondial.",
       popularPrograms: ["Doctorat en Médecine Générale", "Médecine Dentaire", "Faculté de Pharmacie", "Sciences Infirmières"]
@@ -251,7 +251,7 @@ const WICKA_DATA = {
       city: "casablanca",
       cityName: "Casablanca (Casablanca Finance City)",
       domain: "business",
-      domainLabel: "Business, Finance, Audit & Marketing",
+      domainLabel: "Business, Finance, Audit et Marketing",
       type: "Accréditée AACSB (Top 5% mondial)",
       tuition: "À partir de 62 000 DH/an",
       tuitionYearMAD: 65000,
@@ -259,7 +259,7 @@ const WICKA_DATA = {
       recognized: "1ère Business School d'Afrique Francophone",
       tags: ["Campus CFC Ultra Moderne", "Réseau International 120+ universités", "Carrières Mondiales"],
       description: "Classée numéro 1 en Afrique francophone, l'ESCA est située au cœur du quartier financier Casablanca Finance City avec un taux d'embauche record.",
-      popularPrograms: ["Grande École en Management (PGE)", "Finance de Marché & Corporate", "Marketing Digital & IA"]
+      popularPrograms: ["Grande École en Management (PGE)", "Finance de Marché et Corporate", "Marketing Digital et IA"]
     },
     {
       id: "um6p",
@@ -268,12 +268,12 @@ const WICKA_DATA = {
       city: "rabat",
       cityName: "Rabat / Benguerir",
       domain: "ingenierie",
-      domainLabel: "Ingénierie, IA, Green Tech & Gouvernance",
-      type: "Excellence & Recherche Mondiale",
-      tuition: "Bourses disponibles & Sur dossier",
+      domainLabel: "Ingénierie, IA, Green Tech et Gouvernance",
+      type: "Excellence et Recherche Mondiale",
+      tuition: "Bourses disponibles et Sur dossier",
       tuitionYearMAD: 75000,
       admissionRate: "98% avec Wicka",
-      recognized: "Reconnaissance Internationale & État",
+      recognized: "Reconnaissance Internationale et État",
       tags: ["Campus 5 étoiles", "Supercalculateur IA Toubkal", "Bourses d'Excellence"],
       description: "L'un des campus les plus avancés au monde, axé sur l'intelligence artificielle, l'agriculture durable, les sciences des matériaux et l'entrepreneuriat.",
       popularPrograms: ["School of Computer Science (UM6P-CS)", "Africa Business School", "School of Collective Intelligence"]
@@ -285,7 +285,7 @@ const WICKA_DATA = {
       city: "rabat",
       cityName: "Rabat (Technopolis)",
       domain: "ingenierie",
-      domainLabel: "Ingénierie, Aérospatiale, Droit & Santé",
+      domainLabel: "Ingénierie, Aérospatiale, Droit et Santé",
       type: "Partenariat Public-Privé de Référence",
       tuition: "À partir de 65 000 DH/an",
       tuitionYearMAD: 72000,
@@ -293,7 +293,7 @@ const WICKA_DATA = {
       recognized: "Doubles Diplômes France / USA / Belgique",
       tags: ["Campus Américain 20 Hectares", "Rabat Business School AACSB", "Faculté de Santé"],
       description: "Une université de rang mondial dotée d'infrastructures sportives et académiques exceptionnelles, formant les futurs leaders du continent.",
-      popularPrograms: ["Ingénierie Aérospatiale & Automobile", "Faculté Internationale de Médecine Dentaire", "Sciences Po Rabat"]
+      popularPrograms: ["Ingénierie Aérospatiale et Automobile", "Faculté Internationale de Médecine Dentaire", "Sciences Po Rabat"]
     },
     {
       id: "emsi",
@@ -302,7 +302,7 @@ const WICKA_DATA = {
       city: "casablanca",
       cityName: "Casablanca, Rabat, Marrakech, Tanger",
       domain: "ingenierie",
-      domainLabel: "Génie Informatique, Réseaux, IA & BTP",
+      domainLabel: "Génie Informatique, Réseaux, IA et BTP",
       type: "1ère École d'Ingénieurs Privée du Maroc (Honoris)",
       tuition: "À partir de 42 000 DH/an",
       tuitionYearMAD: 46000,
@@ -310,7 +310,7 @@ const WICKA_DATA = {
       recognized: "Diplôme d'Ingénieur Reconnu par l'État",
       tags: ["Multiples Brevets Mondiaux", "Laboratoire SMARTiLab", "Insertion Pro 96%"],
       description: "Leader incontesté de l'ingénierie appliquée avec plus de 38 ans de savoir-faire et des milliers de lauréats en poste en Afrique et en Europe.",
-      popularPrograms: ["Génie Informatique & Cybersécurité", "Ingénierie Financière", "Génie Civil & BTP"]
+      popularPrograms: ["Génie Informatique et Cybersécurité", "Ingénierie Financière", "Génie Civil et BTP"]
     },
     {
       id: "mundiapolis",
@@ -319,7 +319,7 @@ const WICKA_DATA = {
       city: "casablanca",
       cityName: "Casablanca",
       domain: "business",
-      domainLabel: "Business, Santé, Ingénierie & Droit",
+      domainLabel: "Business, Santé, Ingénierie et Droit",
       type: "Reconnue par l'État (Réseau Honoris)",
       tuition: "À partir de 48 000 DH/an",
       tuitionYearMAD: 55000,
@@ -327,7 +327,7 @@ const WICKA_DATA = {
       recognized: "Équivalence Diplômes État Marocain",
       tags: ["Campus Intégré de 3 Hectares", "Faculté des Sciences de Santé", "Alternance"],
       description: "Un environnement stimulant alliant rigueur académique et accompagnement carrières pour une intégration professionnelle réussie.",
-      popularPrograms: ["Mundiapolis Business School", "Kinésithérapie & Orthophonie", "Génie Industriel"]
+      popularPrograms: ["Mundiapolis Business School", "Kinésithérapie et Orthophonie", "Génie Industriel"]
     },
     {
       id: "uic",
@@ -336,15 +336,15 @@ const WICKA_DATA = {
       city: "casablanca",
       cityName: "Casablanca (Bouskoura)",
       domain: "medecine",
-      domainLabel: "Faculté de Santé, Ingénierie & Droit",
+      domainLabel: "Faculté de Santé, Ingénierie et Droit",
       type: "Campus Résidentiel Écologique",
       tuition: "À partir de 52 000 DH/an",
       tuitionYearMAD: 68000,
       admissionRate: "97% avec Wicka",
       recognized: "Diplômes Reconnus par l'État",
-      tags: ["Clinique Dentaire & Médicale", "10 Hectares d'Espaces Verts", "Réseau Panafricain"],
+      tags: ["Clinique Dentaire et Médicale", "10 Hectares d'Espaces Verts", "Réseau Panafricain"],
       description: "Offre une formation pluridisciplinaire d'élite dans un cadre naturel sécurisé et moderne à l'entrée de Casablanca.",
-      popularPrograms: ["Médecine Dentaire & Pharmacie", "Génie Biomédical", "Droit International des Affaires"]
+      popularPrograms: ["Médecine Dentaire et Pharmacie", "Génie Biomédical", "Droit International des Affaires"]
     },
     {
       id: "hem_maroc",
@@ -353,15 +353,15 @@ const WICKA_DATA = {
       city: "casablanca",
       cityName: "Casablanca, Rabat, Marrakech, Fès, Tanger",
       domain: "business",
-      domainLabel: "Management, Finance, RH & Marketing",
+      domainLabel: "Management, Finance, RH et Marketing",
       type: "Membre du Réseau Canadien LCI Éducation",
       tuition: "À partir de 55 000 DH/an",
       tuitionYearMAD: 60000,
       admissionRate: "99% avec Wicka",
       recognized: "Diplômes Reconnus par l'État (Bac+5)",
-      tags: ["35 ans d'Histoire", "Partenariats Écoles Françaises & Canadiennes", "Réseau Alumni Puissant"],
+      tags: ["35 ans d'Histoire", "Partenariats Écoles Françaises et Canadiennes", "Réseau Alumni Puissant"],
       description: "L'une des écoles de gestion les plus prestigieuses et historiques du Maroc, reconnue pour son encadrement humain et son excellence.",
-      popularPrograms: ["Programme Grande École (PGE)", "Finance & Ingénierie Financière", "Marketing & Communication"]
+      popularPrograms: ["Programme Grande École (PGE)", "Finance et Ingénierie Financière", "Marketing et Communication"]
     },
     {
       id: "aui_ifrane",
@@ -370,15 +370,15 @@ const WICKA_DATA = {
       city: "ifrane",
       cityName: "Ifrane (Campus Américain)",
       domain: "business",
-      domainLabel: "Business, Ingénierie & Sciences Humaines (100% Anglais)",
+      domainLabel: "Business, Ingénierie et Sciences Humaines (100% Anglais)",
       type: "Système Américain (Accréditation US) - Reconnue par l'État",
       tuition: "À partir de 70 000 DH/an",
       tuitionYearMAD: 80000,
       admissionRate: "95% avec Wicka",
-      recognized: "Diplômes 100% anglophones reconnus aux USA & au Maroc",
-      tags: ["Campus 100% Anglophone", "Échanges USA & Europe", "Cadre Nature Sécurisé"],
+      recognized: "Diplômes 100% anglophones reconnus aux USA et au Maroc",
+      tags: ["Campus 100% Anglophone", "Échanges USA et Europe", "Cadre Nature Sécurisé"],
       description: "La seule université marocaine sur le modèle américain (crédits, liberal arts, tout en anglais). Un campus d'élite à Ifrane, idéal pour viser ensuite les USA, le Canada et l'international.",
-      popularPrograms: ["School of Business Administration (SBA)", "School of Science & Engineering", "Communication & Relations Internationales"]
+      popularPrograms: ["School of Business Administration (SBA)", "School of Science et Engineering", "Communication et Relations Internationales"]
     },
     {
       id: "um6ss_casa",
@@ -387,15 +387,15 @@ const WICKA_DATA = {
       city: "casablanca",
       cityName: "Casablanca (Cité de la Santé)",
       domain: "medecine",
-      domainLabel: "Médecine, Pharmacie, Dentaire & Ingénierie Biomédicale",
+      domainLabel: "Médecine, Pharmacie, Dentaire et Ingénierie Biomédicale",
       type: "Fondation Mohammed VI - Reconnue par l'État",
       tuition: "Frais selon Faculté (Santé)",
       tuitionYearMAD: 90000,
       admissionRate: "95% avec Wicka",
-      recognized: "Diplôme d'État de Docteur & Hôpitaux Universitaires intégrés",
-      tags: ["CHU & Simulation Médicale", "Recherche Biomédicale", "Standards Internationaux"],
+      recognized: "Diplôme d'État de Docteur et Hôpitaux Universitaires intégrés",
+      tags: ["CHU et Simulation Médicale", "Recherche Biomédicale", "Standards Internationaux"],
       description: "Pôle santé de référence adossé à ses propres hôpitaux universitaires et centres de simulation ultramodernes à Casablanca. Un choix d'excellence pour la médecine et les métiers de la santé.",
-      popularPrograms: ["Médecine Générale", "Pharmacie & Médecine Dentaire", "Ingénierie & Sciences Biomédicales"]
+      popularPrograms: ["Médecine Générale", "Pharmacie et Médecine Dentaire", "Ingénierie et Sciences Biomédicales"]
     },
     {
       id: "upm_marrakech",
@@ -404,15 +404,15 @@ const WICKA_DATA = {
       city: "marrakech",
       cityName: "Marrakech (Route de l'Ourika)",
       domain: "ingenierie",
-      domainLabel: "Ingénierie, Business, Santé & Aéronautique",
+      domainLabel: "Ingénierie, Business, Santé et Aéronautique",
       type: "Reconnue par l'État Marocain",
       tuition: "À partir de 45 000 DH/an",
       tuitionYearMAD: 52000,
       admissionRate: "99% avec Wicka",
-      recognized: "Équivalence Diplômes État & Doubles Diplômes",
+      recognized: "Équivalence Diplômes État et Doubles Diplômes",
       tags: ["Campus Vert 8 Hectares", "Pôle Aéronautique", "Ville Touristique Dynamique"],
       description: "Grande université pluridisciplinaire au cœur de Marrakech, réputée pour ses filières ingénierie, aéronautique et santé dans un cadre de vie ensoleillé et agréable.",
-      popularPrograms: ["Génie Informatique & IA", "Maintenance Aéronautique", "Management & Sciences de la Santé"]
+      popularPrograms: ["Génie Informatique et IA", "Maintenance Aéronautique", "Management et Sciences de la Santé"]
     },
     {
       id: "upf_fes",
@@ -421,15 +421,15 @@ const WICKA_DATA = {
       city: "fes",
       cityName: "Fès (Route d'Imouzzer)",
       domain: "medecine",
-      domainLabel: "Dentaire, Ingénierie, Droit & Management",
+      domainLabel: "Dentaire, Ingénierie, Droit et Management",
       type: "1ère Université Privée de Fès - Reconnue par l'État",
       tuition: "À partir de 44 000 DH/an",
       tuitionYearMAD: 50000,
       admissionRate: "99% avec Wicka",
-      recognized: "Équivalence Diplômes État & Formations Accréditées",
+      recognized: "Équivalence Diplômes État et Formations Accréditées",
       tags: ["Clinique Dentaire Universitaire", "Bon Rapport Qualité/Prix", "Ville Étudiante Abordable"],
       description: "Université privée pionnière à Fès, appréciée pour sa faculté de médecine dentaire et ses filières ingénierie, dans une ville au coût de vie parmi les plus bas du Maroc.",
-      popularPrograms: ["Médecine Dentaire", "Génie Informatique & Réseaux", "Droit & Sciences de Gestion"]
+      popularPrograms: ["Médecine Dentaire", "Génie Informatique et Réseaux", "Droit et Sciences de Gestion"]
     },
     {
       id: "isga",
@@ -438,23 +438,23 @@ const WICKA_DATA = {
       city: "rabat",
       cityName: "Rabat, Casablanca, Fès, Marrakech",
       domain: "ingenierie",
-      domainLabel: "Génie Informatique, Cybersécurité, Réseaux & Business",
+      domainLabel: "Génie Informatique, Cybersécurité, Réseaux et Business",
       type: "Grande École Reconnue par l'État (40+ ans)",
       tuition: "À partir de 38 000 DH/an",
       tuitionYearMAD: 42000,
       admissionRate: "100% avec Wicka",
-      recognized: "Diplômes Reconnus par l'État & Titres RNCP France",
+      recognized: "Diplômes Reconnus par l'État et Titres RNCP France",
       tags: ["Titres Français RNCP", "Multi-campus", "Fort Taux d'Insertion"],
       description: "Réseau historique de grandes écoles présent dans 4 villes, spécialisé en ingénierie informatique et management, avec des titres français reconnus. Excellent tremplin accessible.",
-      popularPrograms: ["Ingénierie Informatique & Cybersécurité", "Réseaux & Cloud", "Management & Commerce"]
+      popularPrograms: ["Ingénierie Informatique et Cybersécurité", "Réseaux et Cloud", "Management et Commerce"]
     }
   ],
 
-  // Les avantages du Maroc pour les études des enfants (Guide Parents & Étudiants)
+  // Les avantages du Maroc pour les études des enfants (Guide Parents et Étudiants)
   moroccoAdvantages: [
     {
       icon: "shield-check",
-      title: "Sécurité & Stabilité Exceptionnelles",
+      title: "Sécurité et Stabilité Exceptionnelles",
       desc: "Le Maroc est l'un des pays les plus sûrs et stables au monde, offrant un environnement d'études paisible où les étudiants peuvent circuler et étudier en toute sérénité."
     },
     {
@@ -464,22 +464,22 @@ const WICKA_DATA = {
     },
     {
       icon: "train",
-      title: "Infrastructures Modernes & TGV Al Boraq",
+      title: "Infrastructures Modernes et TGV Al Boraq",
       desc: "Réseau de transports ultra moderne (TGV reliant Tanger, Rabat et Casablanca en un temps record, tramways urbains, aéroports internationaux reliés à toute l'Afrique)."
     },
     {
       icon: "handshake",
-      title: "Hospitalité & Climat Chaleureux",
+      title: "Hospitalité et Climat Chaleureux",
       desc: "Une culture d'accueil légendaire, une grande communauté de plus de 25 000 étudiants internationaux et un climat ensoleillé tout au long de l'année."
     },
     {
       icon: "coins",
-      title: "Coût de la Vie & Frais d'Études Maîtrisés",
+      title: "Coût de la Vie et Frais d'Études Maîtrisés",
       desc: "Des études de rang international pour un coût global 3 à 4 fois inférieur à la France, au Canada ou aux États-Unis, sans barrière linguistique pour les francophones."
     },
     {
       icon: "briefcase",
-      title: "Pôle Économique & Opportunités de Stages",
+      title: "Pôle Économique et Opportunités de Stages",
       desc: "Hub économique panafricain abritant les sièges régionaux de multinationales en finance, aéronautique, automobile, intelligence artificielle et énergies renouvelables."
     }
   ],
@@ -488,7 +488,7 @@ const WICKA_DATA = {
   packs: [
     {
       id: "orientation",
-      name: "Pack Diagnostic & Orientation",
+      name: "Pack Diagnostic et Orientation",
       badge: "Pour démarrer",
       price: "290 DH",
       oldPrice: "590 DH",
@@ -528,8 +528,8 @@ const WICKA_DATA = {
     },
     {
       id: "vip",
-      name: "Pack VIP All-Inclusive & Navette Aéroport",
-      badge: "Sérénité Totale des Parents & Étudiants",
+      name: "Pack VIP All-Inclusive et Navette Aéroport",
+      badge: "Sérénité Totale des Parents et Étudiants",
       price: "1 990 DH",
       oldPrice: "3 890 DH",
       equivalentPrice: "~120 000 FCFA / 185 €",
@@ -537,7 +537,7 @@ const WICKA_DATA = {
       popular: false,
       features: [
         "Toutes les prestations du Pack Admission Réussie",
-        "Montage & validation rigoureuse du Dossier Consulaire de Visa",
+        "Montage et validation rigoureuse du Dossier Consulaire de Visa",
         "🏛️ Accompagnement complet pour la Carte Consulaire jusqu'au dépôt à l'ambassade du Maroc",
         "🚗 Navette Privée Sécurisée : Accueil à la sortie de l'aéroport et transfert direct avec chauffeur vers votre ville d'affectation (Casablanca, Rabat, Fès, Marrakech, Tanger, Ifrane)",
         "📱 Carte SIM 4G marocaine remise en main propre avec forfait internet",
@@ -545,7 +545,7 @@ const WICKA_DATA = {
         "📑 Prise en charge intégrale du dossier de Carte de Séjour (Titre de séjour) jusqu'à l'obtention",
         "📞 Ligne d'assistance et contact d'urgence 7j/7 pour rassurer les parents"
       ],
-      cta: "Choisir le Pack VIP & Navette",
+      cta: "Choisir le Pack VIP et Navette",
       highlight: false
     }
   ],
@@ -557,56 +557,56 @@ const WICKA_DATA = {
       name: "Mamadou Diop",
       origin: "Dakar, Sénégal 🇸🇳",
       university: "UIR - Université Internationale de Rabat",
-      program: "Cycle Ingénieur Aérospatiale & Systèmes Embarqués",
+      program: "Cycle Ingénieur Aérospatiale et Systèmes Embarqués",
       rating: 5,
       year: "Promotion 2025-2026",
       avatar: "assets/images/student-senegal.jpg",
       quote: "Wicka Assistance a été formidable ! En 2 semaines, j'avais mon admission officielle à l'UIR. Le chauffeur m'attendait directement à la sortie de l'aéroport Mohammed V de Casablanca pour me conduire jusqu'à mon campus à Rabat avec ma carte SIM déjà activée. Mes parents à Dakar étaient totalement sereins !",
       verified: true,
-      badge: "Admission & Navette Réussies"
+      badge: "Admission et Navette Réussies"
     },
     {
       id: "tem_2",
       name: "Amina Kassi",
       origin: "Abidjan, Côte d'Ivoire 🇨🇮",
-      university: "ESTEM Casablanca & UIC",
-      program: "Management International & Supply Chain",
+      university: "ESTEM Casablanca et UIC",
+      program: "Management International et Supply Chain",
       rating: 5,
       year: "Promotion 2025-2026",
       avatar: "assets/images/student-ivory-coast.jpg",
       quote: "Ce que mes parents ont le plus apprécié, c'est la franchise de l'équipe de Wicka. Ils nous ont aidés à comparer les universités comme ESTEM et l'UIC en toute transparence. Le paiement en FCFA par Wave depuis Abidjan a été super simple et sécurisé avec reçu officiel.",
       verified: true,
-      badge: "Paiement Wave & Admission"
+      badge: "Paiement Wave et Admission"
     },
     {
       id: "tem_3",
       name: "Brice Tchamadeu",
       origin: "Douala, Cameroun 🇨🇲",
       university: "Euromed Fès (UEMF)",
-      program: "École d'Ingénierie Digitale & Intelligence Artificielle",
+      program: "École d'Ingénierie Digitale et Intelligence Artificielle",
       rating: 5,
       year: "Promotion 2024-2025",
       avatar: "assets/images/student-cameroon.jpg",
       quote: "Partir étudier à l'UEMF à Fès était mon rêve. Wicka Assistance a fait des appels visio avec mon père pour tout expliquer : le transport depuis l'aéroport de Casablanca jusqu'à Fès, la sécurité et les démarches de la carte de séjour. Une agence d'un professionnalisme exemplaire !",
       verified: true,
-      badge: "Euromed Fès & Pack VIP"
+      badge: "Euromed Fès et Pack VIP"
     },
     {
       id: "tem_4",
       name: "Grace Ondo",
       origin: "Libreville, Gabon 🇬🇦",
       university: "UIASS Rabat (Sciences de la Santé)",
-      program: "Faculté des Sciences Médicales & Pharmacie",
+      program: "Faculté des Sciences Médicales et Pharmacie",
       rating: 5,
       year: "Promotion 2025-2026",
       avatar: "assets/images/student-gabon.jpg",
       quote: "L'accompagnement pour l'équivalence de mon Bac gabonais et le dépôt à la faculté de santé à Rabat a été parfait. Je recommande Wicka à 100% à tous les bacheliers et parents au Gabon qui cherchent une agence fiable et sérieuse au Maroc.",
       verified: true,
-      badge: "Santé & Démarches Réussies"
+      badge: "Santé et Démarches Réussies"
     }
   ],
 
-  // Questions Fréquentes Spéciales Parents & Étudiants
+  // Questions Fréquentes Spéciales Parents et Étudiants
   faqs: [
     {
       q: "En tant que parent, comment puis-je m'assurer de la sécurité de mon enfant au Maroc ?",

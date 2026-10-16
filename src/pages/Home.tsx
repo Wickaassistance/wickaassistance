@@ -2,7 +2,7 @@ import type { Child } from "hono/jsx";
 import { SITE, waLink } from "../config/site";
 
 export const homeMeta = {
-  title: "Étudier au Maroc | Admission, Visa & Orientation",
+  title: "Étudier au Maroc | Admission, Visa et Orientation",
   description:
     "Préparez vos études au Maroc avec un accompagnement personnalisé : orientation, admission, visa étudiant, tarifs et accueil des étudiants internationaux."
 };
@@ -10,32 +10,32 @@ export const homeMeta = {
 const advantages: { icon: string; title: string; text: string }[] = [
   {
     icon: "fas fa-shield-alt",
-    title: "Sécurité & Stabilité Totale",
+    title: "Sécurité et Stabilité Totale",
     text: "Le Maroc bénéficie d'une stabilité institutionnelle et d'une sécurité publique reconnues internationalement. Les étudiants y vivent et se déplacent en toute tranquillité, de jour comme de nuit."
   },
   {
     icon: "fas fa-graduation-cap",
-    title: "Diplômes Reconnus & Doubles Diplômes",
+    title: "Diplômes Reconnus et Doubles Diplômes",
     text: "Système LMD (Licence, Master, Doctorat). Les grandes écoles partenaires délivrent des diplômes reconnus par l'État marocain et des doubles diplômes avec la France, l'Europe et les USA."
   },
   {
     icon: "fas fa-train",
-    title: "Infrastructures Modernes & TGV Al Boraq",
+    title: "Infrastructures Modernes et TGV Al Boraq",
     text: "Réseaux de transports ultra modernes : TGV reliant Tanger, Rabat et Casablanca à 320 km/h, lignes de tramways urbains modernes et aéroports internationaux reliés à toute l'Afrique."
   },
   {
     icon: "fas fa-handshake",
-    title: "Hospitalité & Climat Ensoleillé",
+    title: "Hospitalité et Climat Ensoleillé",
     text: "Une culture d'accueil chaleureuse pour plus de 25 000 étudiants internationaux africains. Aucune rupture linguistique pour les francophones et un climat ensoleillé 300 jours par an."
   },
   {
     icon: "fas fa-coins",
-    title: "Budget Maîtrisé & 3x Moins Cher",
+    title: "Budget Maîtrisé et 3x Moins Cher",
     text: "Une qualité d'enseignement équivalente aux meilleures universités européennes pour un coût global de scolarité et de vie 3 à 4 fois inférieur à la France, au Canada ou aux USA."
   },
   {
     icon: "fas fa-briefcase",
-    title: "Hub Économique & Stages Garantis",
+    title: "Hub Économique et Stages Garantis",
     text: "Véritable carrefour économique abritant les sièges régionaux de multinationales en finance (Casablanca Finance City), aéronautique, intelligence artificielle et énergies renouvelables."
   }
 ];
@@ -51,7 +51,7 @@ const explore: { href: string; icon: string; title: string; text: Child; link: s
   {
     href: "/tarifs",
     icon: "fas fa-tags",
-    title: "Tarifs, Simulateur & Packs",
+    title: "Tarifs, Simulateur et Packs",
     text: (
       <>
         Tarifs par pays en <strong>promo −50%</strong>, simulateur de budget et formules d'assistance.
@@ -79,7 +79,7 @@ const steps: { n: string; title: string; text: Child; tagIcon: string; tag: stri
   },
   {
     n: "02",
-    title: "Dépôt & Suivi des Dossiers",
+    title: "Dépôt et Suivi des Dossiers",
     text: "Constitution optimisée du dossier, lettres de motivation percutantes et soumission directe auprès des directions des admissions.",
     tagIcon: "far fa-clock",
     tag: "3 à 7 jours"
@@ -94,7 +94,7 @@ const steps: { n: string; title: string; text: Child; tagIcon: string; tag: stri
   },
   {
     n: "04",
-    title: "Visa, Carte Consulaire & Ambassade",
+    title: "Visa, Carte Consulaire et Ambassade",
     text: (
       <>
         Constitution du dossier de <strong>carte consulaire</strong> et accompagnement jusqu'au dépôt à l'
@@ -106,7 +106,7 @@ const steps: { n: string; title: string; text: Child; tagIcon: string; tag: stri
   },
   {
     n: "05",
-    title: "Navette, Installation & Carte de Séjour",
+    title: "Navette, Installation et Carte de Séjour",
     text: (
       <>
         Accueil avec chauffeur privé à l'atterrissage, transfert vers la ville d'accueil, carte SIM 4G et{" "}
@@ -132,7 +132,7 @@ const values: { icon: string; title: string; text: string }[] = [
   },
   {
     icon: "fas fa-file-contract",
-    title: "Contrat & Reçu Officiel",
+    title: "Contrat et Reçu Officiel",
     text: "Paiements locaux sécurisés avec facture et reçu officiel immédiat."
   },
   {
@@ -143,7 +143,7 @@ const values: { icon: string; title: string; text: string }[] = [
 ];
 
 const successPhotos = [
-  { src: "/assets/uni/student-grad.jpg", alt: "Étudiante diplômée au Maroc", icon: "fas fa-graduation-cap", caption: "Diplômée & fière" },
+  { src: "/assets/uni/student-grad.jpg", alt: "Étudiante diplômée au Maroc", icon: "fas fa-graduation-cap", caption: "Diplômée et fière" },
   { src: "/assets/uni/student-grad-2.jpg", alt: "Jeune diplômé au Maroc", icon: "fas fa-award", caption: "Master en poche" },
   { src: "/assets/uni/student-portrait.jpg", alt: "Étudiant sur son campus", icon: "fas fa-user-graduate", caption: "Sur son campus" }
 ];
@@ -224,7 +224,7 @@ export const Home = () => (
               </div>
               <div class="floating-info">
                 <h4>Diplômes Reconnus</h4>
-                <p>Équivalence d'État & Doubles Diplômes</p>
+                <p>Équivalence d'État et Doubles Diplômes</p>
               </div>
             </div>
           </div>
@@ -245,7 +245,7 @@ export const Home = () => (
           </div>
           <div class="stat-item">
             <span class="counter-value" data-target="100" data-suffix="%">100%</span>
-            <span class="stat-label">Sécurité & Prise en Charge</span>
+            <span class="stat-label">Sécurité et Prise en Charge</span>
           </div>
         </div>
       </div>
@@ -289,7 +289,7 @@ export const Home = () => (
 
         <div class="section-header">
           <span class="section-badge">
-            <i class="fas fa-chart-line"></i> Étude & Analyse
+            <i class="fas fa-chart-line"></i> Étude et Analyse
           </span>
           <h2 class="section-title">Les 6 Grands Atouts du Maroc pour les Études Supérieures</h2>
           <p class="section-subtitle">
@@ -347,7 +347,7 @@ export const Home = () => (
       <div class="container">
         <div class="section-header">
           <span class="section-badge">
-            <i class="fas fa-road"></i> Rigueur & Zéro Faux Pas
+            <i class="fas fa-road"></i> Rigueur et Zéro Faux Pas
           </span>
           <h2 class="section-title">Le Parcours d'Admission en 5 Étapes</h2>
           <p class="section-subtitle">
@@ -385,7 +385,7 @@ export const Home = () => (
             />
             <div class="about-experience-badge">
               <span class="exp-years">100%</span>
-              <span class="exp-text">Sérieux & Transparence</span>
+              <span class="exp-text">Sérieux et Transparence</span>
             </div>
           </div>
 
@@ -393,7 +393,7 @@ export const Home = () => (
             <span class="section-badge">
               <i class="fas fa-shield-alt"></i> À Propos de Nous
             </span>
-            <h2 class="section-title">Une Équipe Passionnée Basée à Casablanca & Rabat</h2>
+            <h2 class="section-title">Une Équipe Passionnée Basée à Casablanca et Rabat</h2>
             <p class="section-subtitle" style="text-align: left; margin-bottom: 20px;">
               Wicka Assistance est un cabinet spécialisé dans la mobilité universitaire et l'orientation stratégique
               des étudiants internationaux vers le Maroc.
@@ -434,7 +434,7 @@ export const Home = () => (
           <span class="section-badge">
             <i class="fas fa-star"></i> Retours d'Expérience
           </span>
-          <h2 class="section-title">Ce Que Disent les Étudiants & Leurs Parents</h2>
+          <h2 class="section-title">Ce Que Disent les Étudiants et Leurs Parents</h2>
           <p class="section-subtitle">
             Des témoignages réels d'étudiants du Sénégal, de Côte d'Ivoire, du Cameroun et du Gabon admis avec succès
             dans les plus grandes écoles marocaines.
@@ -571,7 +571,7 @@ export const Home = () => (
           <span class="section-badge">
             <i class="fas fa-question-circle"></i> Questions Clés
           </span>
-          <h2 class="section-title">Foire Aux Questions Parents & Candidats</h2>
+          <h2 class="section-title">Foire Aux Questions Parents et Candidats</h2>
           <p class="section-subtitle">
             Tout savoir sur les admissions en universités privées, les visas, le transport sécurisé et le coût de la
             vie au Maroc.

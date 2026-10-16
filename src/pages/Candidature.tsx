@@ -70,7 +70,7 @@ export const Candidature = () => (
           </div>
           <div class="step-indicator-item" data-step="3">
             <div class="step-indicator-circle">3</div>
-            <span class="step-indicator-label">Formule & Navette</span>
+            <span class="step-indicator-label">Formule et Navette</span>
           </div>
           <div class="step-indicator-item" data-step="4">
             <div class="step-indicator-circle">4</div>
@@ -88,7 +88,7 @@ export const Candidature = () => (
             <div class="form-row-2">
               <div class="form-group">
                 <label class="form-label" for="formFullName">
-                  Nom & Prénom de l'étudiant *
+                  Nom et Prénom de l'étudiant *
                 </label>
                 <input type="text" id="formFullName" class="form-input" placeholder="Ex: Moussa Traoré" required />
               </div>
@@ -133,7 +133,7 @@ export const Candidature = () => (
               </div>
               <div class="form-group">
                 <label class="form-label" for="formBacSeries">
-                  Série du Bac & Mention obtenue ou visée *
+                  Série du Bac et Mention obtenue ou visée *
                 </label>
                 <input
                   type="text"
@@ -167,11 +167,11 @@ export const Candidature = () => (
                 <select id="formStudyDomain" class="form-select" required>
                   <option value="medecine">Médecine Générale, Dentaire ou Pharmacie</option>
                   <option value="ingenierie" selected>
-                    Génie Informatique, IA, Big Data & Cybersécurité
+                    Génie Informatique, IA, Big Data et Cybersécurité
                   </option>
-                  <option value="business">Management, Audit, Finance, Supply Chain & Commerce</option>
-                  <option value="architecture">Architecture, Urbanisme & Design</option>
-                  <option value="droit">Droit International des Affaires & Sciences Politiques</option>
+                  <option value="business">Management, Audit, Finance, Supply Chain et Commerce</option>
+                  <option value="architecture">Architecture, Urbanisme et Design</option>
+                  <option value="droit">Droit International des Affaires et Sciences Politiques</option>
                   <option value="autre">Autre filière / Je souhaite être conseillé</option>
                 </select>
               </div>
@@ -209,7 +209,7 @@ export const Candidature = () => (
                 <i class="fas fa-arrow-left"></i> <span>Retour</span>
               </button>
               <button type="button" class="btn-primary btn-next-step">
-                <span>Continuer : Formule & Navette</span>
+                <span>Continuer : Formule et Navette</span>
                 <i class="fas fa-arrow-right"></i>
               </button>
             </div>
@@ -218,14 +218,14 @@ export const Candidature = () => (
           {/* Step 3 */}
           <div class="form-step-panel" data-step="3">
             <h3 class="panel-heading">
-              <i class="fas fa-cubes text-rose"></i> Étape 3 : Formule d'Assistance & Navette Aéroport
+              <i class="fas fa-cubes text-rose"></i> Étape 3 : Formule d'Assistance et Navette Aéroport
             </h3>
 
             <div class="form-group">
               <label class="form-label">Choisissez votre formule :</label>
               <div class="sim-radio-cards application-pack-options" style="grid-template-columns: 1fr 1fr 1fr;">
                 <label class="sim-radio-card">
-                  <input type="radio" name="formPackChoice" value="Pack Diagnostic & Orientation (290 DH)" />
+                  <input type="radio" name="formPackChoice" value="Pack Diagnostic et Orientation (290 DH)" />
                   <div class="sim-radio-content">
                     <i class="fas fa-compass"></i>
                     <span>Diagnostic</span>
@@ -241,10 +241,10 @@ export const Candidature = () => (
                   </div>
                 </label>
                 <label class="sim-radio-card">
-                  <input type="radio" name="formPackChoice" value="Pack VIP & Navette Aéroport" />
+                  <input type="radio" name="formPackChoice" value="Pack VIP et Navette Aéroport" />
                   <div class="sim-radio-content">
                     <i class="fas fa-car-side"></i>
-                    <span>VIP & Navette</span>
+                    <span>VIP et Navette</span>
                     <small style="color: var(--rose-700); font-weight: 700;">Chauffeur Privé</small>
                   </div>
                 </label>

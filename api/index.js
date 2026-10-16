@@ -1962,7 +1962,7 @@ var SITE = {
   ],
   promo: {
     tag: "\u{1F525} PROMO -50%",
-    text: "\u{1F4E2} Offre de lancement Rentr\xE9e 2026-2027 : packs d'admission \xE0 prix cass\xE9s \u2014 places & tarifs limit\xE9s !",
+    text: "\u{1F4E2} Offre de lancement Rentr\xE9e 2026-2027 : packs d'admission \xE0 prix cass\xE9s \u2014 places et tarifs limit\xE9s !",
     stickyLabel: "Postuler (Promo \u221250%)",
     // Date de fin du compte à rebours (format ISO). À mettre à jour pour prolonger la promo.
     deadline: "2026-09-30T23:59:59"
@@ -1978,7 +1978,7 @@ var NAV_LINKS = [
   { label: "Universit\xE9s", href: "/universites" },
   { label: "Tarifs par Pays", href: "/tarifs" },
   { label: "Simulateur de Budget", href: "/tarifs#simulateur" },
-  { label: "Packs & Navette", href: "/tarifs#packs" },
+  { label: "Packs et Navette", href: "/tarifs#packs" },
   { label: "Avis", href: "/#avis" },
   { label: "FAQ", href: "/#faq" }
 ];
@@ -1987,8 +1987,8 @@ var FOOTER_LINKS = [
   { label: "Espace Parents", href: "/#parents" },
   { label: "Universit\xE9s Priv\xE9es", href: "/universites" },
   { label: "Tarifs par Pays", href: "/tarifs" },
-  { label: "Packs & Navette A\xE9roport", href: "/tarifs#packs" },
-  { label: "Avis & T\xE9moignages", href: "/#avis" },
+  { label: "Packs et Navette A\xE9roport", href: "/tarifs#packs" },
+  { label: "Avis et T\xE9moignages", href: "/#avis" },
   { label: "Contact", href: "/contact" },
   { label: "Mentions l\xE9gales", href: "/mentions-legales" },
   { label: "Politique de confidentialit\xE9", href: "/politique-confidentialite" },
@@ -2000,7 +2000,7 @@ var FOOTER_SCHOOLS = [
   { label: "UIASS Sant\xE9 Rabat", href: "/universites" },
   { label: "ESCA Management CFC", href: "/universites" },
   { label: "EMSI Maroc (Honoris)", href: "/universites" },
-  { label: "UIR Rabat & UM6P", href: "/universites" }
+  { label: "UIR Rabat et UM6P", href: "/universites" }
 ];
 var SOCIAL_LINKS = [
   { label: "Facebook", icon: "fab fa-facebook-f", href: "#" },
@@ -2659,38 +2659,38 @@ function jsxDEV(tag, props, key) {
 
 // src/pages/Home.tsx
 var homeMeta = {
-  title: "\xC9tudier au Maroc | Admission, Visa & Orientation",
+  title: "\xC9tudier au Maroc | Admission, Visa et Orientation",
   description: "Pr\xE9parez vos \xE9tudes au Maroc avec un accompagnement personnalis\xE9 : orientation, admission, visa \xE9tudiant, tarifs et accueil des \xE9tudiants internationaux."
 };
 var advantages = [
   {
     icon: "fas fa-shield-alt",
-    title: "S\xE9curit\xE9 & Stabilit\xE9 Totale",
+    title: "S\xE9curit\xE9 et Stabilit\xE9 Totale",
     text: "Le Maroc b\xE9n\xE9ficie d'une stabilit\xE9 institutionnelle et d'une s\xE9curit\xE9 publique reconnues internationalement. Les \xE9tudiants y vivent et se d\xE9placent en toute tranquillit\xE9, de jour comme de nuit."
   },
   {
     icon: "fas fa-graduation-cap",
-    title: "Dipl\xF4mes Reconnus & Doubles Dipl\xF4mes",
+    title: "Dipl\xF4mes Reconnus et Doubles Dipl\xF4mes",
     text: "Syst\xE8me LMD (Licence, Master, Doctorat). Les grandes \xE9coles partenaires d\xE9livrent des dipl\xF4mes reconnus par l'\xC9tat marocain et des doubles dipl\xF4mes avec la France, l'Europe et les USA."
   },
   {
     icon: "fas fa-train",
-    title: "Infrastructures Modernes & TGV Al Boraq",
+    title: "Infrastructures Modernes et TGV Al Boraq",
     text: "R\xE9seaux de transports ultra modernes : TGV reliant Tanger, Rabat et Casablanca \xE0 320 km/h, lignes de tramways urbains modernes et a\xE9roports internationaux reli\xE9s \xE0 toute l'Afrique."
   },
   {
     icon: "fas fa-handshake",
-    title: "Hospitalit\xE9 & Climat Ensoleill\xE9",
+    title: "Hospitalit\xE9 et Climat Ensoleill\xE9",
     text: "Une culture d'accueil chaleureuse pour plus de 25 000 \xE9tudiants internationaux africains. Aucune rupture linguistique pour les francophones et un climat ensoleill\xE9 300 jours par an."
   },
   {
     icon: "fas fa-coins",
-    title: "Budget Ma\xEEtris\xE9 & 3x Moins Cher",
+    title: "Budget Ma\xEEtris\xE9 et 3x Moins Cher",
     text: "Une qualit\xE9 d'enseignement \xE9quivalente aux meilleures universit\xE9s europ\xE9ennes pour un co\xFBt global de scolarit\xE9 et de vie 3 \xE0 4 fois inf\xE9rieur \xE0 la France, au Canada ou aux USA."
   },
   {
     icon: "fas fa-briefcase",
-    title: "Hub \xC9conomique & Stages Garantis",
+    title: "Hub \xC9conomique et Stages Garantis",
     text: "V\xE9ritable carrefour \xE9conomique abritant les si\xE8ges r\xE9gionaux de multinationales en finance (Casablanca Finance City), a\xE9ronautique, intelligence artificielle et \xE9nergies renouvelables."
   }
 ];
@@ -2705,7 +2705,7 @@ var explore = [
   {
     href: "/tarifs",
     icon: "fas fa-tags",
-    title: "Tarifs, Simulateur & Packs",
+    title: "Tarifs, Simulateur et Packs",
     text: /* @__PURE__ */ jsxDEV(Fragment, { children: [
       "Tarifs par pays en ",
       /* @__PURE__ */ jsxDEV("strong", { children: "promo \u221250%" }),
@@ -2732,7 +2732,7 @@ var steps = [
   },
   {
     n: "02",
-    title: "D\xE9p\xF4t & Suivi des Dossiers",
+    title: "D\xE9p\xF4t et Suivi des Dossiers",
     text: "Constitution optimis\xE9e du dossier, lettres de motivation percutantes et soumission directe aupr\xE8s des directions des admissions.",
     tagIcon: "far fa-clock",
     tag: "3 \xE0 7 jours"
@@ -2747,7 +2747,7 @@ var steps = [
   },
   {
     n: "04",
-    title: "Visa, Carte Consulaire & Ambassade",
+    title: "Visa, Carte Consulaire et Ambassade",
     text: /* @__PURE__ */ jsxDEV(Fragment, { children: [
       "Constitution du dossier de ",
       /* @__PURE__ */ jsxDEV("strong", { children: "carte consulaire" }),
@@ -2760,7 +2760,7 @@ var steps = [
   },
   {
     n: "05",
-    title: "Navette, Installation & Carte de S\xE9jour",
+    title: "Navette, Installation et Carte de S\xE9jour",
     text: /* @__PURE__ */ jsxDEV(Fragment, { children: [
       "Accueil avec chauffeur priv\xE9 \xE0 l'atterrissage, transfert vers la ville d'accueil, carte SIM 4G et",
       " ",
@@ -2785,7 +2785,7 @@ var values = [
   },
   {
     icon: "fas fa-file-contract",
-    title: "Contrat & Re\xE7u Officiel",
+    title: "Contrat et Re\xE7u Officiel",
     text: "Paiements locaux s\xE9curis\xE9s avec facture et re\xE7u officiel imm\xE9diat."
   },
   {
@@ -2795,7 +2795,7 @@ var values = [
   }
 ];
 var successPhotos = [
-  { src: "/assets/uni/student-grad.jpg", alt: "\xC9tudiante dipl\xF4m\xE9e au Maroc", icon: "fas fa-graduation-cap", caption: "Dipl\xF4m\xE9e & fi\xE8re" },
+  { src: "/assets/uni/student-grad.jpg", alt: "\xC9tudiante dipl\xF4m\xE9e au Maroc", icon: "fas fa-graduation-cap", caption: "Dipl\xF4m\xE9e et fi\xE8re" },
   { src: "/assets/uni/student-grad-2.jpg", alt: "Jeune dipl\xF4m\xE9 au Maroc", icon: "fas fa-award", caption: "Master en poche" },
   { src: "/assets/uni/student-portrait.jpg", alt: "\xC9tudiant sur son campus", icon: "fas fa-user-graduate", caption: "Sur son campus" }
 ];
@@ -2866,7 +2866,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             /* @__PURE__ */ jsxDEV("div", { class: "floating-icon", style: "background-color: var(--gold-light); color: var(--gold);", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-award" }) }),
             /* @__PURE__ */ jsxDEV("div", { class: "floating-info", children: [
               /* @__PURE__ */ jsxDEV("h4", { children: "Dipl\xF4mes Reconnus" }),
-              /* @__PURE__ */ jsxDEV("p", { children: "\xC9quivalence d'\xC9tat & Doubles Dipl\xF4mes" })
+              /* @__PURE__ */ jsxDEV("p", { children: "\xC9quivalence d'\xC9tat et Doubles Dipl\xF4mes" })
             ] })
           ] })
         ] })
@@ -2886,7 +2886,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
         ] }),
         /* @__PURE__ */ jsxDEV("div", { class: "stat-item", children: [
           /* @__PURE__ */ jsxDEV("span", { class: "counter-value", "data-target": "100", "data-suffix": "%", children: "100%" }),
-          /* @__PURE__ */ jsxDEV("span", { class: "stat-label", children: "S\xE9curit\xE9 & Prise en Charge" })
+          /* @__PURE__ */ jsxDEV("span", { class: "stat-label", children: "S\xE9curit\xE9 et Prise en Charge" })
         ] })
       ] })
     ] })
@@ -2934,7 +2934,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
     /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
       /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fas fa-chart-line" }),
-        " \xC9tude & Analyse"
+        " \xC9tude et Analyse"
       ] }),
       /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Les 6 Grands Atouts du Maroc pour les \xC9tudes Sup\xE9rieures" }),
       /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Une analyse objective des opportunit\xE9s acad\xE9miques, du cadre de vie et de l'insertion professionnelle au Royaume du Maroc." })
@@ -2969,7 +2969,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
     /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
       /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fas fa-road" }),
-        " Rigueur & Z\xE9ro Faux Pas"
+        " Rigueur et Z\xE9ro Faux Pas"
       ] }),
       /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Le Parcours d'Admission en 5 \xC9tapes" }),
       /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Un protocole transparent et \xE9prouv\xE9 pour garantir l'admission de l'\xE9tudiant et rassurer ses parents \xE0 chaque \xE9tape." })
@@ -2999,7 +2999,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
       ),
       /* @__PURE__ */ jsxDEV("div", { class: "about-experience-badge", children: [
         /* @__PURE__ */ jsxDEV("span", { class: "exp-years", children: "100%" }),
-        /* @__PURE__ */ jsxDEV("span", { class: "exp-text", children: "S\xE9rieux & Transparence" })
+        /* @__PURE__ */ jsxDEV("span", { class: "exp-text", children: "S\xE9rieux et Transparence" })
       ] })
     ] }),
     /* @__PURE__ */ jsxDEV("div", { class: "about-content", children: [
@@ -3007,7 +3007,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fas fa-shield-alt" }),
         " \xC0 Propos de Nous"
       ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Une \xC9quipe Passionn\xE9e Bas\xE9e \xE0 Casablanca & Rabat" }),
+      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Une \xC9quipe Passionn\xE9e Bas\xE9e \xE0 Casablanca et Rabat" }),
       /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", style: "text-align: left; margin-bottom: 20px;", children: "Wicka Assistance est un cabinet sp\xE9cialis\xE9 dans la mobilit\xE9 universitaire et l'orientation strat\xE9gique des \xE9tudiants internationaux vers le Maroc." }),
       /* @__PURE__ */ jsxDEV("p", { style: "color: var(--slate-600); line-height: 1.7; font-size: 0.95rem;", children: "Contrairement aux d\xE9marcheurs informels, nous entretenons des liens institutionnels directs avec les directions des admissions des universit\xE9s priv\xE9es les plus renomm\xE9es. Nous assurons un suivi juridique et consulaire rigoureux pour faire de chaque projet d'\xE9tudes une r\xE9ussite \xE9clatante." }),
       /* @__PURE__ */ jsxDEV("div", { class: "about-values-list", children: values.map((v) => /* @__PURE__ */ jsxDEV("div", { class: "value-item", children: [
@@ -3029,7 +3029,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fas fa-star" }),
         " Retours d'Exp\xE9rience"
       ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Ce Que Disent les \xC9tudiants & Leurs Parents" }),
+      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Ce Que Disent les \xC9tudiants et Leurs Parents" }),
       /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Des t\xE9moignages r\xE9els d'\xE9tudiants du S\xE9n\xE9gal, de C\xF4te d'Ivoire, du Cameroun et du Gabon admis avec succ\xE8s dans les plus grandes \xE9coles marocaines." })
     ] }),
     /* @__PURE__ */ jsxDEV("div", { class: "testimonials-grid", id: "testimonialsGrid" })
@@ -3160,7 +3160,7 @@ var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fas fa-question-circle" }),
         " Questions Cl\xE9s"
       ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Foire Aux Questions Parents & Candidats" }),
+      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Foire Aux Questions Parents et Candidats" }),
       /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Tout savoir sur les admissions en universit\xE9s priv\xE9es, les visas, le transport s\xE9curis\xE9 et le co\xFBt de la vie au Maroc." })
     ] }),
     /* @__PURE__ */ jsxDEV("div", { class: "faq-accordion-wrap", id: "faqAccordionContainer" }),
@@ -3262,7 +3262,7 @@ var Candidature = () => /* @__PURE__ */ jsxDEV("section", { class: "application-
       ] }),
       /* @__PURE__ */ jsxDEV("div", { class: "step-indicator-item", "data-step": "3", children: [
         /* @__PURE__ */ jsxDEV("div", { class: "step-indicator-circle", children: "3" }),
-        /* @__PURE__ */ jsxDEV("span", { class: "step-indicator-label", children: "Formule & Navette" })
+        /* @__PURE__ */ jsxDEV("span", { class: "step-indicator-label", children: "Formule et Navette" })
       ] }),
       /* @__PURE__ */ jsxDEV("div", { class: "step-indicator-item", "data-step": "4", children: [
         /* @__PURE__ */ jsxDEV("div", { class: "step-indicator-circle", children: "4" }),
@@ -3277,7 +3277,7 @@ var Candidature = () => /* @__PURE__ */ jsxDEV("section", { class: "application-
         ] }),
         /* @__PURE__ */ jsxDEV("div", { class: "form-row-2", children: [
           /* @__PURE__ */ jsxDEV("div", { class: "form-group", children: [
-            /* @__PURE__ */ jsxDEV("label", { class: "form-label", for: "formFullName", children: "Nom & Pr\xE9nom de l'\xE9tudiant *" }),
+            /* @__PURE__ */ jsxDEV("label", { class: "form-label", for: "formFullName", children: "Nom et Pr\xE9nom de l'\xE9tudiant *" }),
             /* @__PURE__ */ jsxDEV("input", { type: "text", id: "formFullName", class: "form-input", placeholder: "Ex: Moussa Traor\xE9", required: true })
           ] }),
           /* @__PURE__ */ jsxDEV("div", { class: "form-group", children: [
@@ -3313,7 +3313,7 @@ var Candidature = () => /* @__PURE__ */ jsxDEV("section", { class: "application-
             ] })
           ] }),
           /* @__PURE__ */ jsxDEV("div", { class: "form-group", children: [
-            /* @__PURE__ */ jsxDEV("label", { class: "form-label", for: "formBacSeries", children: "S\xE9rie du Bac & Mention obtenue ou vis\xE9e *" }),
+            /* @__PURE__ */ jsxDEV("label", { class: "form-label", for: "formBacSeries", children: "S\xE9rie du Bac et Mention obtenue ou vis\xE9e *" }),
             /* @__PURE__ */ jsxDEV(
               "input",
               {
@@ -3341,10 +3341,10 @@ var Candidature = () => /* @__PURE__ */ jsxDEV("section", { class: "application-
             /* @__PURE__ */ jsxDEV("label", { class: "form-label", for: "formStudyDomain", children: "Fili\xE8re d'\xE9tudes souhait\xE9e *" }),
             /* @__PURE__ */ jsxDEV("select", { id: "formStudyDomain", class: "form-select", required: true, children: [
               /* @__PURE__ */ jsxDEV("option", { value: "medecine", children: "M\xE9decine G\xE9n\xE9rale, Dentaire ou Pharmacie" }),
-              /* @__PURE__ */ jsxDEV("option", { value: "ingenierie", selected: true, children: "G\xE9nie Informatique, IA, Big Data & Cybers\xE9curit\xE9" }),
-              /* @__PURE__ */ jsxDEV("option", { value: "business", children: "Management, Audit, Finance, Supply Chain & Commerce" }),
-              /* @__PURE__ */ jsxDEV("option", { value: "architecture", children: "Architecture, Urbanisme & Design" }),
-              /* @__PURE__ */ jsxDEV("option", { value: "droit", children: "Droit International des Affaires & Sciences Politiques" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "ingenierie", selected: true, children: "G\xE9nie Informatique, IA, Big Data et Cybers\xE9curit\xE9" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "business", children: "Management, Audit, Finance, Supply Chain et Commerce" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "architecture", children: "Architecture, Urbanisme et Design" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "droit", children: "Droit International des Affaires et Sciences Politiques" }),
               /* @__PURE__ */ jsxDEV("option", { value: "autre", children: "Autre fili\xE8re / Je souhaite \xEAtre conseill\xE9" })
             ] })
           ] }),
@@ -3379,7 +3379,7 @@ var Candidature = () => /* @__PURE__ */ jsxDEV("section", { class: "application-
             /* @__PURE__ */ jsxDEV("span", { children: "Retour" })
           ] }),
           /* @__PURE__ */ jsxDEV("button", { type: "button", class: "btn-primary btn-next-step", children: [
-            /* @__PURE__ */ jsxDEV("span", { children: "Continuer : Formule & Navette" }),
+            /* @__PURE__ */ jsxDEV("span", { children: "Continuer : Formule et Navette" }),
             /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-right" })
           ] })
         ] })
@@ -3387,13 +3387,13 @@ var Candidature = () => /* @__PURE__ */ jsxDEV("section", { class: "application-
       /* @__PURE__ */ jsxDEV("div", { class: "form-step-panel", "data-step": "3", children: [
         /* @__PURE__ */ jsxDEV("h3", { class: "panel-heading", children: [
           /* @__PURE__ */ jsxDEV("i", { class: "fas fa-cubes text-rose" }),
-          " \xC9tape 3 : Formule d'Assistance & Navette A\xE9roport"
+          " \xC9tape 3 : Formule d'Assistance et Navette A\xE9roport"
         ] }),
         /* @__PURE__ */ jsxDEV("div", { class: "form-group", children: [
           /* @__PURE__ */ jsxDEV("label", { class: "form-label", children: "Choisissez votre formule :" }),
           /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-cards application-pack-options", style: "grid-template-columns: 1fr 1fr 1fr;", children: [
             /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
-              /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "formPackChoice", value: "Pack Diagnostic & Orientation (290 DH)" }),
+              /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "formPackChoice", value: "Pack Diagnostic et Orientation (290 DH)" }),
               /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
                 /* @__PURE__ */ jsxDEV("i", { class: "fas fa-compass" }),
                 /* @__PURE__ */ jsxDEV("span", { children: "Diagnostic" }),
@@ -3409,10 +3409,10 @@ var Candidature = () => /* @__PURE__ */ jsxDEV("section", { class: "application-
               ] })
             ] }),
             /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
-              /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "formPackChoice", value: "Pack VIP & Navette A\xE9roport" }),
+              /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "formPackChoice", value: "Pack VIP et Navette A\xE9roport" }),
               /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
                 /* @__PURE__ */ jsxDEV("i", { class: "fas fa-car-side" }),
-                /* @__PURE__ */ jsxDEV("span", { children: "VIP & Navette" }),
+                /* @__PURE__ */ jsxDEV("span", { children: "VIP et Navette" }),
                 /* @__PURE__ */ jsxDEV("small", { style: "color: var(--rose-700); font-weight: 700;", children: "Chauffeur Priv\xE9" })
               ] })
             ] })
@@ -3527,7 +3527,7 @@ var Universites = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
         /* @__PURE__ */ jsxDEV("i", { class: "fas fa-university" }),
         " Universit\xE9s Priv\xE9es d'Excellence"
       ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Grandes \xC9coles & Universit\xE9s Priv\xE9es Partenaires" }),
+      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Grandes \xC9coles et Universit\xE9s Priv\xE9es Partenaires" }),
       /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: [
         "Wicka Assistance travaille exclusivement avec les meilleures institutions priv\xE9es accr\xE9dit\xE9es par l'\xC9tat marocain :",
         " ",
@@ -3561,11 +3561,11 @@ var Universites = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
       ] }),
       /* @__PURE__ */ jsxDEV("div", { class: "filter-tabs-row", children: [
         /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn active", "data-domain": "all", children: "Toutes les Fili\xE8res" }),
-        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "medecine", children: "\u{1FA7A} M\xE9decine & Pharmacie (UIASS, UIC)" }),
-        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "ingenierie", children: "\u{1F4BB} Ing\xE9nierie & IA (Euromed, EMSI, UIR)" }),
-        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "business", children: "\u{1F4C8} Business & Finance (ESTEM, ESCA, HEM)" }),
-        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "architecture", children: "\u{1F3DB}\uFE0F Architecture & Urbanisme" }),
-        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "droit", children: "\u2696\uFE0F Droit & Sciences Politiques" })
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "medecine", children: "\u{1FA7A} M\xE9decine et Pharmacie (UIASS, UIC)" }),
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "ingenierie", children: "\u{1F4BB} Ing\xE9nierie et IA (Euromed, EMSI, UIR)" }),
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "business", children: "\u{1F4C8} Business et Finance (ESTEM, ESCA, HEM)" }),
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "architecture", children: "\u{1F3DB}\uFE0F Architecture et Urbanisme" }),
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "filter-tab-btn", "data-domain": "droit", children: "\u2696\uFE0F Droit et Sciences Politiques" })
       ] })
     ] }),
     /* @__PURE__ */ jsxDEV("div", { class: "universities-count-bar", id: "universitiesCount", children: "Chargement des \xE9tablissements..." }),
@@ -3620,7 +3620,7 @@ var Universites = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
 
 // src/pages/Tarifs.tsx
 var tarifsMeta = {
-  title: "Tarifs \xE9tudes au Maroc | Packs & accompagnement",
+  title: "Tarifs \xE9tudes au Maroc | Packs et accompagnement",
   description: "D\xE9couvrez les tarifs d\u2019accompagnement pour \xE9tudier au Maroc : orientation, admission, visa, accueil et services adapt\xE9s \xE0 votre pays.",
   keywords: "tarifs \xE9tudes Maroc, prix admission Maroc, accompagnement \xE9tudiant, pack admission, visa \xE9tudiant Maroc, co\xFBt \xE9tudes Maroc, Wicka Assistance"
 };
@@ -3705,10 +3705,10 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             style: "border-color: var(--rose-600); background: linear-gradient(180deg, #ffffff 0%, #fff7f9 100%);",
             children: [
               /* @__PURE__ */ jsxDEV("div", { children: [
-                /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--rose-700); color: var(--white);", children: "\u{1F697} Navette A\xE9roport & VIP" }),
-                /* @__PURE__ */ jsxDEV("h3", { class: "country-pack-title", children: "Pack VIP All-Inclusive & Navette" }),
+                /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--rose-700); color: var(--white);", children: "\u{1F697} Navette A\xE9roport et VIP" }),
+                /* @__PURE__ */ jsxDEV("h3", { class: "country-pack-title", children: "Pack VIP All-Inclusive et Navette" }),
                 /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-600);", children: [
-                  "Admission garantie + Dossier Visa & ",
+                  "Admission garantie + Dossier Visa et ",
                   /* @__PURE__ */ jsxDEV("strong", { children: "Carte Consulaire jusqu'\xE0 l'ambassade" }),
                   " +",
                   " ",
@@ -3730,7 +3730,7 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
                   "data-pack": "Pack VIP All-Inclusive",
                   children: [
                     /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-                    " R\xE9server le Pack VIP & Navette"
+                    " R\xE9server le Pack VIP et Navette"
                   ]
                 }
               )
@@ -3789,12 +3789,12 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             " 1. Ville marocaine d'accueil :"
           ] }),
           /* @__PURE__ */ jsxDEV("select", { id: "simCitySelect", class: "sim-select-styled", children: [
-            /* @__PURE__ */ jsxDEV("option", { value: "casablanca", selected: true, children: "Casablanca (P\xF4le \xC9conomique & M\xE9tropole)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "rabat", children: "Rabat (Capitale Verte & Cit\xE9 d'Excellence)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "fes", children: "F\xE8s (Campus Euromed & Co\xFBt Tr\xE8s Abordable)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "marrakech", children: "Marrakech (Cadre de Vie Ensoleill\xE9 & Dynamique)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "tanger", children: "Tanger (P\xF4le Industriel & Ouvert sur l'Europe)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "ifrane", children: "Ifrane (Campus Al Akhawayn & Co\xFBt le Plus Bas)" })
+            /* @__PURE__ */ jsxDEV("option", { value: "casablanca", selected: true, children: "Casablanca (P\xF4le \xC9conomique et M\xE9tropole)" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "rabat", children: "Rabat (Capitale Verte et Cit\xE9 d'Excellence)" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "fes", children: "F\xE8s (Campus Euromed et Co\xFBt Tr\xE8s Abordable)" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "marrakech", children: "Marrakech (Cadre de Vie Ensoleill\xE9 et Dynamique)" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "tanger", children: "Tanger (P\xF4le Industriel et Ouvert sur l'Europe)" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "ifrane", children: "Ifrane (Campus Al Akhawayn et Co\xFBt le Plus Bas)" })
           ] })
         ] }),
         /* @__PURE__ */ jsxDEV("div", { class: "sim-control-group", children: [
@@ -3815,7 +3815,7 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
               /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "simUniType", value: "prive_excellence" }),
               /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
                 /* @__PURE__ */ jsxDEV("i", { class: "fas fa-star" }),
-                /* @__PURE__ */ jsxDEV("span", { children: "P\xF4le d'\xC9lite & Sant\xE9" }),
+                /* @__PURE__ */ jsxDEV("span", { children: "P\xF4le d'\xC9lite et Sant\xE9" }),
                 /* @__PURE__ */ jsxDEV("small", { style: "font-size: 0.72rem; color: var(--slate-500);", children: "UEMF, UIASS, UIR, UM6P" })
               ] })
             ] }),
@@ -3842,7 +3842,7 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
           /* @__PURE__ */ jsxDEV("div", { class: "sim-results-header", children: [
             /* @__PURE__ */ jsxDEV("div", { children: [
               /* @__PURE__ */ jsxDEV("h3", { children: "Estimation du Budget" }),
-              /* @__PURE__ */ jsxDEV("span", { id: "simCityBadgeLabel", style: "font-size: 0.78rem; color: var(--rose-200);", children: "P\xF4le \xC9conomique & Cosmopolite" })
+              /* @__PURE__ */ jsxDEV("span", { id: "simCityBadgeLabel", style: "font-size: 0.78rem; color: var(--rose-200);", children: "P\xF4le \xC9conomique et Cosmopolite" })
             ] }),
             /* @__PURE__ */ jsxDEV("div", { class: "currency-chips-wrap", children: [
               /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip active", "data-currency": "MAD", children: "MAD" }),
@@ -3861,21 +3861,21 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
               /* @__PURE__ */ jsxDEV("span", { children: [
                 /* @__PURE__ */ jsxDEV("i", { class: "fas fa-utensils" }),
-                " Alimentation & Courses :"
+                " Alimentation et Courses :"
               ] }),
               /* @__PURE__ */ jsxDEV("strong", { id: "simOutFood", children: "1 300 DH" })
             ] }),
             /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
               /* @__PURE__ */ jsxDEV("span", { children: [
                 /* @__PURE__ */ jsxDEV("i", { class: "fas fa-train" }),
-                " Transport (Tramway/Taxis) & Forfait 4G :"
+                " Transport (Tramway/Taxis) et Forfait 4G :"
               ] }),
               /* @__PURE__ */ jsxDEV("strong", { id: "simOutTransport", children: "250 DH" })
             ] }),
             /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
               /* @__PURE__ */ jsxDEV("span", { children: [
                 /* @__PURE__ */ jsxDEV("i", { class: "fas fa-book" }),
-                " Fournitures & Loisirs :"
+                " Fournitures et Loisirs :"
               ] }),
               /* @__PURE__ */ jsxDEV("strong", { id: "simOutLifestyle", children: "450 DH" })
             ] })
@@ -3932,8 +3932,8 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
       /* @__PURE__ */ jsxDEV("div", { class: "pricing-card", children: [
         /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
           /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", children: "Pour d\xE9marrer" }),
-          /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack Diagnostic & Orientation" }),
-          /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Analyse de dossier & s\xE9lection des universit\xE9s" }),
+          /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack Diagnostic et Orientation" }),
+          /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Analyse de dossier et s\xE9lection des universit\xE9s" }),
           /* @__PURE__ */ jsxDEV("div", { class: "pack-price-box", children: [
             /* @__PURE__ */ jsxDEV("span", { class: "pack-price-old", children: "590 DH" }),
             /* @__PURE__ */ jsxDEV("span", { class: "pack-price", children: "290 DH" }),
@@ -3966,7 +3966,7 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
         /* @__PURE__ */ jsxDEV(
           "a",
           {
-            href: waLink("Bonjour Wicka, je souhaite souscrire au Pack Diagnostic & Orientation (290 DH)."),
+            href: waLink("Bonjour Wicka, je souhaite souscrire au Pack Diagnostic et Orientation (290 DH)."),
             target: "_blank",
             rel: "noopener noreferrer",
             class: "btn-secondary btn-full",
@@ -4003,7 +4003,7 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
           ] }),
           /* @__PURE__ */ jsxDEV("li", { children: [
             /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " R\xE9daction et optimisation de CV & lettres de motivation"
+            " R\xE9daction et optimisation de CV et lettres de motivation"
           ] }),
           /* @__PURE__ */ jsxDEV("li", { children: [
             /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
@@ -4044,8 +4044,8 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
       ] }),
       /* @__PURE__ */ jsxDEV("div", { class: "pricing-card", children: [
         /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
-          /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--gold-light); color: var(--gold);", children: "\u{1F697} Navette & S\xE9r\xE9nit\xE9 Totale" }),
-          /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack VIP & Navette A\xE9roport" }),
+          /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--gold-light); color: var(--gold);", children: "\u{1F697} Navette et S\xE9r\xE9nit\xE9 Totale" }),
+          /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack VIP et Navette A\xE9roport" }),
           /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Prise en charge compl\xE8te d\xE8s l'atterrissage" }),
           /* @__PURE__ */ jsxDEV("div", { class: "pack-price-box", children: [
             /* @__PURE__ */ jsxDEV("span", { class: "pack-price-old", children: "3 890 DH" }),
@@ -4106,7 +4106,7 @@ var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
             class: "btn-secondary btn-full",
             children: [
               /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-              " Choisir le Pack VIP & Navette"
+              " Choisir le Pack VIP et Navette"
             ]
           }
         )
@@ -4930,7 +4930,7 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
       /* @__PURE__ */ jsxDEV("ul", { class: "footer-links-list", children: FOOTER_SCHOOLS.map((l) => /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: l.href, children: l.label }) })) })
     ] }),
     /* @__PURE__ */ jsxDEV("div", { children: [
-      /* @__PURE__ */ jsxDEV("h4", { class: "footer-col-title", children: "Contact & Bureaux au Maroc" }),
+      /* @__PURE__ */ jsxDEV("h4", { class: "footer-col-title", children: "Contact et Bureaux au Maroc" }),
       /* @__PURE__ */ jsxDEV("div", { class: "footer-contact-info", children: [
         SITE.offices.map((o) => /* @__PURE__ */ jsxDEV("div", { class: "contact-line", children: [
           /* @__PURE__ */ jsxDEV("i", { class: "fas fa-map-marker-alt" }),

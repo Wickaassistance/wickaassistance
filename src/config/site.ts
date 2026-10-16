@@ -23,7 +23,7 @@ export const SITE = {
   ],
   promo: {
     tag: "🔥 PROMO -50%",
-    text: "📢 Offre de lancement Rentrée 2026-2027 : packs d'admission à prix cassés — places & tarifs limités !",
+    text: "📢 Offre de lancement Rentrée 2026-2027 : packs d'admission à prix cassés — places et tarifs limités !",
     stickyLabel: "Postuler (Promo −50%)",
     // Date de fin du compte à rebours (format ISO). À mettre à jour pour prolonger la promo.
     deadline: "2026-09-30T23:59:59"
@@ -45,7 +45,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Universités", href: "/universites" },
   { label: "Tarifs par Pays", href: "/tarifs" },
   { label: "Simulateur de Budget", href: "/tarifs#simulateur" },
-  { label: "Packs & Navette", href: "/tarifs#packs" },
+  { label: "Packs et Navette", href: "/tarifs#packs" },
   { label: "Avis", href: "/#avis" },
   { label: "FAQ", href: "/#faq" }
 ];
@@ -56,8 +56,8 @@ export const FOOTER_LINKS: NavLink[] = [
   { label: "Espace Parents", href: "/#parents" },
   { label: "Universités Privées", href: "/universites" },
   { label: "Tarifs par Pays", href: "/tarifs" },
-  { label: "Packs & Navette Aéroport", href: "/tarifs#packs" },
-  { label: "Avis & Témoignages", href: "/#avis" },
+  { label: "Packs et Navette Aéroport", href: "/tarifs#packs" },
+  { label: "Avis et Témoignages", href: "/#avis" },
   { label: "Contact", href: "/contact" },
   { label: "Mentions légales", href: "/mentions-legales" },
   { label: "Politique de confidentialité", href: "/politique-confidentialite" },
@@ -71,7 +71,7 @@ export const FOOTER_SCHOOLS: NavLink[] = [
   { label: "UIASS Santé Rabat", href: "/universites" },
   { label: "ESCA Management CFC", href: "/universites" },
   { label: "EMSI Maroc (Honoris)", href: "/universites" },
-  { label: "UIR Rabat & UM6P", href: "/universites" }
+  { label: "UIR Rabat et UM6P", href: "/universites" }
 ];
 
 /** Réseaux sociaux du footer ("#" = lien à renseigner). */
