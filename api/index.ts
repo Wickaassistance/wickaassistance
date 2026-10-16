@@ -15,8 +15,6 @@ type VercelResponse = {
   end(body?: string | Uint8Array): void;
 };
 
-export const config = { runtime: "nodejs" };
-
 /** Adaptateur Node.js Vercel -> Fetch API utilisée par Hono. */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const forwardedProto = req.headers["x-forwarded-proto"];
