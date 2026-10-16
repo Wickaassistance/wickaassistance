@@ -1,0 +1,22 @@
+name = "wicka-assistance"
+main = "src/worker.ts"
+compatibility_date = "2025-06-01"
+
+# Conserve les variables ajoutées dans le tableau de bord Cloudflare lors d'un `wrangler deploy`
+keep_vars = true
+
+# Fichiers statiques (css, js, images) servis directement depuis public/
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Variables non secrètes. PUBLIC_SITE_URL vide = l'origine de la requête est utilisée.
+[vars]
+PUBLIC_SITE_URL = ""
+BREVO_COMPANY_EMAIL = "wickaassistance@gmail.com"
+
+# Secrets et variables à ajouter (npx wrangler secret put NOM, ou tableau de bord Cloudflare) :
+#   BREVO_API_KEY      (secret)
+#   BREVO_FROM_EMAIL   (adresse expéditrice vérifiée dans Brevo)
+#   BREVO_FROM_NAME    (ex : Wicka Assistance)
+#   BREVO_LOGO_URL     (URL absolue du logo, optionnelle : sinon <site>/assets/images/logo.png)

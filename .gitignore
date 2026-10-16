@@ -1,0 +1,12 @@
+node_modules/
+.wrangler/
+.vercel/
+.dev.vars*
+!.dev.vars.example
+.env
+.env.local
+.env.*.local
+!.env.example
+dist/
+*.log
+.DS_Store

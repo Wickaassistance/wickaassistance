@@ -1,0 +1,7 @@
+# Cloudflare (local) : copier ce fichier en .dev.vars — ne jamais committer les vraies valeurs
+BREVO_API_KEY=xkeysib-...
+BREVO_FROM_EMAIL=no-reply@votre-domaine-verifie.com
+BREVO_FROM_NAME=Wicka Assistance
+BREVO_COMPANY_EMAIL=wickaassistance@gmail.com
+PUBLIC_SITE_URL=https://votre-domaine.com
+BREVO_LOGO_URL=https://votre-domaine.com/assets/images/logo.png
