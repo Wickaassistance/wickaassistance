@@ -2073,7 +2073,7 @@ button {
    ============================================================ */
 .site-footer {
   background-color: var(--slate-950);
-  color: var(--slate-400);
+  color: var(--slate-300);
   padding: 80px 0 30px;
   border-top: 4px solid var(--rose-800);
 }
@@ -2091,7 +2091,7 @@ button {
 
 .footer-brand p {
   margin: 16px 0 24px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   line-height: 1.6;
   max-width: 320px;
 }
@@ -2143,8 +2143,8 @@ button {
 }
 
 .footer-links-list a {
-  font-size: 0.88rem;
-  color: var(--slate-400);
+  font-size: 0.92rem;
+  color: var(--slate-300);
 }
 
 .footer-links-list a:hover {
@@ -2162,7 +2162,7 @@ button {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
 }
 
 .contact-line i {
@@ -2176,7 +2176,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
 }
 
 /* ============================================================
