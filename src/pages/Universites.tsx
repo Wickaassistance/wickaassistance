@@ -103,7 +103,7 @@ export const Universites = () => (
                 <i class="fas fa-circle-check"></i> Réponse en 24h
               </span>
               <span>
-                <i class="fas fa-circle-check"></i> 98% de visa obtenu
+                <i class="fas fa-circle-check"></i> Suivi des démarches visa
               </span>
               <span>
                 <i class="fas fa-circle-check"></i> Paiement local sécurisé

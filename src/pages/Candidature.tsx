@@ -10,7 +10,7 @@ export const Candidature = () => (
   <section class="application-section" id="candidature">
     <div class="container">
       <div class="section-header">
-        <span class="section-badge" style="background-color: rgba(225, 29, 72, 0.2); color: var(--rose-300);">
+        <span class="section-badge" style="background-color: var(--rose-100); color: var(--rose-800);">
           <i class="fas fa-paper-plane"></i> Session d'Admission 2026-2027
         </span>
         <h2 class="section-title">Formulaire de Candidature Officiel</h2>
@@ -37,18 +37,17 @@ export const Candidature = () => (
           </span>
           <h3>Vous aussi, réussissez votre projet d'études au Maroc.</h3>
           <p>
-            Rejoignez les <strong>+520 étudiants déjà placés</strong> dans les meilleures universités privées du Maroc.
-            Remplissez le formulaire ci-dessous : un conseiller vous répond en 24h et bloque votre tarif promo.
+            Préparez votre projet d’études au Maroc avec un accompagnement personnalisé. Remplissez le formulaire ci-dessous : un conseiller vous répond rapidement et vous présente la formule adaptée.
           </p>
           <div class="apply-reassure-chips">
             <span>
-              <i class="fas fa-user-graduate"></i> +520 étudiants placés
+              <i class="fas fa-user-graduate"></i> Accompagnement personnalisé
             </span>
             <span>
-              <i class="fas fa-passport"></i> 98% de visa obtenu
+              <i class="fas fa-passport"></i> Suivi des démarches visa
             </span>
             <span>
-              <i class="fas fa-car-side"></i> Navette aéroport incluse
+              <i class="fas fa-car-side"></i> Navette aéroport disponible
             </span>
           </div>
         </div>

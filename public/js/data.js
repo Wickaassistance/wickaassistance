@@ -177,7 +177,7 @@ const WICKA_DATA = {
       lifestyle: 280,
       badge: "Campus d'Élite Al Akhawayn et Cadre Nature",
       tram: "Petite ville sécurisée, tout accessible à pied",
-      advantages: "La « petite Suisse marocaine » : campus américain, air pur, sécurité totale et vie 100% étudiante."
+      advantages: "La « petite Suisse marocaine » : campus américain, air pur, sécurité totale et vie étudiante dynamique."
     }
   },
 
@@ -204,7 +204,6 @@ const WICKA_DATA = {
       type: "Excellence et Partenariat Union pour la Méditerranée",
       tuition: "À partir de 50 000 DH/an",
       tuitionYearMAD: 58000,
-      admissionRate: "98% avec Wicka",
       recognized: "Diplômes Reconnus par l'État Marocain et l'Europe",
       tags: ["Campus Éco-responsable", "Laboratoires 3D et Robotique", "Bourses d'Excellence"],
       description: "Placée sous la Haute Présidence d'Honneur de Sa Majesté le Roi Mohammed VI, l'UEMF est un pôle d'excellence réunissant des étudiants de plus de 30 nationalités avec des doubles diplômes européens.",
@@ -221,9 +220,8 @@ const WICKA_DATA = {
       type: "Grande École Privée Reconnue par l'État",
       tuition: "À partir de 42 000 DH/an",
       tuitionYearMAD: 46000,
-      admissionRate: "100% avec Wicka",
       recognized: "Équivalence Diplômes État et Doubles Diplômes France",
-      tags: ["Insertion Pro 94%", "Partenariats Écoles Françaises", "Classes Prépa et Masters"],
+      tags: ["Partenariats Écoles Françaises", "Classes Prépa et Masters"],
       description: "Institution réputée à Casablanca formant depuis plus de 20 ans des managers et des ingénieurs très demandés sur le marché de l'emploi marocain et international.",
       popularPrograms: ["Audit, Finance et Contrôle de Gestion", "Génie Logiciel et Big Data", "Supply Chain et Commerce International"]
     },
@@ -238,7 +236,6 @@ const WICKA_DATA = {
       type: "Fondation Cheikh Zaïd - Reconnue par l'État",
       tuition: "Frais selon Faculté (Santé)",
       tuitionYearMAD: 85000,
-      admissionRate: "96% avec Wicka",
       recognized: "Diplôme d'État de Docteur et Spécialités",
       tags: ["Hôpital Universitaire Intégré", "Équipements Chirurgicaux de Pointe", "Internat Médical"],
       description: "Pôle médical d'excellence adossé à l'Hôpital Universitaire Cheikh Zaïd de Rabat, offrant une formation clinique intensive de rang mondial.",
@@ -252,13 +249,12 @@ const WICKA_DATA = {
       cityName: "Casablanca (Casablanca Finance City)",
       domain: "business",
       domainLabel: "Business, Finance, Audit et Marketing",
-      type: "Accréditée AACSB (Top 5% mondial)",
+      type: "Accréditée AACSB",
       tuition: "À partir de 62 000 DH/an",
       tuitionYearMAD: 65000,
-      admissionRate: "97% avec Wicka",
       recognized: "1ère Business School d'Afrique Francophone",
       tags: ["Campus CFC Ultra Moderne", "Réseau International 120+ universités", "Carrières Mondiales"],
-      description: "Classée numéro 1 en Afrique francophone, l'ESCA est située au cœur du quartier financier Casablanca Finance City avec un taux d'embauche record.",
+      description: "L'ESCA est située au cœur du quartier financier Casablanca Finance City et propose des formations en management adaptées aux enjeux du marché national et international.",
       popularPrograms: ["Grande École en Management (PGE)", "Finance de Marché et Corporate", "Marketing Digital et IA"]
     },
     {
@@ -272,7 +268,6 @@ const WICKA_DATA = {
       type: "Excellence et Recherche Mondiale",
       tuition: "Bourses disponibles et Sur dossier",
       tuitionYearMAD: 75000,
-      admissionRate: "98% avec Wicka",
       recognized: "Reconnaissance Internationale et État",
       tags: ["Campus 5 étoiles", "Supercalculateur IA Toubkal", "Bourses d'Excellence"],
       description: "L'un des campus les plus avancés au monde, axé sur l'intelligence artificielle, l'agriculture durable, les sciences des matériaux et l'entrepreneuriat.",
@@ -289,7 +284,6 @@ const WICKA_DATA = {
       type: "Partenariat Public-Privé de Référence",
       tuition: "À partir de 65 000 DH/an",
       tuitionYearMAD: 72000,
-      admissionRate: "99% avec Wicka",
       recognized: "Doubles Diplômes France / USA / Belgique",
       tags: ["Campus Américain 20 Hectares", "Rabat Business School AACSB", "Faculté de Santé"],
       description: "Une université de rang mondial dotée d'infrastructures sportives et académiques exceptionnelles, formant les futurs leaders du continent.",
@@ -306,9 +300,8 @@ const WICKA_DATA = {
       type: "1ère École d'Ingénieurs Privée du Maroc (Honoris)",
       tuition: "À partir de 42 000 DH/an",
       tuitionYearMAD: 46000,
-      admissionRate: "100% avec Wicka",
       recognized: "Diplôme d'Ingénieur Reconnu par l'État",
-      tags: ["Multiples Brevets Mondiaux", "Laboratoire SMARTiLab", "Insertion Pro 96%"],
+      tags: ["Multiples Brevets Mondiaux", "Laboratoire SMARTiLab"],
       description: "Leader incontesté de l'ingénierie appliquée avec plus de 38 ans de savoir-faire et des milliers de lauréats en poste en Afrique et en Europe.",
       popularPrograms: ["Génie Informatique et Cybersécurité", "Ingénierie Financière", "Génie Civil et BTP"]
     },
@@ -323,7 +316,6 @@ const WICKA_DATA = {
       type: "Reconnue par l'État (Réseau Honoris)",
       tuition: "À partir de 48 000 DH/an",
       tuitionYearMAD: 55000,
-      admissionRate: "100% avec Wicka",
       recognized: "Équivalence Diplômes État Marocain",
       tags: ["Campus Intégré de 3 Hectares", "Faculté des Sciences de Santé", "Alternance"],
       description: "Un environnement stimulant alliant rigueur académique et accompagnement carrières pour une intégration professionnelle réussie.",
@@ -340,7 +332,6 @@ const WICKA_DATA = {
       type: "Campus Résidentiel Écologique",
       tuition: "À partir de 52 000 DH/an",
       tuitionYearMAD: 68000,
-      admissionRate: "97% avec Wicka",
       recognized: "Diplômes Reconnus par l'État",
       tags: ["Clinique Dentaire et Médicale", "10 Hectares d'Espaces Verts", "Réseau Panafricain"],
       description: "Offre une formation pluridisciplinaire d'élite dans un cadre naturel sécurisé et moderne à l'entrée de Casablanca.",
@@ -357,7 +348,6 @@ const WICKA_DATA = {
       type: "Membre du Réseau Canadien LCI Éducation",
       tuition: "À partir de 55 000 DH/an",
       tuitionYearMAD: 60000,
-      admissionRate: "99% avec Wicka",
       recognized: "Diplômes Reconnus par l'État (Bac+5)",
       tags: ["35 ans d'Histoire", "Partenariats Écoles Françaises et Canadiennes", "Réseau Alumni Puissant"],
       description: "L'une des écoles de gestion les plus prestigieuses et historiques du Maroc, reconnue pour son encadrement humain et son excellence.",
@@ -370,13 +360,12 @@ const WICKA_DATA = {
       city: "ifrane",
       cityName: "Ifrane (Campus Américain)",
       domain: "business",
-      domainLabel: "Business, Ingénierie et Sciences Humaines (100% Anglais)",
+      domainLabel: "Business, Ingénierie et Sciences Humaines (programmes en anglais)",
       type: "Système Américain (Accréditation US) - Reconnue par l'État",
       tuition: "À partir de 70 000 DH/an",
       tuitionYearMAD: 80000,
-      admissionRate: "95% avec Wicka",
-      recognized: "Diplômes 100% anglophones reconnus aux USA et au Maroc",
-      tags: ["Campus 100% Anglophone", "Échanges USA et Europe", "Cadre Nature Sécurisé"],
+      recognized: "Diplômes anglophones reconnus aux États-Unis et au Maroc",
+      tags: ["Campus anglophone", "Échanges USA et Europe", "Cadre Nature Sécurisé"],
       description: "La seule université marocaine sur le modèle américain (crédits, liberal arts, tout en anglais). Un campus d'élite à Ifrane, idéal pour viser ensuite les USA, le Canada et l'international.",
       popularPrograms: ["School of Business Administration (SBA)", "School of Science et Engineering", "Communication et Relations Internationales"]
     },
@@ -391,7 +380,6 @@ const WICKA_DATA = {
       type: "Fondation Mohammed VI - Reconnue par l'État",
       tuition: "Frais selon Faculté (Santé)",
       tuitionYearMAD: 90000,
-      admissionRate: "95% avec Wicka",
       recognized: "Diplôme d'État de Docteur et Hôpitaux Universitaires intégrés",
       tags: ["CHU et Simulation Médicale", "Recherche Biomédicale", "Standards Internationaux"],
       description: "Pôle santé de référence adossé à ses propres hôpitaux universitaires et centres de simulation ultramodernes à Casablanca. Un choix d'excellence pour la médecine et les métiers de la santé.",
@@ -408,7 +396,6 @@ const WICKA_DATA = {
       type: "Reconnue par l'État Marocain",
       tuition: "À partir de 45 000 DH/an",
       tuitionYearMAD: 52000,
-      admissionRate: "99% avec Wicka",
       recognized: "Équivalence Diplômes État et Doubles Diplômes",
       tags: ["Campus Vert 8 Hectares", "Pôle Aéronautique", "Ville Touristique Dynamique"],
       description: "Grande université pluridisciplinaire au cœur de Marrakech, réputée pour ses filières ingénierie, aéronautique et santé dans un cadre de vie ensoleillé et agréable.",
@@ -425,7 +412,6 @@ const WICKA_DATA = {
       type: "1ère Université Privée de Fès - Reconnue par l'État",
       tuition: "À partir de 44 000 DH/an",
       tuitionYearMAD: 50000,
-      admissionRate: "99% avec Wicka",
       recognized: "Équivalence Diplômes État et Formations Accréditées",
       tags: ["Clinique Dentaire Universitaire", "Bon Rapport Qualité/Prix", "Ville Étudiante Abordable"],
       description: "Université privée pionnière à Fès, appréciée pour sa faculté de médecine dentaire et ses filières ingénierie, dans une ville au coût de vie parmi les plus bas du Maroc.",
@@ -442,9 +428,8 @@ const WICKA_DATA = {
       type: "Grande École Reconnue par l'État (40+ ans)",
       tuition: "À partir de 38 000 DH/an",
       tuitionYearMAD: 42000,
-      admissionRate: "100% avec Wicka",
       recognized: "Diplômes Reconnus par l'État et Titres RNCP France",
-      tags: ["Titres Français RNCP", "Multi-campus", "Fort Taux d'Insertion"],
+      tags: ["Titres Français RNCP", "Multi-campus"],
       description: "Réseau historique de grandes écoles présent dans 4 villes, spécialisé en ingénierie informatique et management, avec des titres français reconnus. Excellent tremplin accessible.",
       popularPrograms: ["Ingénierie Informatique et Cybersécurité", "Réseaux et Cloud", "Management et Commerce"]
     }
@@ -507,7 +492,7 @@ const WICKA_DATA = {
     {
       id: "admission",
       name: "Pack Admission Réussie",
-      badge: "⭐ Le Plus Choisi (90% des étudiants)",
+      badge: "⭐ Pack recommandé",
       price: "990 DH",
       oldPrice: "1 990 DH",
       equivalentPrice: "~60 000 FCFA / 92 €",
@@ -600,7 +585,7 @@ const WICKA_DATA = {
       rating: 5,
       year: "Promotion 2025-2026",
       avatar: "assets/images/student-gabon.jpg",
-      quote: "L'accompagnement pour l'équivalence de mon Bac gabonais et le dépôt à la faculté de santé à Rabat a été parfait. Je recommande Wicka à 100% à tous les bacheliers et parents au Gabon qui cherchent une agence fiable et sérieuse au Maroc.",
+      quote: "L'accompagnement pour l'équivalence de mon Bac gabonais et le dépôt à la faculté de santé à Rabat a été parfait. Je recommande vivement Wicka à tous les bacheliers et parents au Gabon qui cherchent une agence fiable et sérieuse au Maroc.",
       verified: true,
       badge: "Santé et Démarches Réussies"
     }
@@ -622,7 +607,7 @@ const WICKA_DATA = {
     },
     {
       q: "Pourquoi choisir des universités privées comme l'UEMF Euromed, l'ESTEM, l'UM6P ou l'UIR ?",
-      a: "Ces institutions bénéficient de la reconnaissance officielle de l'État marocain (équivalence avec les diplômes publics), d'équipements technologiques et médicaux à la pointe mondiale, de partenariats de double diplomation avec des universités en France, aux USA et en Europe, et de taux d'insertion professionnelle dépassant 92% dès la fin des études."
+      a: "Ces établissements sont reconnus par l'État marocain et proposent des équipements adaptés ainsi que des partenariats de double diplomation avec des universités en France, aux USA et en Europe. Leurs formations couvrent plusieurs domaines."
     },
     {
       q: "Wicka Assistance s'occupe-t-elle des démarches de visa d'études ?",

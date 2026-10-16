@@ -28,7 +28,7 @@ export const Cgv = () => (
         </p>
         <h2>Absence de garantie d’admission</h2>
         <p>
-          Aucune admission n’est garantie à 100 %. La décision appartient à l’établissement concerné. Lorsqu’un examen
+          Aucune admission n’est garantie. La décision appartient à l’établissement concerné. Lorsqu’un examen
           ou un concours d’entrée est demandé, l’étudiant doit le composer et satisfaire aux conditions fixées par
           l’établissement.
         </p>

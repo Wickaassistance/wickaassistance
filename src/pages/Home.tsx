@@ -89,7 +89,7 @@ const steps: { n: string; title: string; text: Child; tagIcon: string; tag: stri
     title: "Lettre d'Admission Officielle",
     text: "Délivrance de l'attestation officielle d'admission validée par le Ministère de l'Enseignement Supérieur du Maroc.",
     tagIcon: "fas fa-check-circle",
-    tag: "Taux 98%",
+    tag: "Suivi personnalisé",
     tagClass: "text-rose"
   },
   {
@@ -102,7 +102,7 @@ const steps: { n: string; title: string; text: Child; tagIcon: string; tag: stri
       </>
     ),
     tagIcon: "fas fa-passport",
-    tag: "100% Conforme"
+    tag: "Suivi consulaire"
   },
   {
     n: "05",
@@ -194,7 +194,7 @@ export const Home = () => (
                 <img src="/assets/images/student-gabon.jpg" alt="Étudiante Gabon" class="trust-avatar" />
               </div>
               <div class="trust-text">
-                <strong>+520 Étudiants Placés avec Succès</strong>
+                <strong>Accompagnement dédié aux étudiants</strong>
                 <span>Plébiscité par les parents d'élèves pour son sérieux et sa transparence</span>
               </div>
             </div>
@@ -230,24 +230,6 @@ export const Home = () => (
           </div>
         </div>
 
-        <div class="hero-stats-bar">
-          <div class="stat-item">
-            <span class="counter-value" data-target="520" data-suffix="+">520+</span>
-            <span class="stat-label">Étudiants Admis avec Succès</span>
-          </div>
-          <div class="stat-item">
-            <span class="counter-value" data-target="98" data-suffix="%">98%</span>
-            <span class="stat-label">Taux d'Obtention de Visa</span>
-          </div>
-          <div class="stat-item">
-            <span class="counter-value" data-target="35" data-suffix="+">35+</span>
-            <span class="stat-label">Universités Privées d'Élite</span>
-          </div>
-          <div class="stat-item">
-            <span class="counter-value" data-target="100" data-suffix="%">100%</span>
-            <span class="stat-label">Sécurité et Prise en Charge</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -384,7 +366,7 @@ export const Home = () => (
               class="about-main-img"
             />
             <div class="about-experience-badge">
-              <span class="exp-years">100%</span>
+              <i class="fas fa-shield-alt exp-years" aria-hidden="true"></i>
               <span class="exp-text">Sérieux et Transparence</span>
             </div>
           </div>
@@ -454,8 +436,7 @@ export const Home = () => (
           </span>
           <h2 class="section-title">Épanouissez-vous sur les campus marocains</h2>
           <p class="section-subtitle">
-            Étudiants heureux, diplômés fiers : rejoignez une communauté de <strong>+520 jeunes</strong> qui
-            construisent leur avenir au Maroc.
+            Étudiants heureux, diplômés fiers : construisez votre avenir au Maroc avec un accompagnement personnalisé.
           </p>
         </div>
 
@@ -541,24 +522,6 @@ export const Home = () => (
             <a href="/candidature" class="btn-cta-ghost btn-cta-lg light">
               <i class="fas fa-rocket"></i> Je démarre ma candidature
             </a>
-          </div>
-          <div class="cta-photo-stats">
-            <div>
-              <strong>+520</strong>
-              <span>étudiants placés</span>
-            </div>
-            <div>
-              <strong>98%</strong>
-              <span>visa obtenu</span>
-            </div>
-            <div>
-              <strong>24h</strong>
-              <span>pour une réponse</span>
-            </div>
-            <div>
-              <strong>−50%</strong>
-              <span>promo lancement</span>
-            </div>
           </div>
         </div>
       </div>

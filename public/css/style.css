@@ -1265,7 +1265,7 @@ button {
   background: linear-gradient(180deg, rgba(76,5,25,0) 35%, rgba(76,5,25,0.55) 100%);
 }
 
-.uni-media-city, .uni-media-rate {
+.uni-media-city {
   position: absolute;
   z-index: 1;
   bottom: 12px;
@@ -1280,12 +1280,6 @@ button {
   left: 14px;
   background: rgba(255, 255, 255, 0.92);
   color: var(--rose-800);
-}
-
-.uni-media-rate {
-  right: 14px;
-  background: rgba(16, 185, 129, 0.92);
-  color: var(--white);
 }
 
 .university-card:hover {
@@ -1811,18 +1805,18 @@ button {
    ============================================================ */
 .application-section {
   padding: 90px 0;
-  background-color: var(--slate-900);
-  color: var(--white);
+  background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%);
+  color: var(--slate-700);
   position: relative;
   overflow: hidden;
 }
 
 .application-section .section-title {
-  color: var(--white);
+  color: var(--slate-900);
 }
 
 .application-section .section-subtitle {
-  color: var(--slate-300);
+  color: var(--slate-600);
 }
 
 .app-form-box {
@@ -3439,3 +3433,6 @@ button {
 .site-footer .footer-bottom-bar { border-top-color: var(--rose-200); }
 .site-footer .contact-line a { color: var(--rose-800); font-weight: 700; }
 .site-footer .contact-line a:hover { color: var(--rose-600); }
+
+/* Carte université sans taux : grille pleine largeur. */
+.uni-meta-grid-single { grid-template-columns: 1fr; }

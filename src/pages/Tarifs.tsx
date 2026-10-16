@@ -408,7 +408,7 @@ export const Tarifs = () => (
 
           {/* Pack 2 (Featured) */}
           <div class="pricing-card featured">
-            <span class="pricing-badge-popular">⭐ Le Plus Choisi (90% des familles)</span>
+            <span class="pricing-badge-popular">⭐ Pack recommandé</span>
             <div class="pack-header">
               <span class="badge-rose-soft" style="background-color: var(--rose-700); color: var(--white);">
                 Admission Garantie

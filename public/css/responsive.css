@@ -163,7 +163,7 @@
     height: 320px;
   }
 
-  /* Ligne de confiance "+520 étudiants" : empilée et centrée */
+  /* Ligne de confiance "bloc de confiance" : empilée et centrée */
   .hero-trust-row {
     flex-direction: column;
     gap: 14px;

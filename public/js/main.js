@@ -275,7 +275,6 @@ function initUniversityFilters() {
           <div class="uni-card-media">
             <img src="${photo}" alt="${escapeHtml(uni.cityName)}" loading="lazy" />
             <span class="uni-media-city"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(uni.cityName)}</span>
-            <span class="uni-media-rate"><i class="fas fa-circle-check"></i> ${escapeHtml(uni.admissionRate)}</span>
           </div>
           <div class="uni-card-header">
             <div class="uni-badge-top">
@@ -297,14 +296,10 @@ function initUniversityFilters() {
               <ul>${programsHtml}</ul>
             </div>
 
-            <div class="uni-meta-grid">
+            <div class="uni-meta-grid uni-meta-grid-single">
               <div class="meta-item">
                 <span class="meta-label">Frais indicatifs :</span>
                 <span class="meta-value">${escapeHtml(uni.tuition)}</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">Taux d'admission :</span>
-                <span class="meta-value text-success">${escapeHtml(uni.admissionRate)}</span>
               </div>
             </div>
           </div>
