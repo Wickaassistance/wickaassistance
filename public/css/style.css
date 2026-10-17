@@ -3436,3 +3436,31 @@ button {
 
 /* Carte université sans taux : grille pleine largeur. */
 .uni-meta-grid-single { grid-template-columns: 1fr; }
+
+
+/* ============================================================
+   PROMO −50% : SÉCURITÉS D'AFFICHAGE (règle annuelle, voir README)
+   ------------------------------------------------------------
+   La promo est rendue du 1er août au 15 novembre (UTC) et masquée le reste
+   de l'année (logique : getPromo() dans src/config/site.ts + js/main.js).
+   Tout élément promo porte la classe .promo-only : le JS la retire à
+   l'échéance ou si une page en cache date de la période hors promo.
+   ============================================================ */
+
+/* Un élément promo marqué [hidden] ne s'affiche jamais */
+.promo-only[hidden] { display: none !important; }
+
+/* Bandeau du haut : sans la partie promo (gauche), les liens de contact restent calés à droite */
+.notice-content { gap: 16px; }
+.notice-left { flex: 1 1 auto; min-width: 0; }
+.notice-left > span:last-child { overflow-wrap: anywhere; }
+.notice-right { margin-left: auto; flex: 0 0 auto; }
+
+/* Compte à rebours : pas d'affichage « 00 » avant que le JS ait calculé la vraie valeur
+   (la classe .is-running est ajoutée par initPromoCountdown() dans js/main.js) */
+.promo-countdown:not(.is-running) .pc-units { opacity: 0; }
+.promo-countdown .pc-units { transition: opacity 0.3s ease; }
+
+/* Bloc CTA photo : espacement correct avec ou sans compte à rebours */
+.cta-photo-content > p { margin-bottom: 28px; }
+.cta-photo-content > .promo-countdown + .cta-photo-actions { margin-top: 0; }
