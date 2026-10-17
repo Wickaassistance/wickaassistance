@@ -1,4 +1,5 @@
 import { SITE } from "../config/site";
+import { TIKTOK } from "../config/tiktok";
 
 /** Données structurées schema.org (EducationalOrganization) de la page d'accueil. */
 export function organizationJsonLd(origin: string) {
@@ -18,6 +19,6 @@ export function organizationJsonLd(origin: string) {
       telephone: `+${SITE.phoneRaw}`,
       availableLanguage: "French"
     },
-    sameAs: [`https://wa.me/${SITE.phoneRaw}`]
+    sameAs: [`https://wa.me/${SITE.phoneRaw}`, TIKTOK.profileUrl]
   };
 }
