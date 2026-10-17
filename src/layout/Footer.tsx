@@ -1,6 +1,7 @@
 import { FOOTER_LINKS, FOOTER_SCHOOLS, SITE, SOCIAL_LINKS, waLink } from "../config/site";
+import { TIKTOK } from "../config/tiktok";
 
-/** Footer commun à toutes les pages. Liens et coordonnées : config/site.ts. */
+/** Footer commun à toutes les pages. Liens et coordonnées : config/site.ts (TikTok : config/tiktok.ts). */
 export const Footer = () => (
   <footer class="site-footer">
     <div class="container">
@@ -27,6 +28,15 @@ export const Footer = () => (
                 <i class={s.icon}></i>
               </a>
             ))}
+            <a
+              href={TIKTOK.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon-btn"
+              aria-label="TikTok"
+            >
+              <i class="fab fa-tiktok"></i>
+            </a>
             <a
               href={waLink()}
               target="_blank"
