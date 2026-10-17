@@ -8,7 +8,8 @@ Hono + TypeScript (JSX), compatible **Cloudflare Workers** et **Vercel** (une se
 
 | Je veux modifier…                                   | Fichier                                   |
 | --------------------------------------------------- | ----------------------------------------- |
-| Menu, footer (liens), téléphone, e-mail, promo      | `src/config/site.ts`                      |
+| Menu, footer (liens), téléphone, e-mail             | `src/config/site.ts`                      |
+| **Règle de la promo −50% (dates, compte à rebours)** | `src/config/site.ts` → `getPromo()`       |
 | Structure du header (bandeau, menu, menu mobile)    | `src/layout/Header.tsx`                   |
 | Structure du footer                                 | `src/layout/Footer.tsx`                   |
 | WhatsApp flottant, barre CTA mobile, modals         | `src/layout/FloatingActions.tsx`          |
@@ -24,7 +25,44 @@ Hono + TypeScript (JSX), compatible **Cloudflare Workers** et **Vercel** (une se
 | Page 404                                            | `src/pages/NotFound.tsx`                  |
 | Responsive                                          | `public/css/responsive.css`               |
 | Tarifs, universités, FAQ, avis                      | `public/js/data.js`                       |
+| Compte à rebours (JS client)                        | `public/js/main.js`                       |
 | Envoi des e-mails (Brevo)                           | `src/routes/send-email.ts`                |
+
+## Promo −50% et compte à rebours (règle annuelle automatique)
+
+**Fuseau : GMT+0 (UTC).** Aucune modification manuelle n'est nécessaire d'une année à l'autre.
+
+| Période (UTC)                        | État de la promo                                                                 |
+| ------------------------------------ | -------------------------------------------------------------------------------- |
+| 1er août 00:00:00 → 15 nov. 23:59:59 | **Active** : compte à rebours, bandeau header, boutons/offres de réduction, prix promo |
+| 16 novembre → 31 juillet             | **Masquée** : rien de promotionnel n'est rendu, les prix pleins s'affichent       |
+
+Le 1er août suivant, tout réapparaît automatiquement, avec une échéance au 15 novembre de l'année en cours.
+
+### Fonctionnement
+
+- **Source unique de vérité** : `getPromo()` dans `src/config/site.ts`. Elle renvoie `{ active, deadline, rentree, text }`.
+  - `active` : `true` uniquement du 1er août au 15 novembre.
+  - `deadline` : 15 novembre de l'année en cours (ISO 8601, UTC).
+  - `rentree` : rentrée visée (ex. `2026-2027`), qui passe à l'année suivante après le 15 novembre.
+  - `text` : texte du bandeau promo du header.
+- **Côté serveur** : les pages appellent `getPromo()` à chaque requête et ne rendent pas les éléments promo quand `active` vaut `false`.
+- **Côté client** (`public/js/main.js`) : le script lit `data-promo-deadline`, décompte chaque seconde et, à l'échéance, retire tous les éléments `.promo-only` (utile si la page reste ouverte au moment du 15 novembre).
+
+### Éléments concernés
+
+- Compte à rebours (`#promoCountdown`, page d'accueil)
+- Bandeau promo du header
+- Bouton / libellé « Postuler (Promo −50%) » (barre CTA mobile)
+- Textes « promo −50% » (cartes Explorez, FAQ) et prix promo de `/tarifs`
+
+### Règles pour les développeurs
+
+1. Tout nouvel élément lié à la promo doit être conditionné par `getPromo().active`.
+2. Il doit porter la classe CSS `promo-only`.
+3. Ne jamais écrire de date de fin en dur : la modifier uniquement dans `getPromo()`.
+4. Si la page est mise en cache (Cloudflare, CDN), prévoir un cache court ou une purge le 16 novembre et le 1er août.
+5. Le Maroc est en GMT+1 la majeure partie de l'année : la fin « 23:59:59 UTC » correspond à 00:59:59 le 16 novembre à Casablanca. Pour finir à minuit locale, utiliser `22, 59, 59` dans `end` (fonction `getPromo`).
 
 ## Pages
 
@@ -41,7 +79,7 @@ Hono + TypeScript (JSX), compatible **Cloudflare Workers** et **Vercel** (une se
 | `/merci` (noindex)            | `src/pages/Merci.tsx`                    |
 | toute autre URL (404)         | `src/pages/NotFound.tsx`                 |
 
-Toutes les pages, y compris la 404, passent par le même gabarit `src/layout/Layout.tsx` : bandeau promo, header, footer, WhatsApp flottant, modals et bannière cookies sont écrits une seule fois.
+Toutes les pages, y compris la 404, passent par le même gabarit `src/layout/Layout.tsx` : bandeau promo (affiché selon `getPromo()`), header, footer, WhatsApp flottant, modals et bannière cookies sont écrits une seule fois.
 
 Autres routes : `/sitemap.xml`, `/robots.txt`, `/llms.txt` (générées à partir de `PUBLIC_SITE_URL`) et `POST /api/send-email`.
 Les anciennes URLs `/xxx.html` sont redirigées (301) vers `/xxx`.
@@ -94,3 +132,5 @@ curl https://votre-domaine.com/robots.txt
 ```
 
 Vérifier chaque route (`/`, `/candidature`, `/universites`, `/tarifs`, `/contact`, `/mentions-legales`, `/politique-confidentialite`, `/cgv`, `/merci`) et une URL inexistante (page 404), puis tester un formulaire réel (contact, rappel, candidature) une fois les variables Brevo renseignées.
+
+Test de la règle promo : dans `getPromo(now)`, passer une date factice (ex. `getPromo(new Date("2026-11-16T00:00:00Z"))`) pour vérifier que compte à rebours, bandeau et boutons disparaissent, puis `2026-08-01T00:00:00Z` pour vérifier leur retour.
