@@ -1,5 +1,6 @@
 import type { Child } from "hono/jsx";
 import { getPromo, waLink } from "../config/site";
+import { TikTokSection } from "./TikTokSection";
 
 export const homeMeta = {
   title: "Étudier au Maroc | Admission, Visa et Orientation",
@@ -486,6 +487,9 @@ export const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ===== TIKTOK (aperçu local, vidéo chargée au clic ; config dans src/config/tiktok.ts) ===== */}
+      <TikTokSection />
 
       {/* ===== CTA PHOTO + COMPTE À REBOURS (compte à rebours visible seulement si promo active) ===== */}
       <section
