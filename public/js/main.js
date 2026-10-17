@@ -20,21 +20,70 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ============================================================
+   PROMO −50% : RÈGLE ANNUELLE (fuseau GMT+0 / UTC)
+   ------------------------------------------------------------
+   Cette fonction DOIT rester identique à getPromo() dans src/config/site.ts.
+   - Promo ACTIVE du 1er août 00:00:00 au 15 novembre 23:59:59 (UTC) de chaque année.
+   - Hors de cette période (16 nov. → 31 juil.) : compte à rebours, bandeau, badges
+     et prix promo sont masqués, les prix pleins s'affichent.
+   - Réapparition automatique le 1er août suivant, sans modification manuelle.
+   Voir la section « Promo » du README.
+   ============================================================ */
+function getPromoWindow(now = new Date()) {
+  const y = now.getUTCFullYear();
+  const start = Date.UTC(y, 7, 1, 0, 0, 0); // 1er août (mois 7 = août, base 0)
+  const end = Date.UTC(y, 10, 15, 23, 59, 59); // 15 novembre (mois 10 = novembre)
+  const t = now.getTime();
+  return { active: t >= start && t <= end, deadline: end };
+}
+
+/** Retire du DOM tous les éléments promotionnels (classe .promo-only). */
+function removePromoElements() {
+  document.querySelectorAll('.promo-only').forEach((el) => el.remove());
+}
+
+/* ============================================================
    COMPTE À REBOURS PROMOTION
+   - Lit la deadline fournie par le serveur (data-promo-deadline, ISO UTC),
+     sinon calcule celle de l'année en cours.
+   - À l'échéance (ou hors période) : retire tous les .promo-only et prévient
+     le reste du site via l'événement « wicka:promo-ended ».
    ============================================================ */
 function initPromoCountdown() {
-  const el = document.getElementById('promoCountdown');
-  if (!el) return;
-  const deadline = new Date(el.getAttribute('data-deadline')).getTime();
+  const promo = getPromoWindow();
+  document.documentElement.classList.toggle('promo-active', promo.active);
+
+  // Hors période (ex. page restée en cache) : on retire tout élément promo.
+  if (!promo.active) {
+    removePromoElements();
+    return;
+  }
+
+  const holder = document.querySelector('[data-promo-deadline]');
+  if (!holder && !document.querySelector('.promo-only')) return; // rien à gérer sur cette page
+
+  let deadline = holder ? Date.parse(holder.getAttribute('data-promo-deadline')) : NaN;
+  if (isNaN(deadline)) deadline = promo.deadline;
+
+  const box = document.getElementById('promoCountdown');
   const dEl = document.getElementById('pcDays');
   const hEl = document.getElementById('pcHours');
   const mEl = document.getElementById('pcMins');
   const sEl = document.getElementById('pcSecs');
   const pad = (n) => String(n).padStart(2, '0');
 
+  const endPromo = () => {
+    removePromoElements();
+    document.documentElement.classList.remove('promo-active');
+    document.dispatchEvent(new CustomEvent('wicka:promo-ended'));
+  };
+
   const tick = () => {
-    let diff = deadline - Date.now();
-    if (diff < 0) diff = 0;
+    const diff = deadline - Date.now();
+    if (diff <= 0) {
+      endPromo();
+      return;
+    }
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
@@ -43,10 +92,11 @@ function initPromoCountdown() {
     if (hEl) hEl.innerText = pad(h);
     if (mEl) mEl.innerText = pad(m);
     if (sEl) sEl.innerText = pad(s);
+    if (box) box.classList.add('is-running'); // affiche les chiffres (évite le « 00 » initial)
+    setTimeout(tick, 1000);
   };
 
   tick();
-  setInterval(tick, 1000);
 }
 
 /* ============================================================
@@ -151,6 +201,9 @@ function initCounters() {
 
 /* ============================================================
    3. SÉLECTEUR INTERACTIF DE TARIFS PAR PAYS
+   PROMO : prix barrés + badge « PROMO -50% » uniquement si la promo est active
+   (1er août → 15 novembre, UTC). Sinon, affichage du prix plein
+   (packAdmissionOld / packVIPOld dans data.js = prix avant promo).
    ============================================================ */
 function initCountryPricingSwitcher() {
   const countrySelect = document.getElementById('pricingCountrySelect');
@@ -163,12 +216,23 @@ function initCountryPricingSwitcher() {
 
   if (!window.WICKA_DATA || !window.WICKA_DATA.countryPricings) return;
 
+  let currentCountryKey = 'senegal';
+
   const updateCountryView = (countryKey) => {
+    currentCountryKey = countryKey;
     const data = window.WICKA_DATA.countryPricings[countryKey] || window.WICKA_DATA.countryPricings.senegal;
+    const promoActive = getPromoWindow().active;
+
+    // Prix promo (actif) ou prix plein (hors période)
+    const fullPrice = (oldP, newP) => (oldP || newP);
+    const shownPrice = (oldP, newP) => (promoActive ? newP : fullPrice(oldP, newP));
 
     const priceMarkup = (oldP, newP) => {
+      if (!promoActive) {
+        return `<span class="price-now">${fullPrice(oldP, newP)}</span>`;
+      }
       const oldHtml = oldP ? `<span class="price-old">${oldP}</span>` : '';
-      return `${oldHtml}<span class="price-now">${newP}</span><span class="price-promo-tag">PROMO -50%</span>`;
+      return `${oldHtml}<span class="price-now">${newP}</span><span class="price-promo-tag promo-only">PROMO -50%</span>`;
     };
 
     if (outCountryTitle) outCountryTitle.innerText = `Tarifs et Moyens de Paiement pour : ${data.name}`;
@@ -185,7 +249,10 @@ function initCountryPricingSwitcher() {
     // Update buttons in pricing cards as well
     document.querySelectorAll('.btn-order-pack').forEach(btn => {
       const packType = btn.getAttribute('data-pack');
-      const waMsg = encodeURIComponent(`Bonjour Wicka Assistance ! Je réside en/au ${data.name} et je souhaite souscrire au ${packType} (${packType === 'Pack Admission' ? data.packAdmission : data.packVIP}).`);
+      const price = packType === 'Pack Admission'
+        ? shownPrice(data.packAdmissionOld, data.packAdmission)
+        : shownPrice(data.packVIPOld, data.packVIP);
+      const waMsg = encodeURIComponent(`Bonjour Wicka Assistance ! Je réside en/au ${data.name} et je souhaite souscrire au ${packType} (${price}).`);
       btn.href = `https://wa.me/212789095498?text=${waMsg}`;
     });
   };
@@ -207,6 +274,9 @@ function initCountryPricingSwitcher() {
       updateCountryView(val);
     });
   });
+
+  // Si la promo se termine pendant la visite : on repasse aux prix pleins.
+  document.addEventListener('wicka:promo-ended', () => updateCountryView(currentCountryKey));
 
   // Init with default (Senegal or first)
   updateCountryView('senegal');
