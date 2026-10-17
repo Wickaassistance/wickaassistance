@@ -9,6 +9,8 @@ const CSP = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
   "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
   "script-src 'self' 'unsafe-inline'",
+  // Lecteur TikTok : autorisé uniquement en iframe, et chargé seulement après un clic du visiteur (public/js/tiktok.js)
+  "frame-src https://www.tiktok.com",
   "connect-src 'self'",
   "object-src 'none'",
   "upgrade-insecure-requests"
