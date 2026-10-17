@@ -42,6 +42,18 @@ function removePromoElements() {
   document.querySelectorAll('.promo-only').forEach((el) => el.remove());
 }
 
+/**
+ * Remplace les textes promo par leur version « prix plein » / standard.
+ * Convention : un élément qui affiche un prix ou un libellé promo porte
+ * data-full-text="valeur hors promo" (posé par le serveur dans Tarifs.tsx et
+ * FloatingActions.tsx). Appelé hors période ou à l'échéance du compte à rebours.
+ */
+function showFullTexts() {
+  document.querySelectorAll('[data-full-text]').forEach((el) => {
+    el.textContent = el.getAttribute('data-full-text');
+  });
+}
+
 /* ============================================================
    COMPTE À REBOURS PROMOTION
    - Lit la deadline fournie par le serveur (data-promo-deadline, ISO UTC),
@@ -56,6 +68,7 @@ function initPromoCountdown() {
   // Hors période (ex. page restée en cache) : on retire tout élément promo.
   if (!promo.active) {
     removePromoElements();
+    showFullTexts();
     return;
   }
 
@@ -74,6 +87,7 @@ function initPromoCountdown() {
 
   const endPromo = () => {
     removePromoElements();
+    showFullTexts();
     document.documentElement.classList.remove('promo-active');
     document.dispatchEvent(new CustomEvent('wicka:promo-ended'));
   };
