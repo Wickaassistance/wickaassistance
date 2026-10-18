@@ -3,10 +3,12 @@
 // Variables lues : BREVO_API_KEY, BREVO_FROM_EMAIL, BREVO_FROM_NAME (optionnel),
 //                  BREVO_COMPANY_EMAIL, BREVO_LOGO_URL (optionnel), PUBLIC_SITE_URL (optionnel)
 //
-// URL du site : le cron n'a pas de requête, donc il teste les adresses connues et utilise
-// la première qui répond : PUBLIC_SITE_URL (si renseignée) -> .com -> workers.dev.
-// workers.dev est le dernier recours (il existe tant que le Worker est déployé).
+// URL du site : le cron n'a pas de requête, donc il lit PUBLIC_SITE_URL (1 à 3 adresses séparées
+// par des virgules), teste chaque adresse dans l'ordre et utilise la première qui répond.
+// Si aucune ne répond : workers.dev (il existe tant que le Worker est déployé).
 // Un domaine inexistant ou en panne ne bloque JAMAIS l'envoi de l'e-mail.
+
+import { parseSiteUrls } from "../lib/env";
 
 export interface BrevoEnv {
   BREVO_API_KEY: string;
@@ -14,6 +16,7 @@ export interface BrevoEnv {
   BREVO_FROM_NAME?: string;
   BREVO_COMPANY_EMAIL: string;
   BREVO_LOGO_URL?: string;
+  /** 1 à 3 adresses du site séparées par des virgules. */
   PUBLIC_SITE_URL?: string;
 }
 
@@ -24,7 +27,6 @@ const COM_URL = "https://wickaassistance.com";
 const WORKERS_DEV_URL = "https://wickaassistance.wickaassistance.workers.dev";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const trimSlash = (u: string) => u.trim().replace(/\/+$/, "");
 
 /** Une adresse est "vivante" si elle répond (toute réponse < 500) avant le délai. */
 async function isReachable(url: string, timeoutMs = 5000): Promise<boolean> {
@@ -40,12 +42,10 @@ async function isReachable(url: string, timeoutMs = 5000): Promise<boolean> {
   }
 }
 
-/** Retourne la première URL du site qui fonctionne ; workers.dev en dernier recours. */
+/** Retourne la première adresse du site qui fonctionne ; workers.dev en dernier recours. */
 export async function resolveSiteUrl(env: BrevoEnv): Promise<string> {
-  const candidates = [env.PUBLIC_SITE_URL, COM_URL]
-    .filter((u): u is string => Boolean(u && u.trim()))
-    .map(trimSlash)
-    .filter((u, i, arr) => arr.indexOf(u) === i && u !== WORKERS_DEV_URL);
+  const configured = parseSiteUrls(env.PUBLIC_SITE_URL);
+  const candidates = configured.length > 0 ? configured : [COM_URL, WORKERS_DEV_URL];
 
   for (const url of candidates) {
     if (await isReachable(url)) return url;
