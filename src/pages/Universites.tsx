@@ -54,6 +54,10 @@ const styles = `
 .uv-list .uv-more{color:var(--muted)}
 .uv-list .uv-more::before{background:#cbd5e1}
 
+.uv-price{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin:16px 24px 0;padding-top:16px;border-top:1px solid var(--line)}
+.uv-price-label{font-size:.8rem;color:var(--muted)}
+.uv-price-value{font-size:.98rem;font-weight:700;color:var(--ink)}
+
 .uv-actions{display:grid;gap:10px;padding:20px 24px 24px}
 .uv-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 18px;border-radius:12px;font-weight:600;font-size:.95rem;text-decoration:none;transition:.2s;cursor:pointer}
 .uv-btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:#fff}
@@ -62,20 +66,10 @@ const styles = `
 .uv-btn-main:hover{background:var(--accent-d);border-color:var(--accent-d)}
 
 .uv-foot{text-align:center;color:var(--muted);font-size:.9rem;padding:0 0 48px}
-.uv-cta{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border-radius:28px;padding:52px 28px;text-align:center;margin-bottom:72px}
-.uv-cta h2{margin:0 0 10px;font-size:clamp(1.4rem,3vw,2rem);font-weight:800}
-.uv-cta p{margin:0 auto 26px;max-width:560px;color:#cbd5e1;line-height:1.7}
-.uv-cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.uv-cta .uv-btn{padding:0 26px}
-.uv-btn-line{border:1.5px solid rgba(255,255,255,.4);color:#fff}
-.uv-btn-line:hover{border-color:#fff}
-.uv-micro{display:block;margin-top:16px;font-size:.85rem;color:#94a3b8}
 
 @media (max-width:700px){
   .uv-hero{padding:48px 0 24px}
   .uv-grid{gap:22px}
-  .uv-cta{padding:40px 20px;border-radius:22px}
-  .uv-cta .uv-btn{width:100%}
 }
 `;
 
@@ -123,6 +117,26 @@ const PHOTOS_VILLES: Record<string, string> = {
 // Nombre de formations affichées sur la carte (le reste est résumé en « + N autres »).
 const FORMATIONS_VISIBLES = 3;
 
+// Frais indicatifs affichés sur la carte, repris de l'ancien data.js (clé = slug de src/data/universites.ts).
+// À vérifier avant publication : ils changent chaque année. Sans entrée, la carte affiche « Sur demande ».
+const FRAIS: Record<string, string> = {
+  uemf: "À partir de 50 000 DH/an",
+  estem: "À partir de 42 000 DH/an",
+  uiass: "Selon la faculté",
+  esca: "À partir de 62 000 DH/an",
+  um6p: "Sur dossier (bourses disponibles)",
+  uir: "À partir de 65 000 DH/an",
+  emsi: "À partir de 42 000 DH/an",
+  mundiapolis: "À partir de 48 000 DH/an",
+  uic: "À partir de 52 000 DH/an",
+  hem: "À partir de 55 000 DH/an",
+  aui: "À partir de 70 000 DH/an",
+  um6ss: "Selon la faculté",
+  upm: "À partir de 45 000 DH/an",
+  upf: "À partir de 44 000 DH/an",
+  isga: "À partir de 38 000 DH/an",
+};
+
 const Pin = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
@@ -137,6 +151,7 @@ const Carte = ({ e }: { e: Etablissement }) => {
   const photo = PHOTOS_VILLES[e.villes[0]];
   const visibles = e.filieres.slice(0, FORMATIONS_VISIBLES);
   const cachees = e.filieres.length - visibles.length;
+  const frais = FRAIS[e.slug] ?? "Sur demande";
 
   return (
     <article
@@ -175,6 +190,11 @@ const Carte = ({ e }: { e: Etablissement }) => {
             )}
           </ul>
         )}
+      </div>
+
+      <div class="uv-price">
+        <span class="uv-price-label">Frais indicatifs</span>
+        <strong class="uv-price-value">{frais}</strong>
       </div>
 
       <div class="uv-actions">
@@ -239,29 +259,36 @@ export const Universites = () => (
           à jour.
         </p>
 
-        <section class="uv-cta">
-          <h2>Besoin d'aide pour choisir ?</h2>
-          <p>
-            Un conseiller étudie votre profil, prépare votre candidature et suit votre dossier auprès de
-            l'établissement.
-          </p>
-          <div class="uv-cta-actions">
+      </div>
+    </div>
+
+    <section class="cta-band">
+      <div class="container">
+        <div class="cta-band-inner">
+          <div class="cta-band-text">
+            <h2>Besoin d'aide pour choisir ?</h2>
+            <p>
+              Un conseiller étudie votre profil, prépare votre candidature et suit votre dossier auprès de
+              l'établissement.
+            </p>
+          </div>
+          <div class="cta-band-actions">
             <a
               href={waLink("Bonjour Wicka, je souhaite être orienté vers une université ou une école au Maroc.")}
               target="_blank"
               rel="noopener noreferrer"
-              class="uv-btn uv-btn-main"
+              class="btn-cta-white"
             >
               Parler à un conseiller
             </a>
-            <a href="/candidature" class="uv-btn uv-btn-line">
+            <a href="/candidature" class="btn-cta-ghost">
               Envoyer ma candidature
             </a>
+            <span class="cta-band-microcopy">Sans engagement</span>
           </div>
-          <span class="uv-micro">Sans engagement</span>
-        </section>
+        </div>
       </div>
-    </div>
+    </section>
 
     <script dangerouslySetInnerHTML={{ __html: filterScript }} />
   </>
