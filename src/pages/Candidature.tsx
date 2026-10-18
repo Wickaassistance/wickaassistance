@@ -45,8 +45,8 @@ export const Candidature = () => {
             </span>
             <h3>Présentez-nous votre projet d'études au Maroc.</h3>
             <p>
-              Remplissez le formulaire ci-dessous en 4 étapes : un conseiller étudie votre profil, vous recontacte et
-              vous présente la formule d'accompagnement qui correspond à votre projet.
+              Remplissez le formulaire ci-dessous en 4 étapes : un conseiller étudie votre profil et vous recontacte
+              sous 72 h maximum pour vous présenter la formule d'accompagnement qui correspond à votre projet.
             </p>
             <div class="apply-reassure-chips">
               <span>
@@ -337,7 +337,8 @@ export const Candidature = () => {
                     required
                   />
                   <small style="color: var(--slate-500); font-size: 0.76rem;">
-                    Un conseiller vous contactera sur WhatsApp pour vous présenter la suite de votre dossier.
+                    Un conseiller vous contactera sur WhatsApp sous 72 h maximum pour vous présenter la suite de votre
+                    dossier.
                   </small>
                 </div>
 
