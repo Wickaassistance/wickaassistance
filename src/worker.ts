@@ -15,3 +15,4 @@ export default {
     ctx.waitUntil(sendMonthlyBrevoCheck(env));
   },
 };
+ 
