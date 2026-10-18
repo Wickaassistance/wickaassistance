@@ -311,7 +311,7 @@ function initUniversityFilters() {
   // La page /universites est rendue côté serveur (src/pages/Universites.tsx) avec ses cartes
   // et son propre script de filtre. Si les cartes sont déjà dans le HTML, on ne les remplace
   // pas par les anciennes données de data.js.
-  if (container.querySelector('.university-card')) return;
+  if (container.querySelector('.uv-card, .university-card')) return;
 
   let currentDomain = 'all';
   let currentCity = 'all';
