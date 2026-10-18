@@ -76,7 +76,7 @@ export const Footer = () => (
       </div>
 
       <div class="footer-bottom-bar">
-        <span style="color: var(--rose-300);">© {SITE.copyrightYear} {SITE.name}. Tous droits réservés.</span>
+        <span class="footer-copyright">© {SITE.copyrightYear} {SITE.name}. Tous droits réservés.</span>
       </div>
     </div>
   </footer>

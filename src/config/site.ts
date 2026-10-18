@@ -98,8 +98,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Tarifs par Pays", href: "/tarifs" },
   { label: "Simulateur de Budget", href: "/tarifs#simulateur" },
   { label: "Packs et Navette", href: "/tarifs#packs" },
-  { label: "Avis", href: "/#avis" },
-  { label: "FAQ", href: "/#faq" }
 ];
 
 /** Colonne « Navigation » du footer. */
@@ -128,6 +126,6 @@ export const FOOTER_SCHOOLS: NavLink[] = [
 
 /** Réseaux sociaux affichés dans le footer : uniquement TikTok et WhatsApp. */
 export const SOCIAL_LINKS = [
-  { label: "TikTok", icon: "fab fa-tiktok", href: "https://www.tiktok.com/@willou_osean" },
-  { label: "WhatsApp", icon: "fab fa-whatsapp", href: "https://wa.me/212789095498" }
+  { label: "WhatsApp", icon: "fab fa-whatsapp", href: "https://wa.me/212789095498" },
+  { label: "TikTok", icon: "fab fa-tiktok", href: "https://www.tiktok.com/@willou_osean" }
 ] as const;

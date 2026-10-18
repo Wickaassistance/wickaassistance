@@ -3464,3 +3464,8 @@ button {
 /* Bloc CTA photo : espacement correct avec ou sans compte à rebours */
 .cta-photo-content > p { margin-bottom: 28px; }
 .cta-photo-content > .promo-countdown + .cta-photo-actions { margin-top: 0; }
+
+
+/* Copyright footer : lisible, centré et aligné avec la charte du logo. */
+.footer-bottom-bar { justify-content: center; text-align: center; font-size: 0.98rem; }
+.footer-copyright { color: var(--rose-300); font-weight: 600; }

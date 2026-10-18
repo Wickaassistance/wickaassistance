@@ -1995,9 +1995,7 @@ var NAV_LINKS = [
   { label: "Universit\xE9s", href: "/universites" },
   { label: "Tarifs par Pays", href: "/tarifs" },
   { label: "Simulateur de Budget", href: "/tarifs#simulateur" },
-  { label: "Packs et Navette", href: "/tarifs#packs" },
-  { label: "Avis", href: "/#avis" },
-  { label: "FAQ", href: "/#faq" }
+  { label: "Packs et Navette", href: "/tarifs#packs" }
 ];
 var FOOTER_LINKS = [
   { label: "Accueil", href: "/" },
@@ -2020,8 +2018,8 @@ var FOOTER_SCHOOLS = [
   { label: "UIR Rabat et UM6P", href: "/universites" }
 ];
 var SOCIAL_LINKS = [
-  { label: "TikTok", icon: "fab fa-tiktok", href: "https://www.tiktok.com/@willou_osean" },
-  { label: "WhatsApp", icon: "fab fa-whatsapp", href: "https://wa.me/212789095498" }
+  { label: "WhatsApp", icon: "fab fa-whatsapp", href: "https://wa.me/212789095498" },
+  { label: "TikTok", icon: "fab fa-tiktok", href: "https://www.tiktok.com/@willou_osean" }
 ];
 
 // src/config/tiktok.ts
@@ -5026,7 +5024,7 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
       ] })
     ] })
   ] }),
-  /* @__PURE__ */ jsxDEV("div", { class: "footer-bottom-bar", children: /* @__PURE__ */ jsxDEV("span", { style: "color: var(--rose-300);", children: [
+  /* @__PURE__ */ jsxDEV("div", { class: "footer-bottom-bar", children: /* @__PURE__ */ jsxDEV("span", { class: "footer-copyright", children: [
     "\xA9 ",
     SITE.copyrightYear,
     " ",
