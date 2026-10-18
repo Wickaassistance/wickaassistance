@@ -619,6 +619,41 @@ function initContactForm() {
 /* ============================================================
    6. FORMULAIRE DE CANDIDATURE MULTI-ÉTAPES
    ============================================================ */
+
+/**
+ * Message WhatsApp de la candidature : contient TOUS les champs du formulaire
+ * (mêmes données que l'e-mail). Les notes sont limitées à 500 caractères
+ * pour que l'URL wa.me reste d'une longueur acceptable.
+ */
+function buildApplicationWhatsappMessage(d) {
+  const notes = d.notes ? (d.notes.length > 500 ? `${d.notes.slice(0, 500)}…` : d.notes) : 'Aucune';
+  return [
+    'Bonjour Wicka Assistance ! Je viens de soumettre ma candidature.',
+    '',
+    '— PROFIL SCOLAIRE —',
+    `Nom complet : ${d.fullName}`,
+    `Pays de résidence : ${d.country}`,
+    `Niveau d’études : ${d.currentLevel}`,
+    `Série du bac et mention : ${d.bacSeries}`,
+    '',
+    '— PROJET AU MAROC —',
+    `Filière souhaitée : ${d.studyDomain}`,
+    `Ville souhaitée : ${d.targetCity}`,
+    `Université ciblée : ${d.targetUniversity}`,
+    '',
+    '— FORMULE ET NAVETTE —',
+    `Formule : ${d.selectedPack}`,
+    `Navette aéroport : ${d.airportTransfer}`,
+    `Précisions / questions : ${notes}`,
+    '',
+    '— COORDONNÉES —',
+    `WhatsApp : ${d.whatsapp}`,
+    `E-mail : ${d.email}`,
+    '',
+    'Merci de m’indiquer la suite des démarches.'
+  ].join('\n');
+}
+
 function initMultiStepForm() {
   const form = document.getElementById('multiStepApplicationForm');
   if (!form) return;
@@ -769,7 +804,7 @@ function initMultiStepForm() {
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || 'Impossible d’envoyer la candidature.');
       try { sessionStorage.setItem('wickaApplication', JSON.stringify(formData)); } catch (error) { /* stockage indisponible */ }
-      const whatsappMessage = `Bonjour Wicka Assistance ! Je viens de soumettre ma candidature.\n\nNom : ${formData.fullName}\nPays : ${formData.country}\nWhatsApp : ${formData.whatsapp}\nFilière : ${formData.studyDomain}\nUniversité : ${formData.targetUniversity}\nFormule : ${formData.selectedPack}\n\nMerci de m’indiquer la suite des démarches.`;
+      const whatsappMessage = buildApplicationWhatsappMessage(formData);
       window.location.href = `https://wa.me/212789095498?text=${encodeURIComponent(whatsappMessage)}`;
     } catch (error) {
       showToastNotification(error.message || 'Une erreur est survenue. Réessayez.', 'warning');
