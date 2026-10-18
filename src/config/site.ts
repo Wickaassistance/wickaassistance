@@ -126,9 +126,8 @@ export const FOOTER_SCHOOLS: NavLink[] = [
   { label: "UIR Rabat et UM6P", href: "/universites" }
 ];
 
-/** Réseaux sociaux du footer ("#" = lien à renseigner). */
+/** Réseaux sociaux affichés dans le footer : uniquement TikTok et WhatsApp. */
 export const SOCIAL_LINKS = [
-  { label: "Facebook", icon: "fab fa-facebook-f", href: "#" },
-  { label: "Instagram", icon: "fab fa-instagram", href: "#" },
-  { label: "LinkedIn", icon: "fab fa-linkedin-in", href: "#" }
+  { label: "TikTok", icon: "fab fa-tiktok", href: "https://www.tiktok.com/@willou_osean" },
+  { label: "WhatsApp", icon: "fab fa-whatsapp", href: "https://wa.me/212789095498" }
 ] as const;

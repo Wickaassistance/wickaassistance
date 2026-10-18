@@ -3,8 +3,8 @@
  * Utilisé par la section d'accueil (pages/TikTokSection.tsx), le footer (layout/Footer.tsx)
  * et les données structurées (seo/jsonld.ts).
  */
-const handle = "VOTRE_COMPTE"; // sans le @
-const videoId = "VOTRE_VIDEO_ID"; // numéro à la fin du lien .../video/123456... ; laisser "" s'il n'y a pas de vidéo
+const handle = "willou_osean"; // sans le @
+const videoId = ""; // numéro à la fin du lien .../video/123456... ; laisser "" s'il n'y a pas de vidéo
 
 const profileUrl = `https://www.tiktok.com/@${handle}`;
 

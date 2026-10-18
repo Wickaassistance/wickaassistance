@@ -1,5 +1,4 @@
 import { FOOTER_LINKS, FOOTER_SCHOOLS, SITE, SOCIAL_LINKS, waLink } from "../config/site";
-import { TIKTOK } from "../config/tiktok";
 
 /** Footer commun à toutes les pages. Liens et coordonnées : config/site.ts (TikTok : config/tiktok.ts). */
 export const Footer = () => (
@@ -24,28 +23,10 @@ export const Footer = () => (
           </p>
           <div class="footer-social-links">
             {SOCIAL_LINKS.map((s) => (
-              <a href={s.href} class="social-icon-btn" aria-label={s.label}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label={s.label}>
                 <i class={s.icon}></i>
               </a>
             ))}
-            <a
-              href={TIKTOK.profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-icon-btn"
-              aria-label="TikTok"
-            >
-              <i class="fab fa-tiktok"></i>
-            </a>
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-icon-btn"
-              aria-label="WhatsApp"
-            >
-              <i class="fab fa-whatsapp"></i>
-            </a>
           </div>
         </div>
 
@@ -95,7 +76,7 @@ export const Footer = () => (
       </div>
 
       <div class="footer-bottom-bar">
-        <span>© {SITE.copyrightYear} {SITE.name}. Tous droits réservés.</span>
+        <span style="color: var(--rose-300);">© {SITE.copyrightYear} {SITE.name}. Tous droits réservés.</span>
       </div>
     </div>
   </footer>

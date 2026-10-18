@@ -1894,6 +1894,8 @@ var CSP = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
   "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
   "script-src 'self' 'unsafe-inline'",
+  // Lecteur TikTok : autorisé uniquement en iframe, et chargé seulement après un clic du visiteur (public/js/tiktok.js)
+  "frame-src https://www.tiktok.com",
   "connect-src 'self'",
   "object-src 'none'",
   "upgrade-insecure-requests"
@@ -1960,14 +1962,29 @@ var SITE = {
     { city: "Casablanca", address: "Bd d'Anfa, Maarif" },
     { city: "Rabat", address: "Avenue de France, Agdal" }
   ],
+  /**
+   * Libellés fixes de la promo. Les dates et l'état (active / masquée) ne sont PAS ici :
+   * ils sont calculés automatiquement par getPromo() ci-dessous.
+   */
   promo: {
     tag: "\u{1F525} PROMO -50%",
-    text: "\u{1F4E2} Offre de lancement Rentr\xE9e 2026-2027 : packs d'admission \xE0 prix cass\xE9s \u2014 places et tarifs limit\xE9s !",
-    stickyLabel: "Postuler (Promo \u221250%)",
-    // Date de fin du compte à rebours (format ISO). À mettre à jour pour prolonger la promo.
-    deadline: "2026-09-30T23:59:59"
+    stickyLabel: "Postuler (Promo \u221250%)"
   }
 };
+function getPromo(now = /* @__PURE__ */ new Date()) {
+  const y = now.getUTCFullYear();
+  const start = Date.UTC(y, 7, 1, 0, 0, 0);
+  const end = Date.UTC(y, 10, 15, 23, 59, 59);
+  const t = now.getTime();
+  const ref = t > end ? y + 1 : y;
+  const rentree = `${ref}-${ref + 1}`;
+  return {
+    active: t >= start && t <= end,
+    deadline: new Date(end).toISOString(),
+    rentree,
+    text: `\u{1F4E2} Offre de lancement Rentr\xE9e ${rentree} : packs d'admission \xE0 prix cass\xE9s \u2014 places et tarifs limit\xE9s !`
+  };
+}
 function waLink(text2) {
   const base = `https://wa.me/${SITE.phoneRaw}`;
   return text2 ? `${base}?text=${encodeURIComponent(text2)}` : base;
@@ -2003,10 +2020,25 @@ var FOOTER_SCHOOLS = [
   { label: "UIR Rabat et UM6P", href: "/universites" }
 ];
 var SOCIAL_LINKS = [
-  { label: "Facebook", icon: "fab fa-facebook-f", href: "#" },
-  { label: "Instagram", icon: "fab fa-instagram", href: "#" },
-  { label: "LinkedIn", icon: "fab fa-linkedin-in", href: "#" }
+  { label: "TikTok", icon: "fab fa-tiktok", href: "https://www.tiktok.com/@willou_osean" },
+  { label: "WhatsApp", icon: "fab fa-whatsapp", href: "https://wa.me/212789095498" }
 ];
+
+// src/config/tiktok.ts
+var handle = "willou_osean";
+var videoId = "";
+var profileUrl = `https://www.tiktok.com/@${handle}`;
+var TIKTOK = {
+  handle,
+  videoId,
+  profileUrl,
+  /** Lien de la vidéo ; sans vidéo, la carte ouvre le profil. */
+  videoUrl: videoId ? `${profileUrl}/video/${videoId}` : profileUrl,
+  /** Aperçu réel à déposer dans public/assets/images/. */
+  previewSrc: "/assets/images/tiktok-preview.jpg",
+  /** Image déjà présente dans le dépôt : affichée seulement si l'aperçu réel est introuvable. */
+  fallbackSrc: "/assets/uni/student-portrait.jpg"
+};
 
 // node_modules/hono/dist/jsx/utils.js
 var normalizeElementKeyMap = /* @__PURE__ */ new Map([
@@ -2657,6 +2689,74 @@ function jsxDEV(tag, props, key) {
   return node;
 }
 
+// src/pages/TikTokSection.tsx
+var TikTokSection = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
+  /* @__PURE__ */ jsxDEV("link", { rel: "stylesheet", href: "/css/tiktok.css" }),
+  /* @__PURE__ */ jsxDEV("section", { class: "tiktok-section", id: "tiktok", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("div", { class: "tiktok-grid", children: [
+    /* @__PURE__ */ jsxDEV("div", { class: "tiktok-text", children: [
+      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+        /* @__PURE__ */ jsxDEV("i", { class: "fab fa-tiktok" }),
+        " Suivez-nous sur TikTok"
+      ] }),
+      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "D\xE9couvrez la vie \xE9tudiante au Maroc en vid\xE9o" }),
+      /* @__PURE__ */ jsxDEV("p", { children: [
+        "Campus, quotidien des \xE9tudiants, conseils d'admission et de visa : retrouvez toutes nos vid\xE9os sur TikTok",
+        " ",
+        /* @__PURE__ */ jsxDEV("span", { class: "tiktok-handle", children: [
+          "@",
+          TIKTOK.handle
+        ] }),
+        "."
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "tiktok-actions", children: [
+        /* @__PURE__ */ jsxDEV("a", { href: TIKTOK.profileUrl, target: "_blank", rel: "noopener noreferrer", class: "btn-tiktok", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fab fa-tiktok" }),
+          " Voir sur TikTok"
+        ] }),
+        /* @__PURE__ */ jsxDEV("a", { href: TIKTOK.profileUrl, target: "_blank", rel: "noopener noreferrer", class: "btn-secondary", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-user-plus" }),
+          " Suivre le compte"
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxDEV("div", { class: "tiktok-visual", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "tiktok-card", children: /* @__PURE__ */ jsxDEV(
+        "a",
+        {
+          href: TIKTOK.videoUrl,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          class: "tiktok-play",
+          "data-tiktok-play": "",
+          "data-profile-url": TIKTOK.profileUrl,
+          "aria-label": "Lire la vid\xE9o TikTok",
+          children: [
+            /* @__PURE__ */ jsxDEV(
+              "img",
+              {
+                src: TIKTOK.previewSrc,
+                "data-fallback-src": TIKTOK.fallbackSrc,
+                alt: "Aper\xE7u de notre derni\xE8re vid\xE9o TikTok",
+                width: "540",
+                height: "960",
+                loading: "lazy"
+              }
+            ),
+            /* @__PURE__ */ jsxDEV("span", { class: "tiktok-play-btn", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-play" }) }),
+            /* @__PURE__ */ jsxDEV("span", { class: "tiktok-card-tag", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-tiktok" }),
+              " @",
+              TIKTOK.handle
+            ] })
+          ]
+        }
+      ) }),
+      /* @__PURE__ */ jsxDEV("p", { class: "tiktok-note", children: "En lan\xE7ant la vid\xE9o, vous chargez le lecteur TikTok, soumis \xE0 la politique de confidentialit\xE9 de TikTok." })
+    ] })
+  ] }) }) }),
+  /* @__PURE__ */ jsxDEV("script", { src: "/js/tiktok.js", defer: true })
+] });
+
 // src/pages/Home.tsx
 var homeMeta = {
   title: "\xC9tudier au Maroc | Admission, Visa et Orientation",
@@ -2694,7 +2794,7 @@ var advantages = [
     text: "V\xE9ritable carrefour \xE9conomique abritant les si\xE8ges r\xE9gionaux de multinationales en finance (Casablanca Finance City), a\xE9ronautique, intelligence artificielle et \xE9nergies renouvelables."
   }
 ];
-var explore = [
+var buildExplore = (promoActive) => [
   {
     href: "/universites",
     icon: "fas fa-university",
@@ -2706,18 +2806,18 @@ var explore = [
     href: "/tarifs",
     icon: "fas fa-tags",
     title: "Tarifs, Simulateur et Packs",
-    text: /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    text: promoActive ? /* @__PURE__ */ jsxDEV(Fragment, { children: [
       "Tarifs par pays en ",
       /* @__PURE__ */ jsxDEV("strong", { children: "promo \u221250%" }),
       ", simulateur de budget et formules d'assistance."
-    ] }),
+    ] }) : "Tarifs par pays, simulateur de budget et formules d'assistance.",
     link: "Voir les tarifs"
   },
   {
     href: "/candidature",
     icon: "fas fa-paper-plane",
     title: "D\xE9poser ma Candidature",
-    text: "Formulaire en 4 \xE9tapes. R\xE9ponse d'un conseiller sous 24h et tarif promo bloqu\xE9.",
+    text: promoActive ? "Formulaire en 4 \xE9tapes. R\xE9ponse d'un conseiller sous 24h et tarif promo bloqu\xE9." : "Formulaire en 4 \xE9tapes. R\xE9ponse d'un conseiller sous 24h.",
     link: "Postuler maintenant",
     accent: true
   }
@@ -2799,356 +2899,366 @@ var successPhotos = [
   { src: "/assets/uni/student-grad-2.jpg", alt: "Jeune dipl\xF4m\xE9 au Maroc", icon: "fas fa-award", caption: "Master en poche" },
   { src: "/assets/uni/student-portrait.jpg", alt: "\xC9tudiant sur son campus", icon: "fas fa-user-graduate", caption: "Sur son campus" }
 ];
-var Home = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
-  /* @__PURE__ */ jsxDEV("section", { class: "hero-section", id: "hero", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "hero-glow-circle-1" }),
-    /* @__PURE__ */ jsxDEV("div", { class: "hero-glow-circle-2" }),
-    /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("div", { class: "hero-grid", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "hero-text-content", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "hero-badge-pill", children: [
-          /* @__PURE__ */ jsxDEV("span", { class: "pulse-dot" }),
-          /* @__PURE__ */ jsxDEV("span", { children: "Admissions Garanties dans les Meilleures Universit\xE9s Priv\xE9es du Maroc" })
-        ] }),
-        /* @__PURE__ */ jsxDEV("h1", { class: "hero-headline", children: [
-          "S\xE9curisez les \xC9tudes de Votre Enfant dans les ",
-          /* @__PURE__ */ jsxDEV("span", { class: "text-gradient-rose", children: "Grandes \xC9coles Priv\xE9es" }),
-          " ",
-          "du Maroc."
-        ] }),
-        /* @__PURE__ */ jsxDEV("p", { class: "hero-description", children: [
-          "Wicka Assistance garantit l'admission de votre enfant dans des institutions prestigieuses reconnues par l'\xC9tat (",
-          /* @__PURE__ */ jsxDEV("strong", { children: "UEMF Euromed F\xE8s, ESTEM Casa, UIASS, UM6P, UIR, EMSI" }),
-          "), g\xE8re l'int\xE9gralit\xE9 du dossier consulaire de visa et assure le",
-          " ",
-          /* @__PURE__ */ jsxDEV("strong", { children: "transport s\xE9curis\xE9 avec chauffeur priv\xE9 d\xE8s la sortie de l'a\xE9roport" }),
-          "."
-        ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "hero-cta-group", children: [
-          /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-graduation-cap" }),
-            /* @__PURE__ */ jsxDEV("span", { children: "D\xE9marrer la Candidature 2026-2027" })
+var Home = () => {
+  const promo = getPromo();
+  const explore = buildExplore(promo.active);
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV("section", { class: "hero-section", id: "hero", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "hero-glow-circle-1" }),
+      /* @__PURE__ */ jsxDEV("div", { class: "hero-glow-circle-2" }),
+      /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("div", { class: "hero-grid", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "hero-text-content", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "hero-badge-pill", children: [
+            /* @__PURE__ */ jsxDEV("span", { class: "pulse-dot" }),
+            /* @__PURE__ */ jsxDEV("span", { children: "Admissions Garanties dans les Meilleures Universit\xE9s Priv\xE9es du Maroc" })
           ] }),
-          /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-secondary", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-            /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
+          /* @__PURE__ */ jsxDEV("h1", { class: "hero-headline", children: [
+            "S\xE9curisez les \xC9tudes de Votre Enfant dans les ",
+            /* @__PURE__ */ jsxDEV("span", { class: "text-gradient-rose", children: "Grandes \xC9coles Priv\xE9es" }),
+            " ",
+            "du Maroc."
+          ] }),
+          /* @__PURE__ */ jsxDEV("p", { class: "hero-description", children: [
+            "Wicka Assistance garantit l'admission de votre enfant dans des institutions prestigieuses reconnues par l'\xC9tat (",
+            /* @__PURE__ */ jsxDEV("strong", { children: "UEMF Euromed F\xE8s, ESTEM Casa, UIASS, UM6P, UIR, EMSI" }),
+            "), g\xE8re l'int\xE9gralit\xE9 du dossier consulaire de visa et assure le",
+            " ",
+            /* @__PURE__ */ jsxDEV("strong", { children: "transport s\xE9curis\xE9 avec chauffeur priv\xE9 d\xE8s la sortie de l'a\xE9roport" }),
+            "."
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { class: "hero-cta-group", children: [
+            /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-graduation-cap" }),
+              /* @__PURE__ */ jsxDEV("span", { children: [
+                "D\xE9marrer la Candidature ",
+                promo.rentree
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-secondary", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
+              /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { class: "hero-trust-row", children: [
+            /* @__PURE__ */ jsxDEV("div", { class: "trust-avatars-group", children: [
+              /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-senegal.jpg", alt: "\xC9tudiant S\xE9n\xE9gal", class: "trust-avatar" }),
+              /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-ivory-coast.jpg", alt: "\xC9tudiante C\xF4te d'Ivoire", class: "trust-avatar" }),
+              /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-cameroon.jpg", alt: "\xC9tudiant Cameroun", class: "trust-avatar" }),
+              /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-gabon.jpg", alt: "\xC9tudiante Gabon", class: "trust-avatar" })
+            ] }),
+            /* @__PURE__ */ jsxDEV("div", { class: "trust-text", children: [
+              /* @__PURE__ */ jsxDEV("strong", { children: "Accompagnement d\xE9di\xE9 aux \xE9tudiants" }),
+              /* @__PURE__ */ jsxDEV("span", { children: "Pl\xE9biscit\xE9 par les parents d'\xE9l\xE8ves pour son s\xE9rieux et sa transparence" })
+            ] })
           ] })
         ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "hero-trust-row", children: [
-          /* @__PURE__ */ jsxDEV("div", { class: "trust-avatars-group", children: [
-            /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-senegal.jpg", alt: "\xC9tudiant S\xE9n\xE9gal", class: "trust-avatar" }),
-            /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-ivory-coast.jpg", alt: "\xC9tudiante C\xF4te d'Ivoire", class: "trust-avatar" }),
-            /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-cameroon.jpg", alt: "\xC9tudiant Cameroun", class: "trust-avatar" }),
-            /* @__PURE__ */ jsxDEV("img", { src: "/assets/images/student-gabon.jpg", alt: "\xC9tudiante Gabon", class: "trust-avatar" })
+        /* @__PURE__ */ jsxDEV("div", { class: "hero-visual-wrap", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "hero-main-card", children: /* @__PURE__ */ jsxDEV(
+            "img",
+            {
+              src: "/assets/images/hero-students.jpg",
+              alt: "\xC9tudiants internationaux heureux sur les campus marocains"
+            }
+          ) }),
+          /* @__PURE__ */ jsxDEV("div", { class: "hero-floating-card-1", children: [
+            /* @__PURE__ */ jsxDEV("div", { class: "floating-icon", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-car-side" }) }),
+            /* @__PURE__ */ jsxDEV("div", { class: "floating-info", children: [
+              /* @__PURE__ */ jsxDEV("h4", { children: "Navette A\xE9roport Priv\xE9e" }),
+              /* @__PURE__ */ jsxDEV("p", { children: "Transfert s\xE9curis\xE9 vers votre ville" })
+            ] })
           ] }),
-          /* @__PURE__ */ jsxDEV("div", { class: "trust-text", children: [
-            /* @__PURE__ */ jsxDEV("strong", { children: "Accompagnement d\xE9di\xE9 aux \xE9tudiants" }),
-            /* @__PURE__ */ jsxDEV("span", { children: "Pl\xE9biscit\xE9 par les parents d'\xE9l\xE8ves pour son s\xE9rieux et sa transparence" })
+          /* @__PURE__ */ jsxDEV("div", { class: "hero-floating-card-2", children: [
+            /* @__PURE__ */ jsxDEV("div", { class: "floating-icon", style: "background-color: var(--gold-light); color: var(--gold);", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-award" }) }),
+            /* @__PURE__ */ jsxDEV("div", { class: "floating-info", children: [
+              /* @__PURE__ */ jsxDEV("h4", { children: "Dipl\xF4mes Reconnus" }),
+              /* @__PURE__ */ jsxDEV("p", { children: "\xC9quivalence d'\xC9tat et Doubles Dipl\xF4mes" })
+            ] })
           ] })
         ] })
+      ] }) })
+    ] }),
+    /* @__PURE__ */ jsxDEV("section", { class: "parents-section", id: "parents", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "parents-banner-box", children: /* @__PURE__ */ jsxDEV("div", { class: "parents-banner-grid", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "parents-banner-text", children: [
+          /* @__PURE__ */ jsxDEV(
+            "span",
+            {
+              class: "section-badge",
+              style: "background-color: rgba(255, 255, 255, 0.2); color: var(--white); margin-bottom: 12px;",
+              children: [
+                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-user-shield" }),
+                " Espace Confiance Parents"
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxDEV("h3", { children: "Chers Parents : Pourquoi le Maroc est le Meilleur Choix d'Avenir pour Votre Enfant" }),
+          /* @__PURE__ */ jsxDEV("p", { children: [
+            "Envoyer son enfant \xE9tudier \xE0 l'\xE9tranger est une d\xE9cision majeure. Le Royaume du Maroc s'impose aujourd'hui comme le ",
+            /* @__PURE__ */ jsxDEV("strong", { children: "1er p\xF4le universitaire d'excellence en Afrique" }),
+            " : une stabilit\xE9 politique exemplaire, une s\xE9curit\xE9 totale, un climat bienveillant et des campus modernes accr\xE9dit\xE9s aux standards internationaux."
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxDEV("div", { class: "parents-contact-cta", children: [
+          /* @__PURE__ */ jsxDEV("h4", { children: "Une Question pour Votre Enfant ?" }),
+          /* @__PURE__ */ jsxDEV("p", { children: "\xC9changez en direct avec un conseiller senior par appel ou visio WhatsApp." }),
+          /* @__PURE__ */ jsxDEV(
+            "a",
+            {
+              href: waLink("Bonjour Wicka Assistance, je suis un parent et je souhaite des informations pour mon enfant."),
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "btn-primary btn-full",
+              style: "background: #25D366; border-color: #25D366;",
+              children: [
+                /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+                " WhatsApp"
+              ]
+            }
+          )
+        ] })
+      ] }) }),
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-chart-line" }),
+          " \xC9tude et Analyse"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Les 6 Grands Atouts du Maroc pour les \xC9tudes Sup\xE9rieures" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Une analyse objective des opportunit\xE9s acad\xE9miques, du cadre de vie et de l'insertion professionnelle au Royaume du Maroc." })
       ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "hero-visual-wrap", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "hero-main-card", children: /* @__PURE__ */ jsxDEV(
+      /* @__PURE__ */ jsxDEV("div", { class: "advantages-grid", children: advantages.map((a) => /* @__PURE__ */ jsxDEV("div", { class: "advantage-card", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "advantage-icon-wrap", children: /* @__PURE__ */ jsxDEV("i", { class: a.icon }) }),
+        /* @__PURE__ */ jsxDEV("h3", { class: "advantage-title", children: a.title }),
+        /* @__PURE__ */ jsxDEV("p", { class: "advantage-desc", children: a.text })
+      ] })) })
+    ] }) }),
+    /* @__PURE__ */ jsxDEV("section", { class: "explore-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-compass" }),
+          " Par o\xF9 commencer ?"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Explorez nos Services" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "D\xE9couvrez les universit\xE9s partenaires, comparez les tarifs dans votre devise, puis d\xE9posez votre candidature." })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "explore-cards", children: explore.map((e) => /* @__PURE__ */ jsxDEV("a", { href: e.href, class: e.accent ? "explore-card explore-card-accent" : "explore-card", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "explore-icon", children: /* @__PURE__ */ jsxDEV("i", { class: e.icon }) }),
+        /* @__PURE__ */ jsxDEV("h3", { children: e.title }),
+        /* @__PURE__ */ jsxDEV("p", { children: e.text }),
+        /* @__PURE__ */ jsxDEV("span", { class: "explore-link", children: [
+          e.link,
+          " ",
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-right" })
+        ] })
+      ] })) })
+    ] }) }),
+    /* @__PURE__ */ jsxDEV("section", { class: "steps-section", id: "etapes", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-road" }),
+          " Rigueur et Z\xE9ro Faux Pas"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Le Parcours d'Admission en 5 \xC9tapes" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Un protocole transparent et \xE9prouv\xE9 pour garantir l'admission de l'\xE9tudiant et rassurer ses parents \xE0 chaque \xE9tape." })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "steps-timeline-grid", children: steps.map((s) => /* @__PURE__ */ jsxDEV("div", { class: "step-card", children: [
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "step-num-badge", children: s.n }),
+          /* @__PURE__ */ jsxDEV("h3", { class: "step-title", children: s.title }),
+          /* @__PURE__ */ jsxDEV("p", { class: "step-desc", children: s.text })
+        ] }),
+        /* @__PURE__ */ jsxDEV("span", { class: s.tagClass ? `step-footer-tag ${s.tagClass}` : "step-footer-tag", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: s.tagIcon }),
+          " ",
+          s.tag
+        ] })
+      ] })) })
+    ] }) }),
+    /* @__PURE__ */ jsxDEV("section", { class: "about-section", id: "apropos", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("div", { class: "about-grid", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "about-image-wrapper", children: [
+        /* @__PURE__ */ jsxDEV(
           "img",
           {
-            src: "/assets/images/hero-students.jpg",
-            alt: "\xC9tudiants internationaux heureux sur les campus marocains"
-          }
-        ) }),
-        /* @__PURE__ */ jsxDEV("div", { class: "hero-floating-card-1", children: [
-          /* @__PURE__ */ jsxDEV("div", { class: "floating-icon", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-car-side" }) }),
-          /* @__PURE__ */ jsxDEV("div", { class: "floating-info", children: [
-            /* @__PURE__ */ jsxDEV("h4", { children: "Navette A\xE9roport Priv\xE9e" }),
-            /* @__PURE__ */ jsxDEV("p", { children: "Transfert s\xE9curis\xE9 vers votre ville" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "hero-floating-card-2", children: [
-          /* @__PURE__ */ jsxDEV("div", { class: "floating-icon", style: "background-color: var(--gold-light); color: var(--gold);", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-award" }) }),
-          /* @__PURE__ */ jsxDEV("div", { class: "floating-info", children: [
-            /* @__PURE__ */ jsxDEV("h4", { children: "Dipl\xF4mes Reconnus" }),
-            /* @__PURE__ */ jsxDEV("p", { children: "\xC9quivalence d'\xC9tat et Doubles Dipl\xF4mes" })
-          ] })
-        ] })
-      ] })
-    ] }) })
-  ] }),
-  /* @__PURE__ */ jsxDEV("section", { class: "parents-section", id: "parents", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "parents-banner-box", children: /* @__PURE__ */ jsxDEV("div", { class: "parents-banner-grid", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "parents-banner-text", children: [
-        /* @__PURE__ */ jsxDEV(
-          "span",
-          {
-            class: "section-badge",
-            style: "background-color: rgba(255, 255, 255, 0.2); color: var(--white); margin-bottom: 12px;",
-            children: [
-              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-user-shield" }),
-              " Espace Confiance Parents"
-            ]
+            src: "/assets/images/about-team.jpg",
+            alt: "\xC9quipe de conseillers Wicka Assistance \xE0 Casablanca",
+            class: "about-main-img"
           }
         ),
-        /* @__PURE__ */ jsxDEV("h3", { children: "Chers Parents : Pourquoi le Maroc est le Meilleur Choix d'Avenir pour Votre Enfant" }),
-        /* @__PURE__ */ jsxDEV("p", { children: [
-          "Envoyer son enfant \xE9tudier \xE0 l'\xE9tranger est une d\xE9cision majeure. Le Royaume du Maroc s'impose aujourd'hui comme le ",
-          /* @__PURE__ */ jsxDEV("strong", { children: "1er p\xF4le universitaire d'excellence en Afrique" }),
-          " : une stabilit\xE9 politique exemplaire, une s\xE9curit\xE9 totale, un climat bienveillant et des campus modernes accr\xE9dit\xE9s aux standards internationaux."
+        /* @__PURE__ */ jsxDEV("div", { class: "about-experience-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-shield-alt exp-years", "aria-hidden": "true" }),
+          /* @__PURE__ */ jsxDEV("span", { class: "exp-text", children: "S\xE9rieux et Transparence" })
         ] })
       ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "parents-contact-cta", children: [
-        /* @__PURE__ */ jsxDEV("h4", { children: "Une Question pour Votre Enfant ?" }),
-        /* @__PURE__ */ jsxDEV("p", { children: "\xC9changez en direct avec un conseiller senior par appel ou visio WhatsApp." }),
+      /* @__PURE__ */ jsxDEV("div", { class: "about-content", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-shield-alt" }),
+          " \xC0 Propos de Nous"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Une \xC9quipe Passionn\xE9e Bas\xE9e \xE0 Casablanca et Rabat" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", style: "text-align: left; margin-bottom: 20px;", children: "Wicka Assistance est un cabinet sp\xE9cialis\xE9 dans la mobilit\xE9 universitaire et l'orientation strat\xE9gique des \xE9tudiants internationaux vers le Maroc." }),
+        /* @__PURE__ */ jsxDEV("p", { style: "color: var(--slate-600); line-height: 1.7; font-size: 0.95rem;", children: "Contrairement aux d\xE9marcheurs informels, nous entretenons des liens institutionnels directs avec les directions des admissions des universit\xE9s priv\xE9es les plus renomm\xE9es. Nous assurons un suivi juridique et consulaire rigoureux pour faire de chaque projet d'\xE9tudes une r\xE9ussite \xE9clatante." }),
+        /* @__PURE__ */ jsxDEV("div", { class: "about-values-list", children: values.map((v) => /* @__PURE__ */ jsxDEV("div", { class: "value-item", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "value-icon", children: /* @__PURE__ */ jsxDEV("i", { class: v.icon }) }),
+          /* @__PURE__ */ jsxDEV("div", { children: [
+            /* @__PURE__ */ jsxDEV("h4", { children: v.title }),
+            /* @__PURE__ */ jsxDEV("p", { children: v.text })
+          ] })
+        ] })) }),
+        /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-primary", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+          /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
+        ] })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsxDEV("section", { class: "testimonials-section", id: "avis", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-star" }),
+          " Retours d'Exp\xE9rience"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Ce Que Disent les \xC9tudiants et Leurs Parents" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Des t\xE9moignages r\xE9els d'\xE9tudiants du S\xE9n\xE9gal, de C\xF4te d'Ivoire, du Cameroun et du Gabon admis avec succ\xE8s dans les plus grandes \xE9coles marocaines." })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "testimonials-grid", id: "testimonialsGrid" })
+    ] }) }),
+    /* @__PURE__ */ jsxDEV("section", { class: "success-band", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-heart" }),
+          " Une nouvelle vie vous attend"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "\xC9panouissez-vous sur les campus marocains" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "\xC9tudiants heureux, dipl\xF4m\xE9s fiers : construisez votre avenir au Maroc avec un accompagnement personnalis\xE9." })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "success-photos", children: successPhotos.map((p) => /* @__PURE__ */ jsxDEV("figure", { class: "success-photo", children: [
+        /* @__PURE__ */ jsxDEV("img", { src: p.src, alt: p.alt, loading: "lazy" }),
+        /* @__PURE__ */ jsxDEV("figcaption", { children: [
+          /* @__PURE__ */ jsxDEV("i", { class: p.icon }),
+          " ",
+          p.caption
+        ] })
+      ] })) }),
+      /* @__PURE__ */ jsxDEV("div", { class: "success-cta", children: [
+        /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
+          " Je veux r\xE9ussir moi aussi"
+        ] }),
         /* @__PURE__ */ jsxDEV(
           "a",
           {
-            href: waLink("Bonjour Wicka Assistance, je suis un parent et je souhaite des informations pour mon enfant."),
+            href: waLink("Bonjour Wicka, je veux r\xE9ussir mes \xE9tudes au Maroc comme vos \xE9tudiants."),
             target: "_blank",
             rel: "noopener noreferrer",
-            class: "btn-primary btn-full",
-            style: "background: #25D366; border-color: #25D366;",
+            class: "btn-secondary",
             children: [
-              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-              " WhatsApp"
+              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
+              " En parler sur WhatsApp"
             ]
           }
         )
       ] })
     ] }) }),
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-chart-line" }),
-        " \xC9tude et Analyse"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Les 6 Grands Atouts du Maroc pour les \xC9tudes Sup\xE9rieures" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Une analyse objective des opportunit\xE9s acad\xE9miques, du cadre de vie et de l'insertion professionnelle au Royaume du Maroc." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "advantages-grid", children: advantages.map((a) => /* @__PURE__ */ jsxDEV("div", { class: "advantage-card", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "advantage-icon-wrap", children: /* @__PURE__ */ jsxDEV("i", { class: a.icon }) }),
-      /* @__PURE__ */ jsxDEV("h3", { class: "advantage-title", children: a.title }),
-      /* @__PURE__ */ jsxDEV("p", { class: "advantage-desc", children: a.text })
-    ] })) })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("section", { class: "explore-section", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-compass" }),
-        " Par o\xF9 commencer ?"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Explorez nos Services" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "D\xE9couvrez les universit\xE9s partenaires, comparez les tarifs dans votre devise, puis d\xE9posez votre candidature." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "explore-cards", children: explore.map((e) => /* @__PURE__ */ jsxDEV("a", { href: e.href, class: e.accent ? "explore-card explore-card-accent" : "explore-card", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "explore-icon", children: /* @__PURE__ */ jsxDEV("i", { class: e.icon }) }),
-      /* @__PURE__ */ jsxDEV("h3", { children: e.title }),
-      /* @__PURE__ */ jsxDEV("p", { children: e.text }),
-      /* @__PURE__ */ jsxDEV("span", { class: "explore-link", children: [
-        e.link,
-        " ",
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-right" })
-      ] })
-    ] })) })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("section", { class: "steps-section", id: "etapes", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-road" }),
-        " Rigueur et Z\xE9ro Faux Pas"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Le Parcours d'Admission en 5 \xC9tapes" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Un protocole transparent et \xE9prouv\xE9 pour garantir l'admission de l'\xE9tudiant et rassurer ses parents \xE0 chaque \xE9tape." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "steps-timeline-grid", children: steps.map((s) => /* @__PURE__ */ jsxDEV("div", { class: "step-card", children: [
-      /* @__PURE__ */ jsxDEV("div", { children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "step-num-badge", children: s.n }),
-        /* @__PURE__ */ jsxDEV("h3", { class: "step-title", children: s.title }),
-        /* @__PURE__ */ jsxDEV("p", { class: "step-desc", children: s.text })
-      ] }),
-      /* @__PURE__ */ jsxDEV("span", { class: s.tagClass ? `step-footer-tag ${s.tagClass}` : "step-footer-tag", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: s.tagIcon }),
-        " ",
-        s.tag
-      ] })
-    ] })) })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("section", { class: "about-section", id: "apropos", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("div", { class: "about-grid", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "about-image-wrapper", children: [
-      /* @__PURE__ */ jsxDEV(
-        "img",
-        {
-          src: "/assets/images/about-team.jpg",
-          alt: "\xC9quipe de conseillers Wicka Assistance \xE0 Casablanca",
-          class: "about-main-img"
-        }
-      ),
-      /* @__PURE__ */ jsxDEV("div", { class: "about-experience-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-shield-alt exp-years", "aria-hidden": "true" }),
-        /* @__PURE__ */ jsxDEV("span", { class: "exp-text", children: "S\xE9rieux et Transparence" })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "about-content", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-shield-alt" }),
-        " \xC0 Propos de Nous"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Une \xC9quipe Passionn\xE9e Bas\xE9e \xE0 Casablanca et Rabat" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", style: "text-align: left; margin-bottom: 20px;", children: "Wicka Assistance est un cabinet sp\xE9cialis\xE9 dans la mobilit\xE9 universitaire et l'orientation strat\xE9gique des \xE9tudiants internationaux vers le Maroc." }),
-      /* @__PURE__ */ jsxDEV("p", { style: "color: var(--slate-600); line-height: 1.7; font-size: 0.95rem;", children: "Contrairement aux d\xE9marcheurs informels, nous entretenons des liens institutionnels directs avec les directions des admissions des universit\xE9s priv\xE9es les plus renomm\xE9es. Nous assurons un suivi juridique et consulaire rigoureux pour faire de chaque projet d'\xE9tudes une r\xE9ussite \xE9clatante." }),
-      /* @__PURE__ */ jsxDEV("div", { class: "about-values-list", children: values.map((v) => /* @__PURE__ */ jsxDEV("div", { class: "value-item", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "value-icon", children: /* @__PURE__ */ jsxDEV("i", { class: v.icon }) }),
-        /* @__PURE__ */ jsxDEV("div", { children: [
-          /* @__PURE__ */ jsxDEV("h4", { children: v.title }),
-          /* @__PURE__ */ jsxDEV("p", { children: v.text })
-        ] })
-      ] })) }),
-      /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-primary", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-        /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
-      ] })
-    ] })
-  ] }) }) }),
-  /* @__PURE__ */ jsxDEV("section", { class: "testimonials-section", id: "avis", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-star" }),
-        " Retours d'Exp\xE9rience"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Ce Que Disent les \xC9tudiants et Leurs Parents" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Des t\xE9moignages r\xE9els d'\xE9tudiants du S\xE9n\xE9gal, de C\xF4te d'Ivoire, du Cameroun et du Gabon admis avec succ\xE8s dans les plus grandes \xE9coles marocaines." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "testimonials-grid", id: "testimonialsGrid" })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("section", { class: "success-band", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-heart" }),
-        " Une nouvelle vie vous attend"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "\xC9panouissez-vous sur les campus marocains" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "\xC9tudiants heureux, dipl\xF4m\xE9s fiers : construisez votre avenir au Maroc avec un accompagnement personnalis\xE9." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "success-photos", children: successPhotos.map((p) => /* @__PURE__ */ jsxDEV("figure", { class: "success-photo", children: [
-      /* @__PURE__ */ jsxDEV("img", { src: p.src, alt: p.alt, loading: "lazy" }),
-      /* @__PURE__ */ jsxDEV("figcaption", { children: [
-        /* @__PURE__ */ jsxDEV("i", { class: p.icon }),
-        " ",
-        p.caption
-      ] })
-    ] })) }),
-    /* @__PURE__ */ jsxDEV("div", { class: "success-cta", children: [
-      /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
-        " Je veux r\xE9ussir moi aussi"
-      ] }),
-      /* @__PURE__ */ jsxDEV(
-        "a",
-        {
-          href: waLink("Bonjour Wicka, je veux r\xE9ussir mes \xE9tudes au Maroc comme vos \xE9tudiants."),
-          target: "_blank",
-          rel: "noopener noreferrer",
-          class: "btn-secondary",
-          children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-            " En parler sur WhatsApp"
-          ]
-        }
-      )
-    ] })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV(
-    "section",
-    {
-      class: "cta-photo-band",
-      style: "background-image: linear-gradient(115deg, rgba(76,5,25,0.92) 0%, rgba(159,18,57,0.82) 55%, rgba(190,18,60,0.7) 100%), url('/assets/uni/tanger.jpg');",
-      children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("div", { class: "cta-photo-content", children: [
-        /* @__PURE__ */ jsxDEV("span", { class: "cta-band-kicker light", children: [
-          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-graduation-cap" }),
-          " Rentr\xE9e 2026-2027 \xB7 Il reste peu de places"
-        ] }),
-        /* @__PURE__ */ jsxDEV("h2", { children: "Votre avenir au Maroc commence par un simple message." }),
-        /* @__PURE__ */ jsxDEV("p", { children: "Admission garantie, visa, carte consulaire jusqu'\xE0 l'ambassade, navette a\xE9roport et carte de s\xE9jour : on s'occupe de tout. Parlez \xE0 un conseiller d\xE8s maintenant." }),
-        /* @__PURE__ */ jsxDEV("div", { class: "promo-countdown", id: "promoCountdown", "data-deadline": SITE.promo.deadline, children: [
-          /* @__PURE__ */ jsxDEV("span", { class: "pc-label", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-hourglass-half" }),
-            " Fin de la PROMO \u221250% dans :"
+    /* @__PURE__ */ jsxDEV(TikTokSection, {}),
+    /* @__PURE__ */ jsxDEV(
+      "section",
+      {
+        class: "cta-photo-band",
+        style: "background-image: linear-gradient(115deg, rgba(76,5,25,0.92) 0%, rgba(159,18,57,0.82) 55%, rgba(190,18,60,0.7) 100%), url('/assets/uni/tanger.jpg');",
+        children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("div", { class: "cta-photo-content", children: [
+          /* @__PURE__ */ jsxDEV("span", { class: "cta-band-kicker light", children: [
+            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-graduation-cap" }),
+            " Rentr\xE9e ",
+            promo.rentree,
+            promo.active && /* @__PURE__ */ jsxDEV(Fragment, { children: " \xB7 Il reste peu de places" })
           ] }),
-          /* @__PURE__ */ jsxDEV("div", { class: "pc-units", children: [
-            /* @__PURE__ */ jsxDEV("div", { children: [
-              /* @__PURE__ */ jsxDEV("strong", { id: "pcDays", children: "00" }),
-              /* @__PURE__ */ jsxDEV("span", { children: "jours" })
+          /* @__PURE__ */ jsxDEV("h2", { children: "Votre avenir au Maroc commence par un simple message." }),
+          /* @__PURE__ */ jsxDEV("p", { children: "Admission garantie, visa, carte consulaire jusqu'\xE0 l'ambassade, navette a\xE9roport et carte de s\xE9jour : on s'occupe de tout. Parlez \xE0 un conseiller d\xE8s maintenant." }),
+          promo.active && /* @__PURE__ */ jsxDEV("div", { class: "promo-countdown promo-only", id: "promoCountdown", "data-promo-deadline": promo.deadline, children: [
+            /* @__PURE__ */ jsxDEV("span", { class: "pc-label", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-hourglass-half" }),
+              " Fin de la PROMO \u221250% dans :"
             ] }),
-            /* @__PURE__ */ jsxDEV("div", { class: "pc-sep", children: ":" }),
-            /* @__PURE__ */ jsxDEV("div", { children: [
-              /* @__PURE__ */ jsxDEV("strong", { id: "pcHours", children: "00" }),
-              /* @__PURE__ */ jsxDEV("span", { children: "heures" })
-            ] }),
-            /* @__PURE__ */ jsxDEV("div", { class: "pc-sep", children: ":" }),
-            /* @__PURE__ */ jsxDEV("div", { children: [
-              /* @__PURE__ */ jsxDEV("strong", { id: "pcMins", children: "00" }),
-              /* @__PURE__ */ jsxDEV("span", { children: "min" })
-            ] }),
-            /* @__PURE__ */ jsxDEV("div", { class: "pc-sep", children: ":" }),
-            /* @__PURE__ */ jsxDEV("div", { children: [
-              /* @__PURE__ */ jsxDEV("strong", { id: "pcSecs", children: "00" }),
-              /* @__PURE__ */ jsxDEV("span", { children: "sec" })
+            /* @__PURE__ */ jsxDEV("div", { class: "pc-units", children: [
+              /* @__PURE__ */ jsxDEV("div", { children: [
+                /* @__PURE__ */ jsxDEV("strong", { id: "pcDays", children: "00" }),
+                /* @__PURE__ */ jsxDEV("span", { children: "jours" })
+              ] }),
+              /* @__PURE__ */ jsxDEV("div", { class: "pc-sep", children: ":" }),
+              /* @__PURE__ */ jsxDEV("div", { children: [
+                /* @__PURE__ */ jsxDEV("strong", { id: "pcHours", children: "00" }),
+                /* @__PURE__ */ jsxDEV("span", { children: "heures" })
+              ] }),
+              /* @__PURE__ */ jsxDEV("div", { class: "pc-sep", children: ":" }),
+              /* @__PURE__ */ jsxDEV("div", { children: [
+                /* @__PURE__ */ jsxDEV("strong", { id: "pcMins", children: "00" }),
+                /* @__PURE__ */ jsxDEV("span", { children: "min" })
+              ] }),
+              /* @__PURE__ */ jsxDEV("div", { class: "pc-sep", children: ":" }),
+              /* @__PURE__ */ jsxDEV("div", { children: [
+                /* @__PURE__ */ jsxDEV("strong", { id: "pcSecs", children: "00" }),
+                /* @__PURE__ */ jsxDEV("span", { children: "sec" })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { class: "cta-photo-actions", children: [
+            /* @__PURE__ */ jsxDEV(
+              "a",
+              {
+                href: waLink("Bonjour Wicka, je souhaite d\xE9marrer mon projet d'\xE9tudes au Maroc d\xE8s maintenant."),
+                target: "_blank",
+                rel: "noopener noreferrer",
+                class: "btn-cta-white btn-cta-lg",
+                children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+                  " Discuter avec un conseiller"
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-cta-ghost btn-cta-lg light", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-rocket" }),
+              " Je d\xE9marre ma candidature"
             ] })
           ] })
+        ] }) })
+      }
+    ),
+    /* @__PURE__ */ jsxDEV("section", { class: "faq-section", id: "faq", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-question-circle" }),
+          " Questions Cl\xE9s"
         ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "cta-photo-actions", children: [
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Foire Aux Questions Parents et Candidats" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Tout savoir sur les admissions en universit\xE9s priv\xE9es, les visas, le transport s\xE9curis\xE9 et le co\xFBt de la vie au Maroc." })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "faq-accordion-wrap", id: "faqAccordionContainer" }),
+      /* @__PURE__ */ jsxDEV("div", { class: "faq-cta-box", children: [
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV("h3", { children: "Une autre question ? Un conseiller vous r\xE9pond en quelques minutes." }),
+          /* @__PURE__ */ jsxDEV("p", { children: promo.active ? "Ne restez pas dans le doute : profitez de la promo \u221250% avant la fin du compte \xE0 rebours." : "Ne restez pas dans le doute : un conseiller vous accompagne \xE0 chaque \xE9tape de votre projet." })
+        ] }),
+        /* @__PURE__ */ jsxDEV("div", { class: "faq-cta-actions", children: [
           /* @__PURE__ */ jsxDEV(
             "a",
             {
-              href: waLink("Bonjour Wicka, je souhaite d\xE9marrer mon projet d'\xE9tudes au Maroc d\xE8s maintenant."),
+              href: waLink("Bonjour Wicka, j'ai une question avant de souscrire."),
               target: "_blank",
               rel: "noopener noreferrer",
-              class: "btn-cta-white btn-cta-lg",
+              class: "btn-cta-white",
               children: [
                 /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-                " Discuter avec un conseiller"
+                " Poser ma question sur WhatsApp"
               ]
             }
           ),
-          /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-cta-ghost btn-cta-lg light", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-rocket" }),
-            " Je d\xE9marre ma candidature"
+          /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-cta-ghost", children: [
+            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
+            " Postuler maintenant"
           ] })
         ] })
-      ] }) })
-    }
-  ),
-  /* @__PURE__ */ jsxDEV("section", { class: "faq-section", id: "faq", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-question-circle" }),
-        " Questions Cl\xE9s"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Foire Aux Questions Parents et Candidats" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Tout savoir sur les admissions en universit\xE9s priv\xE9es, les visas, le transport s\xE9curis\xE9 et le co\xFBt de la vie au Maroc." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "faq-accordion-wrap", id: "faqAccordionContainer" }),
-    /* @__PURE__ */ jsxDEV("div", { class: "faq-cta-box", children: [
-      /* @__PURE__ */ jsxDEV("div", { children: [
-        /* @__PURE__ */ jsxDEV("h3", { children: "Une autre question ? Un conseiller vous r\xE9pond en quelques minutes." }),
-        /* @__PURE__ */ jsxDEV("p", { children: "Ne restez pas dans le doute : profitez de la promo \u221250% avant la fin du compte \xE0 rebours." })
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "faq-cta-actions", children: [
-        /* @__PURE__ */ jsxDEV(
-          "a",
-          {
-            href: waLink("Bonjour Wicka, j'ai une question avant de souscrire."),
-            target: "_blank",
-            rel: "noopener noreferrer",
-            class: "btn-cta-white",
-            children: [
-              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-              " Poser ma question sur WhatsApp"
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-cta-ghost", children: [
-          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
-          " Postuler maintenant"
-        ] })
       ] })
-    ] })
-  ] }) })
-] });
+    ] }) })
+  ] });
+};
 
 // src/pages/Candidature.tsx
 var candidatureMeta = {
@@ -3578,500 +3688,518 @@ var tarifsMeta = {
   description: "D\xE9couvrez les tarifs d\u2019accompagnement pour \xE9tudier au Maroc : orientation, admission, visa, accueil et services adapt\xE9s \xE0 votre pays.",
   keywords: "tarifs \xE9tudes Maroc, prix admission Maroc, accompagnement \xE9tudiant, pack admission, visa \xE9tudiant Maroc, co\xFBt \xE9tudes Maroc, Wicka Assistance"
 };
-var Tarifs = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
-  /* @__PURE__ */ jsxDEV("section", { class: "pricing-section", id: "tarifs-pays", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-globe-africa" }),
-        " Transparence Financi\xE8re Internationale"
+var PackPrice = ({ active, full, promo, cut }) => /* @__PURE__ */ jsxDEV("div", { class: "pack-price-box", children: [
+  active && /* @__PURE__ */ jsxDEV("span", { class: "pack-price-old promo-only", children: full }),
+  /* @__PURE__ */ jsxDEV("span", { class: "pack-price", "data-full-text": full, children: active ? promo : full }),
+  active && /* @__PURE__ */ jsxDEV("span", { class: "pack-price-cut promo-only", children: cut })
+] });
+var Tarifs = () => {
+  const promo = getPromo();
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV("section", { class: "pricing-section", id: "tarifs-pays", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-globe-africa" }),
+          " Transparence Financi\xE8re Internationale"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Tarifs Adapt\xE9s Selon le Pays du Candidat" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "S\xE9lectionnez votre pays de r\xE9sidence pour afficher nos tarifs dans votre devise locale ainsi que les moyens de paiement disponibles (Wave, Orange Money, MTN MoMo, Airtel, Virement...)." })
       ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Tarifs Adapt\xE9s Selon le Pays du Candidat" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "S\xE9lectionnez votre pays de r\xE9sidence pour afficher nos tarifs dans votre devise locale ainsi que les moyens de paiement disponibles (Wave, Orange Money, MTN MoMo, Airtel, Virement...)." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "country-pricing-widget", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "promo-ribbon-bar", children: [
-        /* @__PURE__ */ jsxDEV("span", { class: "promo-flame", children: "\u{1F525}" }),
-        /* @__PURE__ */ jsxDEV("div", { class: "promo-ribbon-text", children: [
-          /* @__PURE__ */ jsxDEV("strong", { children: "PROMOTION DE LANCEMENT \u221250%" }),
-          /* @__PURE__ */ jsxDEV("span", { children: "Tarifs de lancement \xE0 dur\xE9e limit\xE9e. Le prix est bloqu\xE9 et garanti d\xE8s la signature de votre contrat." }),
-          /* @__PURE__ */ jsxDEV("span", { class: "promo-places", id: "promoPlaces", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-fire" }),
-            " Plus que ",
-            /* @__PURE__ */ jsxDEV("b", { children: "14 places" }),
-            " \xE0 ce tarif promotionnel"
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV("span", { class: "promo-badge-pct", children: "-50%" })
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "country-selector-bar", children: [
-        /* @__PURE__ */ jsxDEV("label", { class: "country-selector-label", for: "pricingCountrySelect", children: [
-          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-map-pin text-rose" }),
-          " Choisissez votre pays de r\xE9sidence :"
-        ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "country-pills-wrap", children: [
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn active", "data-country": "senegal", children: "S\xE9n\xE9gal \u{1F1F8}\u{1F1F3}" }),
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "ivory_coast", children: "C\xF4te d'Ivoire \u{1F1E8}\u{1F1EE}" }),
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "cameroon", children: "Cameroun \u{1F1E8}\u{1F1F2}" }),
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "gabon", children: "Gabon \u{1F1EC}\u{1F1E6}" }),
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "guinea", children: "Guin\xE9e \u{1F1EC}\u{1F1F3}" }),
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "congo", children: "Congo / RDC \u{1F1E8}\u{1F1EC} \u{1F1E8}\u{1F1E9}" }),
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "diaspora_europe", children: "France / Diaspora \u{1F1EB}\u{1F1F7} \u{1F1EA}\u{1F1FA}" }),
-          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "maroc", children: "Maroc (Sur place) \u{1F1F2}\u{1F1E6}" })
-        ] }),
-        /* @__PURE__ */ jsxDEV("select", { id: "pricingCountrySelect", style: "display: none;", children: [
-          /* @__PURE__ */ jsxDEV("option", { value: "senegal", selected: true, children: "S\xE9n\xE9gal" }),
-          /* @__PURE__ */ jsxDEV("option", { value: "ivory_coast", children: "C\xF4te d'Ivoire" }),
-          /* @__PURE__ */ jsxDEV("option", { value: "cameroon", children: "Cameroun" }),
-          /* @__PURE__ */ jsxDEV("option", { value: "gabon", children: "Gabon" }),
-          /* @__PURE__ */ jsxDEV("option", { value: "guinea", children: "Guin\xE9e" }),
-          /* @__PURE__ */ jsxDEV("option", { value: "congo", children: "Congo" }),
-          /* @__PURE__ */ jsxDEV("option", { value: "diaspora_europe", children: "France / Diaspora" }),
-          /* @__PURE__ */ jsxDEV("option", { value: "maroc", children: "Maroc" })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "country-display-grid", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "country-pack-col", children: [
-          /* @__PURE__ */ jsxDEV("div", { children: [
-            /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", children: "\u2B50 Le Plus Populaire" }),
-            /* @__PURE__ */ jsxDEV("h3", { class: "country-pack-title", children: "Pack Admission R\xE9ussie" }),
-            /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-600);", children: "D\xE9p\xF4t de 3 \xE0 5 candidatures universitaires + Suivi jusqu'\xE0 la Lettre d'Admission Officielle + Aide Bourse + Dossier Carte Consulaire (ambassade) + Attestation Visa." }),
-            /* @__PURE__ */ jsxDEV("div", { class: "country-pack-price", id: "countryOutAdmissionPrice", children: "60 000 FCFA" })
-          ] }),
-          /* @__PURE__ */ jsxDEV(
-            "a",
-            {
-              href: waLink(),
-              target: "_blank",
-              rel: "noopener noreferrer",
-              class: "btn-primary btn-full btn-order-pack",
-              "data-pack": "Pack Admission",
-              children: [
-                /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-                " Souscrire dans mon Pays"
-              ]
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxDEV(
-          "div",
-          {
-            class: "country-pack-col",
-            style: "border-color: var(--rose-600); background: linear-gradient(180deg, #ffffff 0%, #fff7f9 100%);",
-            children: [
-              /* @__PURE__ */ jsxDEV("div", { children: [
-                /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--rose-700); color: var(--white);", children: "\u{1F697} Navette A\xE9roport et VIP" }),
-                /* @__PURE__ */ jsxDEV("h3", { class: "country-pack-title", children: "Pack VIP All-Inclusive et Navette" }),
-                /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-600);", children: [
-                  "Admission garantie + Dossier Visa et ",
-                  /* @__PURE__ */ jsxDEV("strong", { children: "Carte Consulaire jusqu'\xE0 l'ambassade" }),
-                  " +",
-                  " ",
-                  /* @__PURE__ */ jsxDEV("strong", { children: "Navette a\xE9roport priv\xE9e s\xE9curis\xE9e" }),
-                  " + Carte SIM 4G + ",
-                  /* @__PURE__ */ jsxDEV("strong", { children: "Carte de S\xE9jour" }),
-                  " ",
-                  "jusqu'\xE0 l'obtention."
-                ] }),
-                /* @__PURE__ */ jsxDEV("div", { class: "country-pack-price", id: "countryOutVipPrice", children: "120 000 FCFA" })
-              ] }),
-              /* @__PURE__ */ jsxDEV(
-                "a",
-                {
-                  href: waLink(),
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                  class: "btn-primary btn-full btn-order-pack",
-                  "data-pack": "Pack VIP All-Inclusive",
-                  children: [
-                    /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-                    " R\xE9server le Pack VIP et Navette"
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "payment-methods-wrap", children: [
-        /* @__PURE__ */ jsxDEV("span", { class: "payment-methods-label", children: [
-          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-wallet text-rose" }),
-          " Moyens de paiement accept\xE9s localement :"
-        ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "payment-chips-list", id: "countryOutPaymentMethods", children: [
-          /* @__PURE__ */ jsxDEV("span", { class: "payment-method-chip", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle text-rose" }),
-            " Wave"
-          ] }),
-          /* @__PURE__ */ jsxDEV("span", { class: "payment-method-chip", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle text-rose" }),
-            " Orange Money"
-          ] }),
-          /* @__PURE__ */ jsxDEV("span", { class: "payment-method-chip", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle text-rose" }),
-            " Virement Bancaire"
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV("p", { id: "countryOutNote", style: "font-size: 0.82rem; color: var(--slate-500); margin-top: 10px;", children: "Paiement local sans frais de change via Wave / Orange Money. Re\xE7u officiel et contrat d\xE9livr\xE9s instantan\xE9ment." }),
-        /* @__PURE__ */ jsxDEV("p", { class: "promo-disclaimer", children: [
-          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-circle-info" }),
-          " Prix promotionnels de lancement, susceptibles d'\xE9voluer \xE0 tout moment. Tarif garanti d\xE8s la signature du contrat."
-        ] })
-      ] })
-    ] })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("section", { class: "simulator-section", id: "simulateur", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-calculator" }),
-        " \xC9tude de Co\xFBt R\xE9el"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Simulateur de Budget de Vie \xC9tudiante au Maroc" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Estimez le budget mensuel n\xE9cessaire pour vivre confortablement selon la ville choisie (F\xE8s, Casablanca, Rabat, Marrakech, Tanger) et convertissez instantan\xE9ment les montants." })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "simulator-card-wrapper", children: /* @__PURE__ */ jsxDEV("div", { class: "simulator-grid", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "sim-controls-panel", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "sim-city-photo", children: [
-          /* @__PURE__ */ jsxDEV("img", { id: "simCityPhoto", src: "/assets/uni/casablanca.jpg", alt: "Ville marocaine", loading: "lazy" }),
-          /* @__PURE__ */ jsxDEV("span", { id: "simCityPhotoLabel", class: "sim-city-photo-label", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-map-marker-alt" }),
-            " Casablanca"
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "sim-control-group", children: [
-          /* @__PURE__ */ jsxDEV("label", { class: "sim-label", for: "simCitySelect", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-map-marker-alt text-rose" }),
-            " 1. Ville marocaine d'accueil :"
-          ] }),
-          /* @__PURE__ */ jsxDEV("select", { id: "simCitySelect", class: "sim-select-styled", children: [
-            /* @__PURE__ */ jsxDEV("option", { value: "casablanca", selected: true, children: "Casablanca (P\xF4le \xC9conomique et M\xE9tropole)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "rabat", children: "Rabat (Capitale Verte et Cit\xE9 d'Excellence)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "fes", children: "F\xE8s (Campus Euromed et Co\xFBt Tr\xE8s Abordable)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "marrakech", children: "Marrakech (Cadre de Vie Ensoleill\xE9 et Dynamique)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "tanger", children: "Tanger (P\xF4le Industriel et Ouvert sur l'Europe)" }),
-            /* @__PURE__ */ jsxDEV("option", { value: "ifrane", children: "Ifrane (Campus Al Akhawayn et Co\xFBt le Plus Bas)" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV("div", { class: "sim-control-group", children: [
-          /* @__PURE__ */ jsxDEV("label", { class: "sim-label", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-graduation-cap text-rose" }),
-            " 2. Cat\xE9gorie d'\xE9tablissement vis\xE9 :"
-          ] }),
-          /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-cards", children: [
-            /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
-              /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "simUniType", value: "prive_standard", checked: true }),
-              /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
-                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-award" }),
-                /* @__PURE__ */ jsxDEV("span", { children: "Grande \xC9cole Priv\xE9e" }),
-                /* @__PURE__ */ jsxDEV("small", { style: "font-size: 0.72rem; color: var(--slate-500);", children: "ESTEM, EMSI, Mundia (42k-50k DH)" })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
-              /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "simUniType", value: "prive_excellence" }),
-              /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
-                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-star" }),
-                /* @__PURE__ */ jsxDEV("span", { children: "P\xF4le d'\xC9lite et Sant\xE9" }),
-                /* @__PURE__ */ jsxDEV("small", { style: "font-size: 0.72rem; color: var(--slate-500);", children: "UEMF, UIASS, UIR, UM6P" })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
-              /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "simUniType", value: "public_assiste" }),
-              /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
-                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-landmark" }),
-                /* @__PURE__ */ jsxDEV("span", { children: "Facult\xE9 Publique" }),
-                /* @__PURE__ */ jsxDEV("small", { style: "font-size: 0.72rem; color: var(--slate-500);", children: "Frais symboliques" })
-              ] })
+      /* @__PURE__ */ jsxDEV("div", { class: "country-pricing-widget", children: [
+        promo.active && /* @__PURE__ */ jsxDEV("div", { class: "promo-ribbon-bar promo-only", children: [
+          /* @__PURE__ */ jsxDEV("span", { class: "promo-flame", children: "\u{1F525}" }),
+          /* @__PURE__ */ jsxDEV("div", { class: "promo-ribbon-text", children: [
+            /* @__PURE__ */ jsxDEV("strong", { children: "PROMOTION DE LANCEMENT \u221250%" }),
+            /* @__PURE__ */ jsxDEV("span", { children: "Tarifs de lancement \xE0 dur\xE9e limit\xE9e. Le prix est bloqu\xE9 et garanti d\xE8s la signature de votre contrat." }),
+            /* @__PURE__ */ jsxDEV("span", { class: "promo-places", id: "promoPlaces", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-fire" }),
+              " Plus que ",
+              /* @__PURE__ */ jsxDEV("b", { children: "14 places" }),
+              " \xE0 ce tarif promotionnel"
             ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV("span", { class: "promo-badge-pct", children: "-50%" })
+        ] }),
+        /* @__PURE__ */ jsxDEV("div", { class: "country-selector-bar", children: [
+          /* @__PURE__ */ jsxDEV("label", { class: "country-selector-label", for: "pricingCountrySelect", children: [
+            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-map-pin text-rose" }),
+            " Choisissez votre pays de r\xE9sidence :"
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { class: "country-pills-wrap", children: [
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn active", "data-country": "senegal", children: "S\xE9n\xE9gal \u{1F1F8}\u{1F1F3}" }),
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "ivory_coast", children: "C\xF4te d'Ivoire \u{1F1E8}\u{1F1EE}" }),
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "cameroon", children: "Cameroun \u{1F1E8}\u{1F1F2}" }),
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "gabon", children: "Gabon \u{1F1EC}\u{1F1E6}" }),
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "guinea", children: "Guin\xE9e \u{1F1EC}\u{1F1F3}" }),
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "congo", children: "Congo / RDC \u{1F1E8}\u{1F1EC} \u{1F1E8}\u{1F1E9}" }),
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "diaspora_europe", children: "France / Diaspora \u{1F1EB}\u{1F1F7} \u{1F1EA}\u{1F1FA}" }),
+            /* @__PURE__ */ jsxDEV("button", { type: "button", class: "country-pill-btn", "data-country": "maroc", children: "Maroc (Sur place) \u{1F1F2}\u{1F1E6}" })
+          ] }),
+          /* @__PURE__ */ jsxDEV("select", { id: "pricingCountrySelect", style: "display: none;", children: [
+            /* @__PURE__ */ jsxDEV("option", { value: "senegal", selected: true, children: "S\xE9n\xE9gal" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "ivory_coast", children: "C\xF4te d'Ivoire" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "cameroon", children: "Cameroun" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "gabon", children: "Gabon" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "guinea", children: "Guin\xE9e" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "congo", children: "Congo" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "diaspora_europe", children: "France / Diaspora" }),
+            /* @__PURE__ */ jsxDEV("option", { value: "maroc", children: "Maroc" })
           ] })
         ] }),
-        /* @__PURE__ */ jsxDEV("div", { style: "background-color: var(--rose-soft); border: 1px solid var(--rose-200); border-radius: var(--radius-md); padding: 16px; margin-top: 10px;", children: [
-          /* @__PURE__ */ jsxDEV("strong", { style: "color: var(--rose-900); font-size: 0.88rem;", children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-info-circle" }),
-            " Sp\xE9cificit\xE9 de cette ville :"
-          ] }),
-          /* @__PURE__ */ jsxDEV("p", { id: "simCityAdvantages", style: "font-size: 0.85rem; color: var(--slate-700); margin-top: 4px;", children: "Immense vivier de stages, si\xE8ges de multinationales, transports 24/7." })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "sim-results-panel", children: [
-        /* @__PURE__ */ jsxDEV("div", { children: [
-          /* @__PURE__ */ jsxDEV("div", { class: "sim-results-header", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "country-display-grid", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "country-pack-col", children: [
             /* @__PURE__ */ jsxDEV("div", { children: [
-              /* @__PURE__ */ jsxDEV("h3", { children: "Estimation du Budget" }),
-              /* @__PURE__ */ jsxDEV("span", { id: "simCityBadgeLabel", style: "font-size: 0.78rem; color: var(--rose-200);", children: "P\xF4le \xC9conomique et Cosmopolite" })
+              /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", children: "\u2B50 Le Plus Populaire" }),
+              /* @__PURE__ */ jsxDEV("h3", { class: "country-pack-title", children: "Pack Admission R\xE9ussie" }),
+              /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-600);", children: "D\xE9p\xF4t de 3 \xE0 5 candidatures universitaires + Suivi jusqu'\xE0 la Lettre d'Admission Officielle + Aide Bourse + Dossier Carte Consulaire (ambassade) + Attestation Visa." }),
+              /* @__PURE__ */ jsxDEV("div", { class: "country-pack-price", id: "countryOutAdmissionPrice", children: promo.active ? "60 000 FCFA" : "120 000 FCFA" })
             ] }),
-            /* @__PURE__ */ jsxDEV("div", { class: "currency-chips-wrap", children: [
-              /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip active", "data-currency": "MAD", children: "MAD" }),
-              /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip", "data-currency": "XOF", children: "FCFA" }),
-              /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip", "data-currency": "EUR", children: "EUR" }),
-              /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip", "data-currency": "USD", children: "USD" })
-            ] }),
-            /* @__PURE__ */ jsxDEV("select", { id: "simCurrencySelect", style: "display:none;", children: [
-              /* @__PURE__ */ jsxDEV("option", { value: "MAD", selected: true, children: "MAD" }),
-              /* @__PURE__ */ jsxDEV("option", { value: "XOF", children: "XOF" }),
-              /* @__PURE__ */ jsxDEV("option", { value: "EUR", children: "EUR" }),
-              /* @__PURE__ */ jsxDEV("option", { value: "USD", children: "USD" })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-list", children: [
-            /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
-              /* @__PURE__ */ jsxDEV("span", { children: [
-                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-utensils" }),
-                " Alimentation et Courses :"
-              ] }),
-              /* @__PURE__ */ jsxDEV("strong", { id: "simOutFood", children: "1 300 DH" })
-            ] }),
-            /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
-              /* @__PURE__ */ jsxDEV("span", { children: [
-                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-train" }),
-                " Transport (Tramway/Taxis) et Forfait 4G :"
-              ] }),
-              /* @__PURE__ */ jsxDEV("strong", { id: "simOutTransport", children: "250 DH" })
-            ] }),
-            /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
-              /* @__PURE__ */ jsxDEV("span", { children: [
-                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-book" }),
-                " Fournitures et Loisirs :"
-              ] }),
-              /* @__PURE__ */ jsxDEV("strong", { id: "simOutLifestyle", children: "450 DH" })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxDEV("div", { class: "sim-total-highlight", children: [
-            /* @__PURE__ */ jsxDEV("span", { class: "sim-total-label", children: "Budget de Vie Mensuel Conseill\xE9 :" }),
-            /* @__PURE__ */ jsxDEV("div", { class: "sim-total-val", id: "simOutMonthlyLiving", children: "2 000 DH / mois" })
+            /* @__PURE__ */ jsxDEV(
+              "a",
+              {
+                href: waLink(),
+                target: "_blank",
+                rel: "noopener noreferrer",
+                class: "btn-primary btn-full btn-order-pack",
+                "data-pack": "Pack Admission",
+                children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+                  " Souscrire dans mon Pays"
+                ]
+              }
+            )
           ] }),
           /* @__PURE__ */ jsxDEV(
             "div",
             {
-              class: "sim-breakdown-item",
-              style: "border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 12px; margin-bottom: 8px;",
+              class: "country-pack-col",
+              style: "border-color: var(--rose-600); background: linear-gradient(180deg, #ffffff 0%, #fff7f9 100%);",
               children: [
-                /* @__PURE__ */ jsxDEV("span", { children: "Frais Scolarit\xE9 Universit\xE9 (Annuel) :" }),
-                /* @__PURE__ */ jsxDEV("strong", { id: "simOutTuitionYear", style: "color: var(--gold-light);", children: "46 000 DH / an" })
+                /* @__PURE__ */ jsxDEV("div", { children: [
+                  /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--rose-700); color: var(--white);", children: "\u{1F697} Navette A\xE9roport et VIP" }),
+                  /* @__PURE__ */ jsxDEV("h3", { class: "country-pack-title", children: "Pack VIP All-Inclusive et Navette" }),
+                  /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-600);", children: [
+                    "Admission garantie + Dossier Visa et ",
+                    /* @__PURE__ */ jsxDEV("strong", { children: "Carte Consulaire jusqu'\xE0 l'ambassade" }),
+                    " +",
+                    " ",
+                    /* @__PURE__ */ jsxDEV("strong", { children: "Navette a\xE9roport priv\xE9e s\xE9curis\xE9e" }),
+                    " + Carte SIM 4G + ",
+                    /* @__PURE__ */ jsxDEV("strong", { children: "Carte de S\xE9jour" }),
+                    " ",
+                    "jusqu'\xE0 l'obtention."
+                  ] }),
+                  /* @__PURE__ */ jsxDEV("div", { class: "country-pack-price", id: "countryOutVipPrice", children: promo.active ? "120 000 FCFA" : "235 000 FCFA" })
+                ] }),
+                /* @__PURE__ */ jsxDEV(
+                  "a",
+                  {
+                    href: waLink(),
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    class: "btn-primary btn-full btn-order-pack",
+                    "data-pack": "Pack VIP All-Inclusive",
+                    children: [
+                      /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+                      " R\xE9server le Pack VIP et Navette"
+                    ]
+                  }
+                )
               ]
             }
-          ),
-          /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
-            /* @__PURE__ */ jsxDEV("span", { children: "Grand Total Annuel Estim\xE9 (Vie 10 mois + \xC9cole) :" }),
-            /* @__PURE__ */ jsxDEV("strong", { id: "simOutGrandTotalYear", style: "color: var(--white); font-size: 1.15rem;", children: "66 000 DH / an" })
+          )
+        ] }),
+        /* @__PURE__ */ jsxDEV("div", { class: "payment-methods-wrap", children: [
+          /* @__PURE__ */ jsxDEV("span", { class: "payment-methods-label", children: [
+            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-wallet text-rose" }),
+            " Moyens de paiement accept\xE9s localement :"
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { class: "payment-chips-list", id: "countryOutPaymentMethods", children: [
+            /* @__PURE__ */ jsxDEV("span", { class: "payment-method-chip", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle text-rose" }),
+              " Wave"
+            ] }),
+            /* @__PURE__ */ jsxDEV("span", { class: "payment-method-chip", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle text-rose" }),
+              " Orange Money"
+            ] }),
+            /* @__PURE__ */ jsxDEV("span", { class: "payment-method-chip", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle text-rose" }),
+              " Virement Bancaire"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV("p", { id: "countryOutNote", style: "font-size: 0.82rem; color: var(--slate-500); margin-top: 10px;", children: "Paiement local sans frais de change via Wave / Orange Money. Re\xE7u officiel et contrat d\xE9livr\xE9s instantan\xE9ment." }),
+          promo.active && /* @__PURE__ */ jsxDEV("p", { class: "promo-disclaimer promo-only", children: [
+            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-circle-info" }),
+            " Prix promotionnels de lancement, susceptibles d'\xE9voluer \xE0 tout moment. Tarif garanti d\xE8s la signature du contrat."
+          ] })
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxDEV("section", { class: "simulator-section", id: "simulateur", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-calculator" }),
+          " \xC9tude de Co\xFBt R\xE9el"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Simulateur de Budget de Vie \xC9tudiante au Maroc" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: "Estimez le budget mensuel n\xE9cessaire pour vivre confortablement selon la ville choisie (F\xE8s, Casablanca, Rabat, Marrakech, Tanger) et convertissez instantan\xE9ment les montants." })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "simulator-card-wrapper", children: /* @__PURE__ */ jsxDEV("div", { class: "simulator-grid", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "sim-controls-panel", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "sim-city-photo", children: [
+            /* @__PURE__ */ jsxDEV("img", { id: "simCityPhoto", src: "/assets/uni/casablanca.jpg", alt: "Ville marocaine", loading: "lazy" }),
+            /* @__PURE__ */ jsxDEV("span", { id: "simCityPhotoLabel", class: "sim-city-photo-label", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-map-marker-alt" }),
+              " Casablanca"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { class: "sim-control-group", children: [
+            /* @__PURE__ */ jsxDEV("label", { class: "sim-label", for: "simCitySelect", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-map-marker-alt text-rose" }),
+              " 1. Ville marocaine d'accueil :"
+            ] }),
+            /* @__PURE__ */ jsxDEV("select", { id: "simCitySelect", class: "sim-select-styled", children: [
+              /* @__PURE__ */ jsxDEV("option", { value: "casablanca", selected: true, children: "Casablanca (P\xF4le \xC9conomique et M\xE9tropole)" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "rabat", children: "Rabat (Capitale Verte et Cit\xE9 d'Excellence)" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "fes", children: "F\xE8s (Campus Euromed et Co\xFBt Tr\xE8s Abordable)" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "marrakech", children: "Marrakech (Cadre de Vie Ensoleill\xE9 et Dynamique)" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "tanger", children: "Tanger (P\xF4le Industriel et Ouvert sur l'Europe)" }),
+              /* @__PURE__ */ jsxDEV("option", { value: "ifrane", children: "Ifrane (Campus Al Akhawayn et Co\xFBt le Plus Bas)" })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { class: "sim-control-group", children: [
+            /* @__PURE__ */ jsxDEV("label", { class: "sim-label", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-graduation-cap text-rose" }),
+              " 2. Cat\xE9gorie d'\xE9tablissement vis\xE9 :"
+            ] }),
+            /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-cards", children: [
+              /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
+                /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "simUniType", value: "prive_standard", checked: true }),
+                /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fas fa-award" }),
+                  /* @__PURE__ */ jsxDEV("span", { children: "Grande \xC9cole Priv\xE9e" }),
+                  /* @__PURE__ */ jsxDEV("small", { style: "font-size: 0.72rem; color: var(--slate-500);", children: "ESTEM, EMSI, Mundia (42k-50k DH)" })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
+                /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "simUniType", value: "prive_excellence" }),
+                /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fas fa-star" }),
+                  /* @__PURE__ */ jsxDEV("span", { children: "P\xF4le d'\xC9lite et Sant\xE9" }),
+                  /* @__PURE__ */ jsxDEV("small", { style: "font-size: 0.72rem; color: var(--slate-500);", children: "UEMF, UIASS, UIR, UM6P" })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxDEV("label", { class: "sim-radio-card", children: [
+                /* @__PURE__ */ jsxDEV("input", { type: "radio", name: "simUniType", value: "public_assiste" }),
+                /* @__PURE__ */ jsxDEV("div", { class: "sim-radio-content", children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fas fa-landmark" }),
+                  /* @__PURE__ */ jsxDEV("span", { children: "Facult\xE9 Publique" }),
+                  /* @__PURE__ */ jsxDEV("small", { style: "font-size: 0.72rem; color: var(--slate-500);", children: "Frais symboliques" })
+                ] })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV("div", { style: "background-color: var(--rose-soft); border: 1px solid var(--rose-200); border-radius: var(--radius-md); padding: 16px; margin-top: 10px;", children: [
+            /* @__PURE__ */ jsxDEV("strong", { style: "color: var(--rose-900); font-size: 0.88rem;", children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-info-circle" }),
+              " Sp\xE9cificit\xE9 de cette ville :"
+            ] }),
+            /* @__PURE__ */ jsxDEV("p", { id: "simCityAdvantages", style: "font-size: 0.85rem; color: var(--slate-700); margin-top: 4px;", children: "Immense vivier de stages, si\xE8ges de multinationales, transports 24/7." })
           ] })
         ] }),
-        /* @__PURE__ */ jsxDEV(
-          "a",
-          {
-            href: "/candidature",
-            class: "btn-primary btn-full",
-            style: "margin-top: 20px; background: var(--white); color: var(--rose-900);",
-            children: [
-              /* @__PURE__ */ jsxDEV("span", { children: "Faire \xC9valuer Mon Dossier" }),
-              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-right" })
-            ]
-          }
-        )
+        /* @__PURE__ */ jsxDEV("div", { class: "sim-results-panel", children: [
+          /* @__PURE__ */ jsxDEV("div", { children: [
+            /* @__PURE__ */ jsxDEV("div", { class: "sim-results-header", children: [
+              /* @__PURE__ */ jsxDEV("div", { children: [
+                /* @__PURE__ */ jsxDEV("h3", { children: "Estimation du Budget" }),
+                /* @__PURE__ */ jsxDEV("span", { id: "simCityBadgeLabel", style: "font-size: 0.78rem; color: var(--rose-200);", children: "P\xF4le \xC9conomique et Cosmopolite" })
+              ] }),
+              /* @__PURE__ */ jsxDEV("div", { class: "currency-chips-wrap", children: [
+                /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip active", "data-currency": "MAD", children: "MAD" }),
+                /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip", "data-currency": "XOF", children: "FCFA" }),
+                /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip", "data-currency": "EUR", children: "EUR" }),
+                /* @__PURE__ */ jsxDEV("button", { type: "button", class: "currency-chip", "data-currency": "USD", children: "USD" })
+              ] }),
+              /* @__PURE__ */ jsxDEV("select", { id: "simCurrencySelect", style: "display:none;", children: [
+                /* @__PURE__ */ jsxDEV("option", { value: "MAD", selected: true, children: "MAD" }),
+                /* @__PURE__ */ jsxDEV("option", { value: "XOF", children: "XOF" }),
+                /* @__PURE__ */ jsxDEV("option", { value: "EUR", children: "EUR" }),
+                /* @__PURE__ */ jsxDEV("option", { value: "USD", children: "USD" })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-list", children: [
+              /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
+                /* @__PURE__ */ jsxDEV("span", { children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fas fa-utensils" }),
+                  " Alimentation et Courses :"
+                ] }),
+                /* @__PURE__ */ jsxDEV("strong", { id: "simOutFood", children: "1 300 DH" })
+              ] }),
+              /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
+                /* @__PURE__ */ jsxDEV("span", { children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fas fa-train" }),
+                  " Transport (Tramway/Taxis) et Forfait 4G :"
+                ] }),
+                /* @__PURE__ */ jsxDEV("strong", { id: "simOutTransport", children: "250 DH" })
+              ] }),
+              /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
+                /* @__PURE__ */ jsxDEV("span", { children: [
+                  /* @__PURE__ */ jsxDEV("i", { class: "fas fa-book" }),
+                  " Fournitures et Loisirs :"
+                ] }),
+                /* @__PURE__ */ jsxDEV("strong", { id: "simOutLifestyle", children: "450 DH" })
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxDEV("div", { class: "sim-total-highlight", children: [
+              /* @__PURE__ */ jsxDEV("span", { class: "sim-total-label", children: "Budget de Vie Mensuel Conseill\xE9 :" }),
+              /* @__PURE__ */ jsxDEV("div", { class: "sim-total-val", id: "simOutMonthlyLiving", children: "2 000 DH / mois" })
+            ] }),
+            /* @__PURE__ */ jsxDEV(
+              "div",
+              {
+                class: "sim-breakdown-item",
+                style: "border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 12px; margin-bottom: 8px;",
+                children: [
+                  /* @__PURE__ */ jsxDEV("span", { children: "Frais Scolarit\xE9 Universit\xE9 (Annuel) :" }),
+                  /* @__PURE__ */ jsxDEV("strong", { id: "simOutTuitionYear", style: "color: var(--gold-light);", children: "46 000 DH / an" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxDEV("div", { class: "sim-breakdown-item", children: [
+              /* @__PURE__ */ jsxDEV("span", { children: "Grand Total Annuel Estim\xE9 (Vie 10 mois + \xC9cole) :" }),
+              /* @__PURE__ */ jsxDEV("strong", { id: "simOutGrandTotalYear", style: "color: var(--white); font-size: 1.15rem;", children: "66 000 DH / an" })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV(
+            "a",
+            {
+              href: "/candidature",
+              class: "btn-primary btn-full",
+              style: "margin-top: 20px; background: var(--white); color: var(--rose-900);",
+              children: [
+                /* @__PURE__ */ jsxDEV("span", { children: "Faire \xC9valuer Mon Dossier" }),
+                /* @__PURE__ */ jsxDEV("i", { class: "fas fa-arrow-right" })
+              ]
+            }
+          )
+        ] })
+      ] }) })
+    ] }) }),
+    /* @__PURE__ */ jsxDEV("section", { class: "pricing-section", id: "packs", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
+        promo.active ? /* @__PURE__ */ jsxDEV("span", { class: "section-badge badge-promo promo-only", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-fire" }),
+          " Promo Lancement \u221250%"
+        ] }) : /* @__PURE__ */ jsxDEV("span", { class: "section-badge", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-tags" }),
+          " Nos Formules"
+        ] }),
+        /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Choisissez la Formule Adapt\xE9e \xE0 Votre Projet" }),
+        /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: promo.active ? /* @__PURE__ */ jsxDEV(Fragment, { children: [
+          "Profitez de nos ",
+          /* @__PURE__ */ jsxDEV("strong", { children: "tarifs promotionnels de lancement" }),
+          " \u2014 parmi les plus accessibles du march\xE9 \u2014 payables localement dans votre devise (Wave, Orange Money, MTN, Virement)."
+        ] }) : /* @__PURE__ */ jsxDEV(Fragment, { children: "Des formules claires et accessibles, payables localement dans votre devise (Wave, Orange Money, MTN, Virement)." }) })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "pricing-grid", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "pricing-card", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
+            /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", children: "Pour d\xE9marrer" }),
+            /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack Diagnostic et Orientation" }),
+            /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Analyse de dossier et s\xE9lection des universit\xE9s" }),
+            /* @__PURE__ */ jsxDEV(PackPrice, { active: promo.active, full: "590 DH", promo: "290 DH", cut: "\u221251%" }),
+            /* @__PURE__ */ jsxDEV("span", { class: "pack-subprice", "data-full-text": "Prix standard \xB7 ~36 000 FCFA / 54 \u20AC \xB7 Sans engagement", children: promo.active ? "\u{1F525} Prix PROMO de lancement \xB7 ~18 000 FCFA / 27 \u20AC \xB7 Sans engagement" : "Prix standard \xB7 ~36 000 FCFA / 54 \u20AC \xB7 Sans engagement" })
+          ] }),
+          /* @__PURE__ */ jsxDEV("ul", { class: "pack-features-list", children: [
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Audit approfondi des relev\xE9s de notes de l'\xE9l\xE8ve"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Recommandation personnalis\xE9e de 3 universit\xE9s priv\xE9es"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Estimation pr\xE9cise des frais de scolarit\xE9 par ville"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Guide complet sur la vie et la s\xE9curit\xE9 au Maroc"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Entretien d'orientation de 30 min avec un expert"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV(
+            "a",
+            {
+              href: waLink(
+                `Bonjour Wicka, je souhaite souscrire au Pack Diagnostic et Orientation (${promo.active ? "290" : "590"} DH).`
+              ),
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "btn-secondary btn-full",
+              children: [
+                /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
+                " ",
+                /* @__PURE__ */ jsxDEV("span", { children: "Souscrire au Diagnostic" })
+              ]
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxDEV("div", { class: "pricing-card featured", children: [
+          /* @__PURE__ */ jsxDEV("span", { class: "pricing-badge-popular", children: "\u2B50 Pack recommand\xE9" }),
+          /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
+            /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--rose-700); color: var(--white);", children: "Admission Garantie" }),
+            /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", style: "margin-top: 8px;", children: "Pack Admission R\xE9ussie" }),
+            /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Admission officielle dans l'universit\xE9 priv\xE9e cibl\xE9e" }),
+            /* @__PURE__ */ jsxDEV(PackPrice, { active: promo.active, full: "1 990 DH", promo: "990 DH", cut: "\u221250%" }),
+            /* @__PURE__ */ jsxDEV(
+              "span",
+              {
+                class: "pack-subprice",
+                "data-full-text": "Prix standard \xB7 ~120 000 FCFA / 185 \u20AC (Wave, Orange Money)",
+                children: promo.active ? "\u{1F525} Prix PROMO de lancement \xB7 ~60 000 FCFA / 92 \u20AC (Wave, Orange Money)" : "Prix standard \xB7 ~120 000 FCFA / 185 \u20AC (Wave, Orange Money)"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxDEV("ul", { class: "pack-features-list", children: [
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " ",
+              /* @__PURE__ */ jsxDEV("strong", { children: "Toutes les prestations du Pack Orientation" })
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " D\xE9p\xF4t prioritaire de 3 \xE0 5 candidatures universitaires"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " R\xE9daction et optimisation de CV et lettres de motivation"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Pr\xE9paration personnalis\xE9e aux oraux d'admission"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Suivi direct jusqu'\xE0 la Lettre d'Admission Officielle"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Assistance pour les demandes de bourses d'\xE9tudes"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Constitution du dossier de ",
+              /* @__PURE__ */ jsxDEV("strong", { children: "Carte Consulaire" }),
+              " aupr\xE8s de l'ambassade du Maroc"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " D\xE9livrance de l'attestation officielle pour le visa"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV(
+            "a",
+            {
+              href: waLink("Bonjour Wicka, je souhaite souscrire au Pack Admission R\xE9ussie."),
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "btn-primary btn-full",
+              children: [
+                /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+                " Choisir le Pack Admission"
+              ]
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxDEV("div", { class: "pricing-card", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
+            /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--gold-light); color: var(--gold);", children: "\u{1F697} Navette et S\xE9r\xE9nit\xE9 Totale" }),
+            /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack VIP et Navette A\xE9roport" }),
+            /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Prise en charge compl\xE8te d\xE8s l'atterrissage" }),
+            /* @__PURE__ */ jsxDEV(PackPrice, { active: promo.active, full: "3 890 DH", promo: "1 990 DH", cut: "\u221249%" }),
+            /* @__PURE__ */ jsxDEV(
+              "span",
+              {
+                class: "pack-subprice",
+                "data-full-text": "Prix standard \xB7 ~235 000 FCFA / 360 \u20AC (chauffeur inclus)",
+                children: promo.active ? "\u{1F525} Prix PROMO de lancement \xB7 ~120 000 FCFA / 185 \u20AC (chauffeur inclus)" : "Prix standard \xB7 ~235 000 FCFA / 360 \u20AC (chauffeur inclus)"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxDEV("ul", { class: "pack-features-list", children: [
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " ",
+              /* @__PURE__ */ jsxDEV("strong", { children: "Toutes les prestations du Pack Admission R\xE9ussie" })
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Montage et validation du dossier consulaire de Visa"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " ",
+              /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F3DB}\uFE0F Carte Consulaire :" }),
+              " accompagnement complet jusqu'au d\xE9p\xF4t \xE0 l'ambassade du Maroc"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " ",
+              /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F697} Navette A\xE9roport Priv\xE9e S\xE9curis\xE9e" }),
+              " : Chauffeur d\xE9di\xE9 \xE0 l'arriv\xE9e vers votre ville (Casablanca, Rabat, F\xE8s, Marrakech, Tanger, Ifrane)"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " ",
+              /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F4F1} Carte SIM 4G locale" }),
+              " avec forfait internet remise en main propre"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Accompagnement pour l'ouverture de compte bancaire"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " ",
+              /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F4D1} Carte de S\xE9jour :" }),
+              " prise en charge int\xE9grale du dossier jusqu'\xE0 l'obtention du titre"
+            ] }),
+            /* @__PURE__ */ jsxDEV("li", { children: [
+              /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
+              " Ligne d'assistance prioritaire 7j/7 pour rassurer les parents"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxDEV(
+            "a",
+            {
+              href: waLink("Bonjour Wicka, je souhaite r\xE9server le Pack VIP avec Navette A\xE9roport."),
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "btn-secondary btn-full",
+              children: [
+                /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
+                " Choisir le Pack VIP et Navette"
+              ]
+            }
+          )
+        ] })
+      ] }),
+      promo.active ? /* @__PURE__ */ jsxDEV("p", { class: "promo-disclaimer promo-disclaimer-center promo-only", children: [
+        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-circle-info" }),
+        " Offre promotionnelle de lancement \xE0 dur\xE9e et places limit\xE9es. Les tarifs affich\xE9s sont susceptibles d'\xE9voluer \xE0 tout moment ; votre prix est bloqu\xE9 et garanti d\xE8s la signature du contrat."
+      ] }) : /* @__PURE__ */ jsxDEV("p", { class: "promo-disclaimer promo-disclaimer-center", children: [
+        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-circle-info" }),
+        " Les tarifs affich\xE9s sont susceptibles d'\xE9voluer \xE0 tout moment ; votre prix est bloqu\xE9 et garanti d\xE8s la signature du contrat."
       ] })
     ] }) })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("section", { class: "pricing-section", id: "packs", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "section-header", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "section-badge badge-promo", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-fire" }),
-        " Promo Lancement \u221250%"
-      ] }),
-      /* @__PURE__ */ jsxDEV("h2", { class: "section-title", children: "Choisissez la Formule Adapt\xE9e \xE0 Votre Projet" }),
-      /* @__PURE__ */ jsxDEV("p", { class: "section-subtitle", children: [
-        "Profitez de nos ",
-        /* @__PURE__ */ jsxDEV("strong", { children: "tarifs promotionnels de lancement" }),
-        " \u2014 parmi les plus accessibles du march\xE9 \u2014 payables localement dans votre devise (Wave, Orange Money, MTN, Virement)."
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "pricing-grid", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "pricing-card", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
-          /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", children: "Pour d\xE9marrer" }),
-          /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack Diagnostic et Orientation" }),
-          /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Analyse de dossier et s\xE9lection des universit\xE9s" }),
-          /* @__PURE__ */ jsxDEV("div", { class: "pack-price-box", children: [
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price-old", children: "590 DH" }),
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price", children: "290 DH" }),
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price-cut", children: "\u221251%" })
-          ] }),
-          /* @__PURE__ */ jsxDEV("span", { class: "pack-subprice", children: "\u{1F525} Prix PROMO de lancement \xB7 ~18 000 FCFA / 27 \u20AC \xB7 Sans engagement" })
-        ] }),
-        /* @__PURE__ */ jsxDEV("ul", { class: "pack-features-list", children: [
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Audit approfondi des relev\xE9s de notes de l'\xE9l\xE8ve"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Recommandation personnalis\xE9e de 3 universit\xE9s priv\xE9es"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Estimation pr\xE9cise des frais de scolarit\xE9 par ville"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Guide complet sur la vie et la s\xE9curit\xE9 au Maroc"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Entretien d'orientation de 30 min avec un expert"
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV(
-          "a",
-          {
-            href: waLink("Bonjour Wicka, je souhaite souscrire au Pack Diagnostic et Orientation (290 DH)."),
-            target: "_blank",
-            rel: "noopener noreferrer",
-            class: "btn-secondary btn-full",
-            children: [
-              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-              " ",
-              /* @__PURE__ */ jsxDEV("span", { children: "Souscrire au Diagnostic" })
-            ]
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "pricing-card featured", children: [
-        /* @__PURE__ */ jsxDEV("span", { class: "pricing-badge-popular", children: "\u2B50 Pack recommand\xE9" }),
-        /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
-          /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--rose-700); color: var(--white);", children: "Admission Garantie" }),
-          /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", style: "margin-top: 8px;", children: "Pack Admission R\xE9ussie" }),
-          /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Admission officielle dans l'universit\xE9 priv\xE9e cibl\xE9e" }),
-          /* @__PURE__ */ jsxDEV("div", { class: "pack-price-box", children: [
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price-old", children: "1 990 DH" }),
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price", children: "990 DH" }),
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price-cut", children: "\u221250%" })
-          ] }),
-          /* @__PURE__ */ jsxDEV("span", { class: "pack-subprice", children: "\u{1F525} Prix PROMO de lancement \xB7 ~60 000 FCFA / 92 \u20AC (Wave, Orange Money)" })
-        ] }),
-        /* @__PURE__ */ jsxDEV("ul", { class: "pack-features-list", children: [
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " ",
-            /* @__PURE__ */ jsxDEV("strong", { children: "Toutes les prestations du Pack Orientation" })
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " D\xE9p\xF4t prioritaire de 3 \xE0 5 candidatures universitaires"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " R\xE9daction et optimisation de CV et lettres de motivation"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Pr\xE9paration personnalis\xE9e aux oraux d'admission"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Suivi direct jusqu'\xE0 la Lettre d'Admission Officielle"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Assistance pour les demandes de bourses d'\xE9tudes"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Constitution du dossier de ",
-            /* @__PURE__ */ jsxDEV("strong", { children: "Carte Consulaire" }),
-            " aupr\xE8s de l'ambassade du Maroc"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " D\xE9livrance de l'attestation officielle pour le visa"
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV(
-          "a",
-          {
-            href: waLink("Bonjour Wicka, je souhaite souscrire au Pack Admission R\xE9ussie."),
-            target: "_blank",
-            rel: "noopener noreferrer",
-            class: "btn-primary btn-full",
-            children: [
-              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-              " Choisir le Pack Admission"
-            ]
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "pricing-card", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "pack-header", children: [
-          /* @__PURE__ */ jsxDEV("span", { class: "badge-rose-soft", style: "background-color: var(--gold-light); color: var(--gold);", children: "\u{1F697} Navette et S\xE9r\xE9nit\xE9 Totale" }),
-          /* @__PURE__ */ jsxDEV("h3", { class: "pack-name", children: "Pack VIP et Navette A\xE9roport" }),
-          /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.85rem; color: var(--slate-500);", children: "Prise en charge compl\xE8te d\xE8s l'atterrissage" }),
-          /* @__PURE__ */ jsxDEV("div", { class: "pack-price-box", children: [
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price-old", children: "3 890 DH" }),
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price", children: "1 990 DH" }),
-            /* @__PURE__ */ jsxDEV("span", { class: "pack-price-cut", children: "\u221249%" })
-          ] }),
-          /* @__PURE__ */ jsxDEV("span", { class: "pack-subprice", children: "\u{1F525} Prix PROMO de lancement \xB7 ~120 000 FCFA / 185 \u20AC (chauffeur inclus)" })
-        ] }),
-        /* @__PURE__ */ jsxDEV("ul", { class: "pack-features-list", children: [
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " ",
-            /* @__PURE__ */ jsxDEV("strong", { children: "Toutes les prestations du Pack Admission R\xE9ussie" })
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Montage et validation du dossier consulaire de Visa"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " ",
-            /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F3DB}\uFE0F Carte Consulaire :" }),
-            " accompagnement complet jusqu'au d\xE9p\xF4t \xE0 l'ambassade du Maroc"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " ",
-            /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F697} Navette A\xE9roport Priv\xE9e S\xE9curis\xE9e" }),
-            " : Chauffeur d\xE9di\xE9 \xE0 l'arriv\xE9e vers votre ville (Casablanca, Rabat, F\xE8s, Marrakech, Tanger, Ifrane)"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " ",
-            /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F4F1} Carte SIM 4G locale" }),
-            " avec forfait internet remise en main propre"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Accompagnement pour l'ouverture de compte bancaire"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " ",
-            /* @__PURE__ */ jsxDEV("strong", { children: "\u{1F4D1} Carte de S\xE9jour :" }),
-            " prise en charge int\xE9grale du dossier jusqu'\xE0 l'obtention du titre"
-          ] }),
-          /* @__PURE__ */ jsxDEV("li", { children: [
-            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }),
-            " Ligne d'assistance prioritaire 7j/7 pour rassurer les parents"
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxDEV(
-          "a",
-          {
-            href: waLink("Bonjour Wicka, je souhaite r\xE9server le Pack VIP avec Navette A\xE9roport."),
-            target: "_blank",
-            rel: "noopener noreferrer",
-            class: "btn-secondary btn-full",
-            children: [
-              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-              " Choisir le Pack VIP et Navette"
-            ]
-          }
-        )
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxDEV("p", { class: "promo-disclaimer promo-disclaimer-center", children: [
-      /* @__PURE__ */ jsxDEV("i", { class: "fas fa-circle-info" }),
-      " Offre promotionnelle de lancement \xE0 dur\xE9e et places limit\xE9es. Les tarifs affich\xE9s sont susceptibles d'\xE9voluer \xE0 tout moment ; votre prix est bloqu\xE9 et garanti d\xE8s la signature du contrat."
-    ] })
-  ] }) })
-] });
+  ] });
+};
 
 // src/pages/Contact.tsx
 var contactMeta = {
@@ -4719,7 +4847,7 @@ function organizationJsonLd(origin) {
       telephone: `+${SITE.phoneRaw}`,
       availableLanguage: "French"
     },
-    sameAs: [`https://wa.me/${SITE.phoneRaw}`]
+    sameAs: [`https://wa.me/${SITE.phoneRaw}`, TIKTOK.profileUrl]
   };
 }
 
@@ -4789,61 +4917,64 @@ var Brand = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
     /* @__PURE__ */ jsxDEV("span", { class: "brand-subtitle", children: SITE.tagline })
   ] })
 ] });
-var Header = ({ path }) => /* @__PURE__ */ jsxDEV(Fragment, { children: [
-  /* @__PURE__ */ jsxDEV("div", { class: "top-notice-bar", children: /* @__PURE__ */ jsxDEV("div", { class: "container notice-content", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "notice-left", children: [
-      /* @__PURE__ */ jsxDEV("span", { class: "notice-tag", children: SITE.promo.tag }),
-      /* @__PURE__ */ jsxDEV("span", { children: SITE.promo.text })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "notice-right", children: [
-      /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "notice-contact", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose-300" }),
-        " WhatsApp"
+var Header = ({ path }) => {
+  const promo = getPromo();
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    /* @__PURE__ */ jsxDEV("div", { class: "top-notice-bar", children: /* @__PURE__ */ jsxDEV("div", { class: "container notice-content", children: [
+      promo.active && /* @__PURE__ */ jsxDEV("div", { class: "notice-left promo-only", "data-promo-deadline": promo.deadline, children: [
+        /* @__PURE__ */ jsxDEV("span", { class: "notice-tag", children: SITE.promo.tag }),
+        /* @__PURE__ */ jsxDEV("span", { children: promo.text })
       ] }),
-      /* @__PURE__ */ jsxDEV("a", { href: `mailto:${SITE.email}`, class: "notice-contact", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "far fa-envelope" }),
+      /* @__PURE__ */ jsxDEV("div", { class: "notice-right", children: [
+        /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "notice-contact", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose-300" }),
+          " WhatsApp"
+        ] }),
+        /* @__PURE__ */ jsxDEV("a", { href: `mailto:${SITE.email}`, class: "notice-contact", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "far fa-envelope" }),
+          " ",
+          SITE.email
+        ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxDEV("header", { class: "site-header", id: "siteHeader", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("nav", { class: "navbar", "aria-label": "Navigation principale", children: [
+      /* @__PURE__ */ jsxDEV("a", { href: "/", class: "brand-logo", children: /* @__PURE__ */ jsxDEV(Brand, {}) }),
+      /* @__PURE__ */ jsxDEV("ul", { class: "nav-links", children: NAV_LINKS.map((link2) => /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: link2.href, class: link2.href === path ? "nav-link active" : "nav-link", children: link2.label }) })) }),
+      /* @__PURE__ */ jsxDEV("div", { class: "nav-actions", children: [
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "nav-callback-btn", id: "triggerCallbackModal", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-phone-alt" }),
+          /* @__PURE__ */ jsxDEV("span", { children: "\xCAtre Rappel\xE9" })
+        ] }),
+        /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary btn-sm", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
+          /* @__PURE__ */ jsxDEV("span", { children: "Postuler" })
+        ] }),
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "mobile-menu-toggle", id: "mobileMenuToggle", "aria-label": "Ouvrir le menu", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-bars" }) })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ jsxDEV("div", { class: "mobile-menu-drawer", id: "mobileMenu", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "drawer-header", children: [
+        /* @__PURE__ */ jsxDEV("div", { class: "brand-logo", children: /* @__PURE__ */ jsxDEV(Brand, {}) }),
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "drawer-close-btn", id: "mobileMenuClose", "aria-label": "Fermer le menu", children: "\xD7" })
+      ] }),
+      /* @__PURE__ */ jsxDEV("div", { class: "mobile-nav-links", children: NAV_LINKS.map((link2) => /* @__PURE__ */ jsxDEV("a", { href: link2.href, class: "mobile-nav-link", children: [
+        link2.label,
         " ",
-        SITE.email
+        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-chevron-right" })
+      ] })) }),
+      /* @__PURE__ */ jsxDEV("div", { style: "margin-top: auto; display: flex; flex-direction: column; gap: 12px;", children: [
+        /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary btn-full mobile-nav-link", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
+          " D\xE9marrer ma Candidature"
+        ] }),
+        /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-secondary btn-full", children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
+          " WhatsApp"
+        ] })
       ] })
     ] })
-  ] }) }),
-  /* @__PURE__ */ jsxDEV("header", { class: "site-header", id: "siteHeader", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: /* @__PURE__ */ jsxDEV("nav", { class: "navbar", "aria-label": "Navigation principale", children: [
-    /* @__PURE__ */ jsxDEV("a", { href: "/", class: "brand-logo", children: /* @__PURE__ */ jsxDEV(Brand, {}) }),
-    /* @__PURE__ */ jsxDEV("ul", { class: "nav-links", children: NAV_LINKS.map((link2) => /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: link2.href, class: link2.href === path ? "nav-link active" : "nav-link", children: link2.label }) })) }),
-    /* @__PURE__ */ jsxDEV("div", { class: "nav-actions", children: [
-      /* @__PURE__ */ jsxDEV("button", { type: "button", class: "nav-callback-btn", id: "triggerCallbackModal", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-phone-alt" }),
-        /* @__PURE__ */ jsxDEV("span", { children: "\xCAtre Rappel\xE9" })
-      ] }),
-      /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary btn-sm", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
-        /* @__PURE__ */ jsxDEV("span", { children: "Postuler" })
-      ] }),
-      /* @__PURE__ */ jsxDEV("button", { type: "button", class: "mobile-menu-toggle", id: "mobileMenuToggle", "aria-label": "Ouvrir le menu", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-bars" }) })
-    ] })
-  ] }) }) }),
-  /* @__PURE__ */ jsxDEV("div", { class: "mobile-menu-drawer", id: "mobileMenu", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "drawer-header", children: [
-      /* @__PURE__ */ jsxDEV("div", { class: "brand-logo", children: /* @__PURE__ */ jsxDEV(Brand, {}) }),
-      /* @__PURE__ */ jsxDEV("button", { type: "button", class: "drawer-close-btn", id: "mobileMenuClose", "aria-label": "Fermer le menu", children: "\xD7" })
-    ] }),
-    /* @__PURE__ */ jsxDEV("div", { class: "mobile-nav-links", children: NAV_LINKS.map((link2) => /* @__PURE__ */ jsxDEV("a", { href: link2.href, class: "mobile-nav-link", children: [
-      link2.label,
-      " ",
-      /* @__PURE__ */ jsxDEV("i", { class: "fas fa-chevron-right" })
-    ] })) }),
-    /* @__PURE__ */ jsxDEV("div", { style: "margin-top: auto; display: flex; flex-direction: column; gap: 12px;", children: [
-      /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary btn-full mobile-nav-link", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
-        " D\xE9marrer ma Candidature"
-      ] }),
-      /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-secondary btn-full", children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-        " WhatsApp"
-      ] })
-    ] })
-  ] })
-] });
+  ] });
+};
 
 // src/layout/Footer.tsx
 var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", children: /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
@@ -4860,20 +4991,7 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
         ] })
       ] }),
       /* @__PURE__ */ jsxDEV("p", { children: "Cabinet d'orientation, d'admission en grandes \xE9coles priv\xE9es et de navette VIP pour les \xE9tudiants internationaux au Maroc." }),
-      /* @__PURE__ */ jsxDEV("div", { class: "footer-social-links", children: [
-        SOCIAL_LINKS.map((s) => /* @__PURE__ */ jsxDEV("a", { href: s.href, class: "social-icon-btn", "aria-label": s.label, children: /* @__PURE__ */ jsxDEV("i", { class: s.icon }) })),
-        /* @__PURE__ */ jsxDEV(
-          "a",
-          {
-            href: waLink(),
-            target: "_blank",
-            rel: "noopener noreferrer",
-            class: "social-icon-btn",
-            "aria-label": "WhatsApp",
-            children: /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" })
-          }
-        )
-      ] })
+      /* @__PURE__ */ jsxDEV("div", { class: "footer-social-links", children: SOCIAL_LINKS.map((s) => /* @__PURE__ */ jsxDEV("a", { href: s.href, target: "_blank", rel: "noopener noreferrer", class: "social-icon-btn", "aria-label": s.label, children: /* @__PURE__ */ jsxDEV("i", { class: s.icon }) })) })
     ] }),
     /* @__PURE__ */ jsxDEV("div", { children: [
       /* @__PURE__ */ jsxDEV("h4", { class: "footer-col-title", children: "Navigation" }),
@@ -4908,7 +5026,7 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
       ] })
     ] })
   ] }),
-  /* @__PURE__ */ jsxDEV("div", { class: "footer-bottom-bar", children: /* @__PURE__ */ jsxDEV("span", { children: [
+  /* @__PURE__ */ jsxDEV("div", { class: "footer-bottom-bar", children: /* @__PURE__ */ jsxDEV("span", { style: "color: var(--rose-300);", children: [
     "\xA9 ",
     SITE.copyrightYear,
     " ",
@@ -4918,93 +5036,97 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { class: "site-footer", chil
 ] }) });
 
 // src/layout/FloatingActions.tsx
-var FloatingActions = () => /* @__PURE__ */ jsxDEV(Fragment, { children: [
-  /* @__PURE__ */ jsxDEV(
-    "a",
-    {
-      href: waLink("Bonjour Wicka Assistance, je souhaite des informations pour \xE9tudier au Maroc."),
-      target: "_blank",
-      rel: "noopener noreferrer",
-      class: "floating-whatsapp-btn",
-      "aria-label": "Contacter sur WhatsApp",
-      children: [
-        /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-        /* @__PURE__ */ jsxDEV("span", { class: "wa-badge-online", title: "Conseiller WhatsApp en ligne" })
-      ]
-    }
-  ),
-  /* @__PURE__ */ jsxDEV("div", { class: "mobile-sticky-cta", children: [
-    /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "msc-btn msc-primary", children: [
-      /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
-      " ",
-      SITE.promo.stickyLabel
-    ] }),
+var FloatingActions = () => {
+  const promo = getPromo();
+  const stickyFull = "Postuler maintenant";
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
     /* @__PURE__ */ jsxDEV(
       "a",
       {
-        href: waLink("Bonjour Wicka, je souhaite des infos pour \xE9tudier au Maroc."),
+        href: waLink("Bonjour Wicka Assistance, je souhaite des informations pour \xE9tudier au Maroc."),
         target: "_blank",
         rel: "noopener noreferrer",
-        class: "msc-btn msc-wa",
+        class: "floating-whatsapp-btn",
+        "aria-label": "Contacter sur WhatsApp",
         children: [
           /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-          " WhatsApp"
+          /* @__PURE__ */ jsxDEV("span", { class: "wa-badge-online", title: "Conseiller WhatsApp en ligne" })
         ]
       }
-    )
-  ] }),
-  /* @__PURE__ */ jsxDEV("div", { class: "modal-wrapper", id: "callbackModal", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "modal-backdrop" }),
-    /* @__PURE__ */ jsxDEV("div", { class: "modal-card", children: [
-      /* @__PURE__ */ jsxDEV("button", { type: "button", class: "modal-close-btn", "aria-label": "Fermer", children: "\xD7" }),
-      /* @__PURE__ */ jsxDEV("div", { class: "modal-icon-success", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-phone-volume" }) }),
-      /* @__PURE__ */ jsxDEV("h3", { style: "font-size: 1.4rem; margin-bottom: 8px;", children: "\xCAtre Rappel\xE9 par un Conseiller" }),
-      /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.9rem; color: var(--slate-600); margin-bottom: 24px;", children: "Indiquez votre num\xE9ro WhatsApp pour qu'un conseiller d'orientation vous contacte sous 30 minutes." }),
-      /* @__PURE__ */ jsxDEV("form", { id: "callbackQuickForm", children: [
-        /* @__PURE__ */ jsxDEV("div", { class: "form-group", style: "text-align: left;", children: [
-          /* @__PURE__ */ jsxDEV("label", { class: "form-label", style: "font-size: 0.85rem;", children: "Votre Num\xE9ro WhatsApp avec indicatif :" }),
-          /* @__PURE__ */ jsxDEV("input", { type: "tel", class: "form-input", placeholder: "Ex: +221 77... ou +225 07...", required: true })
+    ),
+    /* @__PURE__ */ jsxDEV("div", { class: "mobile-sticky-cta", children: [
+      /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "msc-btn msc-primary", children: [
+        /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
+        " ",
+        /* @__PURE__ */ jsxDEV("span", { "data-full-text": stickyFull, children: promo.active ? SITE.promo.stickyLabel : stickyFull })
+      ] }),
+      /* @__PURE__ */ jsxDEV(
+        "a",
+        {
+          href: waLink("Bonjour Wicka, je souhaite des infos pour \xE9tudier au Maroc."),
+          target: "_blank",
+          rel: "noopener noreferrer",
+          class: "msc-btn msc-wa",
+          children: [
+            /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+            " WhatsApp"
+          ]
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxDEV("div", { class: "modal-wrapper", id: "callbackModal", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "modal-backdrop" }),
+      /* @__PURE__ */ jsxDEV("div", { class: "modal-card", children: [
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "modal-close-btn", "aria-label": "Fermer", children: "\xD7" }),
+        /* @__PURE__ */ jsxDEV("div", { class: "modal-icon-success", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-phone-volume" }) }),
+        /* @__PURE__ */ jsxDEV("h3", { style: "font-size: 1.4rem; margin-bottom: 8px;", children: "\xCAtre Rappel\xE9 par un Conseiller" }),
+        /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.9rem; color: var(--slate-600); margin-bottom: 24px;", children: "Indiquez votre num\xE9ro WhatsApp pour qu'un conseiller d'orientation vous contacte sous 30 minutes." }),
+        /* @__PURE__ */ jsxDEV("form", { id: "callbackQuickForm", children: [
+          /* @__PURE__ */ jsxDEV("div", { class: "form-group", style: "text-align: left;", children: [
+            /* @__PURE__ */ jsxDEV("label", { class: "form-label", style: "font-size: 0.85rem;", children: "Votre Num\xE9ro WhatsApp avec indicatif :" }),
+            /* @__PURE__ */ jsxDEV("input", { type: "tel", class: "form-input", placeholder: "Ex: +221 77... ou +225 07...", required: true })
+          ] }),
+          /* @__PURE__ */ jsxDEV("button", { type: "submit", class: "btn-primary btn-full", children: [
+            /* @__PURE__ */ jsxDEV("i", { class: "fas fa-headset" }),
+            " Demander \xE0 \xEAtre Rappel\xE9"
+          ] })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxDEV("div", { class: "modal-wrapper", id: "successModal", children: [
+      /* @__PURE__ */ jsxDEV("div", { class: "modal-backdrop" }),
+      /* @__PURE__ */ jsxDEV("div", { class: "modal-card", style: "max-width: 580px;", children: [
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "modal-close-btn", "aria-label": "Fermer", children: "\xD7" }),
+        /* @__PURE__ */ jsxDEV("div", { class: "modal-icon-success", style: "background-color: var(--success-bg); color: var(--success);", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }) }),
+        /* @__PURE__ */ jsxDEV("h3", { style: "font-size: 1.5rem; margin-bottom: 8px;", children: "Candidature Enregistr\xE9e avec Succ\xE8s !" }),
+        /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.9rem; color: var(--slate-600);", children: [
+          "F\xE9licitations ! Votre dossier a \xE9t\xE9 transmis aux conseillers de ",
+          SITE.name,
+          "."
         ] }),
-        /* @__PURE__ */ jsxDEV("button", { type: "submit", class: "btn-primary btn-full", children: [
-          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-headset" }),
-          " Demander \xE0 \xEAtre Rappel\xE9"
+        /* @__PURE__ */ jsxDEV("div", { class: "modal-student-summary", id: "modalStudentSummary" }),
+        /* @__PURE__ */ jsxDEV("div", { style: "display: flex; flex-direction: column; gap: 12px;", children: [
+          /* @__PURE__ */ jsxDEV(
+            "a",
+            {
+              id: "modalWhatsappRedirect",
+              href: "#",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "btn-primary btn-full",
+              style: "background: #25D366; border-color: #25D366;",
+              children: [
+                /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
+                /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxDEV("button", { type: "button", class: "btn-secondary btn-full modal-close-btn-action", children: /* @__PURE__ */ jsxDEV("span", { children: "Fermer cette fen\xEAtre" }) })
         ] })
       ] })
     ] })
-  ] }),
-  /* @__PURE__ */ jsxDEV("div", { class: "modal-wrapper", id: "successModal", children: [
-    /* @__PURE__ */ jsxDEV("div", { class: "modal-backdrop" }),
-    /* @__PURE__ */ jsxDEV("div", { class: "modal-card", style: "max-width: 580px;", children: [
-      /* @__PURE__ */ jsxDEV("button", { type: "button", class: "modal-close-btn", "aria-label": "Fermer", children: "\xD7" }),
-      /* @__PURE__ */ jsxDEV("div", { class: "modal-icon-success", style: "background-color: var(--success-bg); color: var(--success);", children: /* @__PURE__ */ jsxDEV("i", { class: "fas fa-check-circle" }) }),
-      /* @__PURE__ */ jsxDEV("h3", { style: "font-size: 1.5rem; margin-bottom: 8px;", children: "Candidature Enregistr\xE9e avec Succ\xE8s !" }),
-      /* @__PURE__ */ jsxDEV("p", { style: "font-size: 0.9rem; color: var(--slate-600);", children: [
-        "F\xE9licitations ! Votre dossier a \xE9t\xE9 transmis aux conseillers de ",
-        SITE.name,
-        "."
-      ] }),
-      /* @__PURE__ */ jsxDEV("div", { class: "modal-student-summary", id: "modalStudentSummary" }),
-      /* @__PURE__ */ jsxDEV("div", { style: "display: flex; flex-direction: column; gap: 12px;", children: [
-        /* @__PURE__ */ jsxDEV(
-          "a",
-          {
-            id: "modalWhatsappRedirect",
-            href: "#",
-            target: "_blank",
-            rel: "noopener noreferrer",
-            class: "btn-primary btn-full",
-            style: "background: #25D366; border-color: #25D366;",
-            children: [
-              /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp" }),
-              /* @__PURE__ */ jsxDEV("span", { children: "WhatsApp" })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "btn-secondary btn-full modal-close-btn-action", children: /* @__PURE__ */ jsxDEV("span", { children: "Fermer cette fen\xEAtre" }) })
-      ] })
-    ] })
-  ] })
-] });
+  ] });
+};
 
 // src/layout/CookieBanner.tsx
 var CookieBanner = () => /* @__PURE__ */ jsxDEV(
