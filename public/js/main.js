@@ -858,28 +858,27 @@ function showSubmissionSuccessModal(data) {
 
 /* ============================================================
    7. FAQ ACCORDÉON
+   Toutes les questions sont FERMÉES au chargement de la page.
+   Une seule question peut être ouverte à la fois.
    ============================================================ */
 function initFaqAccordion() {
   const container = document.getElementById('faqAccordionContainer');
 
   if (!container || !window.WICKA_DATA) return;
 
-  const renderFaqs = (filter = '') => {
-    const filteredFaqs = window.WICKA_DATA.faqs;
-    container.innerHTML = filteredFaqs.map((faq, index) => {
-      const isOpen = index === 0;
-      return `
-        <div class="faq-item ${isOpen ? 'active' : ''}">
-          <button class="faq-question-btn" type="button">
+  const renderFaqs = () => {
+    const faqs = window.WICKA_DATA.faqs;
+    container.innerHTML = faqs.map((faq) => `
+        <div class="faq-item">
+          <button class="faq-question-btn" type="button" aria-expanded="false">
             <span class="faq-q-text">${escapeHtml(faq.q)}</span>
             <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
           </button>
-          <div class="faq-answer-panel" style="${isOpen ? 'max-height: 400px;' : ''}">
+          <div class="faq-answer-panel">
             <p>${escapeHtml(faq.a)}</p>
           </div>
         </div>
-      `;
-    }).join('');
+      `).join('');
 
     const items = container.querySelectorAll('.faq-item');
     items.forEach(item => {
@@ -890,19 +889,22 @@ function initFaqAccordion() {
         const isActive = item.classList.contains('active');
         items.forEach(other => {
           other.classList.remove('active');
+          const otherBtn = other.querySelector('.faq-question-btn');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
           const otherPanel = other.querySelector('.faq-answer-panel');
           if (otherPanel) otherPanel.style.maxHeight = null;
         });
 
         if (!isActive) {
           item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
           panel.style.maxHeight = panel.scrollHeight + 'px';
         }
       });
     });
   };
 
-renderFaqs();
+  renderFaqs();
 }
 
 /* ============================================================
