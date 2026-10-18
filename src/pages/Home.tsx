@@ -11,72 +11,75 @@ export const homeMeta = {
 const advantages: { icon: string; title: string; text: string }[] = [
   {
     icon: "fas fa-shield-alt",
-    title: "Sécurité et Stabilité Totale",
-    text: "Le Maroc bénéficie d'une stabilité institutionnelle et d'une sécurité publique reconnues internationalement. Les étudiants y vivent et se déplacent en toute tranquillité, de jour comme de nuit."
+    title: "Un cadre de vie sûr et stable",
+    text: "Le Maroc est l'une des destinations les plus stables d'Afrique pour les étudiants internationaux, avec une vie étudiante animée dans des villes modernes."
   },
   {
     icon: "fas fa-graduation-cap",
-    title: "Diplômes Reconnus et Doubles Diplômes",
-    text: "Système LMD (Licence, Master, Doctorat). Les grandes écoles partenaires délivrent des diplômes reconnus par l'État marocain et des doubles diplômes avec la France, l'Europe et les USA."
+    title: "Des diplômes reconnus",
+    text: "Système LMD (Licence, Master, Doctorat), établissements reconnus par l'État et, dans certaines écoles, des doubles diplômes avec des universités européennes ou nord-américaines."
   },
   {
     icon: "fas fa-train",
-    title: "Infrastructures Modernes et TGV Al Boraq",
-    text: "Réseaux de transports ultra modernes : TGV reliant Tanger, Rabat et Casablanca à 320 km/h, lignes de tramways urbains modernes et aéroports internationaux reliés à toute l'Afrique."
+    title: "Des villes bien connectées",
+    // À VÉRIFIER avant publication : durée du trajet TGV Al Boraq Tanger–Casablanca (environ 2 h 10)
+    text: "Tramways, TGV Al Boraq (environ 2 h 10 entre Tanger et Casablanca) et aéroports internationaux reliés à de nombreuses capitales africaines."
   },
   {
     icon: "fas fa-handshake",
-    title: "Hospitalité et Climat Ensoleillé",
-    text: "Une culture d'accueil chaleureuse pour plus de 25 000 étudiants internationaux africains. Aucune rupture linguistique pour les francophones et un climat ensoleillé 300 jours par an."
+    title: "Un accueil chaleureux, sans barrière de langue",
+    // À VÉRIFIER avant publication : nombre d'étudiants internationaux (25 000 à 30 000)
+    text: "Enseignement en français et communauté étudiante africaine importante (environ 25 000 à 30 000 étudiants internationaux), dans un climat doux et ensoleillé."
   },
   {
     icon: "fas fa-coins",
-    title: "Budget Maîtrisé et 3x Moins Cher",
-    text: "Une qualité d'enseignement équivalente aux meilleures universités européennes pour un coût global de scolarité et de vie 3 à 4 fois inférieur à la France, au Canada ou aux USA."
+    title: "Un niveau de vie agréable, à moindre coût",
+    // À VÉRIFIER avant publication : scolarité (à partir de 30 000 MAD/an) et budget de vie (3 500 à 6 000 MAD/mois)
+    text: "Scolarité en école privée à partir d'environ 30 000 MAD par an et budget de vie d'environ 3 500 à 6 000 MAD par mois, logement compris. C'est nettement moins cher que la France, le Canada ou les États-Unis."
   },
   {
     icon: "fas fa-briefcase",
-    title: "Hub Économique et Stages Garantis",
-    text: "Véritable carrefour économique abritant les sièges régionaux de multinationales en finance (Casablanca Finance City), aéronautique, intelligence artificielle et énergies renouvelables."
+    title: "Un tremplin professionnel",
+    text: "Casablanca Finance City, aéronautique, énergies renouvelables, numérique : des secteurs qui recrutent, avec des stages proposés par de nombreuses écoles."
   }
 ];
 
 /**
- * Cartes « Explorez nos Services ».
+ * Cartes « Lancez votre projet en 3 étapes ».
  * Fonction (et non constante) car le texte de la carte Tarifs dépend de l'état de la promo
  * (voir getPromo() dans src/config/site.ts).
  */
 const buildExplore = (
-  promoActive: boolean
+  promoActive: boolean,
+  rentree: string
 ): { href: string; icon: string; title: string; text: Child; link: string; accent?: boolean }[] => [
   {
     href: "/universites",
     icon: "fas fa-university",
-    title: "Universités Privées",
-    text: "15 grandes écoles reconnues par l'État, avec photos, filières et mini-descriptions.",
-    link: "Voir les universités"
+    title: "Choisir mon école",
+    text: "Découvrez les grandes écoles privées reconnues par l'État, leurs filières et leurs villes.",
+    link: "Voir les universités au Maroc"
   },
   {
     href: "/tarifs",
     icon: "fas fa-tags",
-    title: "Tarifs, Simulateur et Packs",
+    title: "Estimer mon budget",
     text: promoActive ? (
       <>
-        Tarifs par pays en <strong>promo −50%</strong>, simulateur de budget et formules d'assistance.
+        Tarifs par pays, simulateur de budget et formules d'accompagnement. Offre de lancement{" "}
+        <strong>−50 %</strong> pour la rentrée {rentree}.
       </>
     ) : (
-      "Tarifs par pays, simulateur de budget et formules d'assistance."
+      "Tarifs par pays, simulateur de budget et formules d'accompagnement."
     ),
     link: "Voir les tarifs"
   },
   {
     href: "/candidature",
     icon: "fas fa-paper-plane",
-    title: "Déposer ma Candidature",
-    text: promoActive
-      ? "Formulaire en 4 étapes. Réponse d'un conseiller sous 24h et tarif promo bloqué."
-      : "Formulaire en 4 étapes. Réponse d'un conseiller sous 24h.",
-    link: "Postuler maintenant",
+    title: "Déposer ma candidature",
+    text: "Un formulaire en 4 étapes, puis un conseiller vous répond sous 72 h maximum.",
+    link: "Déposer ma candidature",
     accent: true
   }
 ];
@@ -84,49 +87,46 @@ const buildExplore = (
 const steps: { n: string; title: string; text: Child; tagIcon: string; tag: string; tagClass?: string }[] = [
   {
     n: "01",
-    title: "Bilan Scolaire Personnalisé",
-    text: "Étude personnalisée des relevés de notes et sélection ciblée des meilleures universités privées (UEMF, ESTEM, UIASS, EMSI...).",
+    title: "Bilan scolaire et choix des écoles",
+    text: "Nous étudions vos relevés de notes et vous orientons vers les écoles privées reconnues par l'État qui correspondent à votre profil et à votre budget.",
     tagIcon: "far fa-clock",
-    tag: "24h - 48h"
+    tag: "24 à 48 h"
   },
   {
     n: "02",
-    title: "Dépôt et Suivi des Dossiers",
-    text: "Constitution optimisée du dossier, lettres de motivation percutantes et soumission directe auprès des directions des admissions.",
+    title: "Inscription et suivi du dossier",
+    text: "Nous constituons votre dossier complet, rédigeons avec vous votre lettre de motivation, réalisons l'inscription et suivons la réponse de l'école.",
     tagIcon: "far fa-clock",
     tag: "3 à 7 jours"
   },
   {
     n: "03",
-    title: "Lettre d'Admission Officielle",
-    text: "Délivrance de l'attestation officielle d'admission validée par le Ministère de l'Enseignement Supérieur du Maroc.",
+    title: "Lettre d'admission",
+    text: "Une fois l'admission confirmée, l'école ou l'université vous délivre votre lettre d'admission, document indispensable pour la suite.",
     tagIcon: "fas fa-check-circle",
-    tag: "Suivi personnalisé",
+    tag: "Selon l'école",
     tagClass: "text-rose"
   },
   {
     n: "04",
-    title: "Visa, Carte Consulaire et Ambassade",
-    text: (
-      <>
-        Constitution du dossier de <strong>carte consulaire</strong> et accompagnement jusqu'au dépôt à l'
-        <strong>ambassade / consulat du Maroc</strong> (prise en charge financière, casier, attestation).
-      </>
-    ),
+    title: "Visa et préparation du départ",
+    // À VÉRIFIER avant publication : le visa est-il requis pour tous les pays ciblés ?
+    text: "Nous vous guidons pour réunir les documents demandés (attestation de prise en charge financière, extrait de casier judiciaire, justificatifs) et préparer votre voyage.",
     tagIcon: "fas fa-passport",
-    tag: "Suivi consulaire"
+    tag: "Selon votre pays"
   },
   {
     n: "05",
-    title: "Navette, Installation et Carte de Séjour",
+    title: "Arrivée, installation et démarches au Maroc",
     text: (
       <>
-        Accueil avec chauffeur privé à l'atterrissage, transfert vers la ville d'accueil, carte SIM 4G et{" "}
-        <strong>prise en charge du dossier de Carte de Séjour jusqu'à son obtention</strong>.
+        Un chauffeur vous accueille à l'aéroport et vous conduit dans votre ville d'accueil, avec une carte SIM 4G. Nous
+        vous accompagnons pour la <strong>carte consulaire</strong> auprès de l'ambassade de votre pays, puis nous
+        suivons votre dossier de <strong>carte de séjour</strong>.
       </>
     ),
     tagIcon: "fas fa-car-side",
-    tag: "Sécurité VIP",
+    tag: "Dès l'atterrissage",
     tagClass: "text-success"
   }
 ];
@@ -134,30 +134,45 @@ const steps: { n: string; title: string; text: Child; tagIcon: string; tag: stri
 const values: { icon: string; title: string; text: string }[] = [
   {
     icon: "fas fa-user-check",
-    title: "Contact Direct Parents",
-    text: "Points d'étape réguliers par appel ou visio WhatsApp avec les parents."
+    title: "Un conseiller dédié",
+    text: "Points réguliers par appel ou visio WhatsApp avec l'étudiant et ses parents."
   },
   {
-    icon: "fas fa-certificate",
-    title: "Partenariats Privés Agréés",
-    text: "Accès direct aux jurys d'admission (UEMF, ESTEM, UIASS, EMSI, UIR...)."
+    icon: "fas fa-clipboard-check",
+    title: "Inscription prise en charge",
+    text: "Nous réalisons les inscriptions et suivons votre dossier jusqu'à la réponse de l'école."
   },
   {
     icon: "fas fa-file-contract",
-    title: "Contrat et Reçu Officiel",
-    text: "Paiements locaux sécurisés avec facture et reçu officiel immédiat."
+    title: "Contrat et reçu officiel",
+    text: "Facture et reçu remis immédiatement à chaque paiement."
   },
   {
     icon: "fas fa-car",
-    title: "Prise en Charge Réelle",
-    text: "Un chauffeur et un conseiller dédiés dès la descente de l'avion."
+    title: "Accueil dès l'atterrissage",
+    text: "Un chauffeur vous attend à l'aéroport et un conseiller reste joignable."
   }
 ];
 
 const successPhotos = [
-  { src: "/assets/uni/student-grad.jpg", alt: "Étudiante diplômée au Maroc", icon: "fas fa-graduation-cap", caption: "Diplômée et fière" },
-  { src: "/assets/uni/student-grad-2.jpg", alt: "Jeune diplômé au Maroc", icon: "fas fa-award", caption: "Master en poche" },
-  { src: "/assets/uni/student-portrait.jpg", alt: "Étudiant sur son campus", icon: "fas fa-user-graduate", caption: "Sur son campus" }
+  {
+    src: "/assets/uni/student-grad.jpg",
+    alt: "Étudiante diplômée lors d'une remise de diplôme au Maroc",
+    icon: "fas fa-graduation-cap",
+    caption: "Remise de diplôme"
+  },
+  {
+    src: "/assets/uni/student-grad-2.jpg",
+    alt: "Jeune diplômé d'un master au Maroc",
+    icon: "fas fa-award",
+    caption: "Un master pour lancer sa carrière"
+  },
+  {
+    src: "/assets/uni/student-portrait.jpg",
+    alt: "Étudiant sur un campus au Maroc",
+    icon: "fas fa-user-graduate",
+    caption: "La vie sur un campus marocain"
+  }
 ];
 
 export const Home = () => {
@@ -168,7 +183,7 @@ export const Home = () => {
    * Tout élément promo ci-dessous est conditionné par `promo.active` et porte la classe `promo-only`.
    */
   const promo = getPromo();
-  const explore = buildExplore(promo.active);
+  const explore = buildExplore(promo.active, promo.rentree);
 
   return (
     <>
@@ -182,29 +197,28 @@ export const Home = () => {
             <div class="hero-text-content">
               <div class="hero-badge-pill">
                 <span class="pulse-dot"></span>
-                <span>Admissions Garanties dans les Meilleures Universités Privées du Maroc</span>
+                <span>Admission, visa et accueil au Maroc</span>
               </div>
 
               <h1 class="hero-headline">
-                Sécurisez les Études de Votre Enfant dans les <span class="text-gradient-rose">Grandes Écoles Privées</span>{" "}
-                du Maroc.
+                <span class="text-gradient-rose">Étudier au Maroc</span> : on s'occupe de votre admission, de votre visa et
+                de votre arrivée.
               </h1>
 
               <p class="hero-description">
-                Wicka Assistance garantit l'admission de votre enfant dans des institutions prestigieuses reconnues par
-                l'État (<strong>UEMF Euromed Fès, ESTEM Casa, UIASS, UM6P, UIR, EMSI</strong>), gère l'intégralité du
-                dossier consulaire de visa et assure le{" "}
-                <strong>transport sécurisé avec chauffeur privé dès la sortie de l'aéroport</strong>.
+                Nous constituons votre dossier d'admission dans les grandes écoles privées reconnues par l'État (
+                <strong>UEMF, ESTEM, UIR, EMSI, UM6P…</strong>), vous accompagnons pour la carte consulaire et le visa,
+                puis vous accueillons à l'aéroport avec un chauffeur dédié.
               </p>
 
               <div class="hero-cta-group">
                 <a href="/candidature" class="btn-primary">
                   <i class="fas fa-graduation-cap"></i>
-                  <span>Démarrer la Candidature {promo.rentree}</span>
+                  <span>Démarrer ma candidature {promo.rentree}</span>
                 </a>
                 <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn-secondary">
                   <i class="fab fa-whatsapp text-rose"></i>
-                  <span>WhatsApp</span>
+                  <span>Parler à un conseiller</span>
                 </a>
               </div>
 
@@ -216,8 +230,8 @@ export const Home = () => {
                   <img src="/assets/images/student-gabon.jpg" alt="Étudiante Gabon" class="trust-avatar" />
                 </div>
                 <div class="trust-text">
-                  <strong>Accompagnement dédié aux étudiants</strong>
-                  <span>Plébiscité par les parents d'élèves pour son sérieux et sa transparence</span>
+                  <strong>Accompagnement de A à Z</strong>
+                  <span>de la candidature à la carte de séjour</span>
                 </div>
               </div>
             </div>
@@ -264,19 +278,20 @@ export const Home = () => {
                   class="section-badge"
                   style="background-color: rgba(255, 255, 255, 0.2); color: var(--white); margin-bottom: 12px;"
                 >
-                  <i class="fas fa-user-shield"></i> Espace Confiance Parents
+                  <i class="fas fa-user-shield"></i> Pour les parents
                 </span>
-                <h3>Chers Parents : Pourquoi le Maroc est le Meilleur Choix d'Avenir pour Votre Enfant</h3>
+                <h3>Vous confiez votre enfant à quelqu'un : voici comment nous veillons sur lui au Maroc</h3>
                 <p>
-                  Envoyer son enfant étudier à l'étranger est une décision majeure. Le Royaume du Maroc s'impose
-                  aujourd'hui comme le <strong>1er pôle universitaire d'excellence en Afrique</strong> : une stabilité
-                  politique exemplaire, une sécurité totale, un climat bienveillant et des campus modernes accrédités
-                  aux standards internationaux.
+                  Envoyer son enfant étudier à l'étranger est une grande décision. Le Maroc est une destination sûre et
+                  accessible pour les étudiants africains francophones : même langue d'enseignement, niveau de vie
+                  agréable, coût des études et de la vie bien inférieur à celui de l'Europe, établissements reconnus par
+                  l'État. Chez Wicka Assistance, un conseiller reste votre interlocuteur de l'admission jusqu'à
+                  l'obtention de la carte de séjour, avec des points réguliers par appel ou visio WhatsApp.
                 </p>
               </div>
               <div class="parents-contact-cta">
-                <h4>Une Question pour Votre Enfant ?</h4>
-                <p>Échangez en direct avec un conseiller senior par appel ou visio WhatsApp.</p>
+                <h4>Une question sur le projet de votre enfant ?</h4>
+                <p>Un conseiller vous répond par appel ou visio WhatsApp.</p>
                 <a
                   href={waLink("Bonjour Wicka Assistance, je suis un parent et je souhaite des informations pour mon enfant.")}
                   target="_blank"
@@ -284,7 +299,7 @@ export const Home = () => {
                   class="btn-primary btn-full"
                   style="background: #25D366; border-color: #25D366;"
                 >
-                  <i class="fab fa-whatsapp"></i> WhatsApp
+                  <i class="fab fa-whatsapp"></i> Parler à un conseiller
                 </a>
               </div>
             </div>
@@ -292,12 +307,11 @@ export const Home = () => {
 
           <div class="section-header">
             <span class="section-badge">
-              <i class="fas fa-chart-line"></i> Étude et Analyse
+              <i class="fas fa-chart-line"></i> Pourquoi le Maroc
             </span>
-            <h2 class="section-title">Les 6 Grands Atouts du Maroc pour les Études Supérieures</h2>
+            <h2 class="section-title">6 raisons de choisir le Maroc pour ses études supérieures</h2>
             <p class="section-subtitle">
-              Une analyse objective des opportunités académiques, du cadre de vie et de l'insertion professionnelle au
-              Royaume du Maroc.
+              Cadre de vie, diplômes, coût et débouchés : ce qui attire chaque année des milliers d'étudiants africains.
             </p>
           </div>
 
@@ -322,10 +336,10 @@ export const Home = () => {
             <span class="section-badge">
               <i class="fas fa-compass"></i> Par où commencer ?
             </span>
-            <h2 class="section-title">Explorez nos Services</h2>
+            <h2 class="section-title">Lancez votre projet d'études au Maroc en 3 étapes</h2>
             <p class="section-subtitle">
-              Découvrez les universités partenaires, comparez les tarifs dans votre devise, puis déposez votre
-              candidature.
+              Choisissez votre école, estimez votre budget, puis déposez votre candidature. Nous nous occupons ensuite de
+              l'inscription et des démarches.
             </p>
           </div>
           <div class="explore-cards">
@@ -350,12 +364,12 @@ export const Home = () => {
         <div class="container">
           <div class="section-header">
             <span class="section-badge">
-              <i class="fas fa-road"></i> Rigueur et Zéro Faux Pas
+              <i class="fas fa-road"></i> Notre méthode
             </span>
-            <h2 class="section-title">Le Parcours d'Admission en 5 Étapes</h2>
+            <h2 class="section-title">De la candidature à la carte de séjour : votre parcours en 5 étapes</h2>
             <p class="section-subtitle">
-              Un protocole transparent et éprouvé pour garantir l'admission de l'étudiant et rassurer ses parents à
-              chaque étape.
+              Un parcours clair, avec un conseiller à vos côtés à chaque étape. L'étudiant et ses parents savent toujours
+              où en est le dossier.
             </p>
           </div>
 
@@ -383,7 +397,7 @@ export const Home = () => {
             <div class="about-image-wrapper">
               <img
                 src="/assets/images/about-team.jpg"
-                alt="Équipe de conseillers Wicka Assistance à Casablanca"
+                alt="Étudiants accompagnés par Wicka Assistance au Maroc"
                 class="about-main-img"
               />
               <div class="about-experience-badge">
@@ -394,17 +408,17 @@ export const Home = () => {
 
             <div class="about-content">
               <span class="section-badge">
-                <i class="fas fa-shield-alt"></i> À Propos de Nous
+                <i class="fas fa-shield-alt"></i> À propos de Wicka Assistance
               </span>
-              <h2 class="section-title">Une Équipe Passionnée Basée à Casablanca et Rabat</h2>
-              <p class="section-subtitle" style="text-align: left; margin-bottom: 20px;">
-                Wicka Assistance est un cabinet spécialisé dans la mobilité universitaire et l'orientation stratégique
-                des étudiants internationaux vers le Maroc.
-              </p>
+              <h2 class="section-title">
+                Une équipe basée à Casablanca et Rabat, à vos côtés avant et après votre arrivée
+              </h2>
               <p style="color: var(--slate-600); line-height: 1.7; font-size: 0.95rem;">
-                Contrairement aux démarcheurs informels, nous entretenons des liens institutionnels directs avec les
-                directions des admissions des universités privées les plus renommées. Nous assurons un suivi juridique
-                et consulaire rigoureux pour faire de chaque projet d'études une réussite éclatante.
+                Wicka Assistance accompagne les étudiants internationaux qui veulent étudier au Maroc : orientation,
+                inscription dans les écoles privées reconnues par l'État, démarches de visa, accueil à l'aéroport, carte
+                consulaire et carte de séjour. Notre équipe est installée au Maroc : nous connaissons les écoles, les
+                administrations et les délais. Chaque dossier est suivi par un conseiller identifié, avec un contrat et un
+                reçu officiel pour chaque paiement.
               </p>
 
               <div class="about-values-list">
@@ -423,7 +437,7 @@ export const Home = () => {
 
               <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn-primary">
                 <i class="fab fa-whatsapp"></i>
-                <span>WhatsApp</span>
+                <span>Parler à un conseiller</span>
               </a>
             </div>
           </div>
@@ -435,12 +449,12 @@ export const Home = () => {
         <div class="container">
           <div class="section-header">
             <span class="section-badge">
-              <i class="fas fa-star"></i> Retours d'Expérience
+              <i class="fas fa-star"></i> Avis et témoignages
             </span>
-            <h2 class="section-title">Ce Que Disent les Étudiants et Leurs Parents</h2>
+            <h2 class="section-title">Ce que disent les étudiants et leurs parents</h2>
             <p class="section-subtitle">
-              Des témoignages réels d'étudiants du Sénégal, de Côte d'Ivoire, du Cameroun et du Gabon admis avec succès
-              dans les plus grandes écoles marocaines.
+              Des étudiants du Sénégal, de Côte d'Ivoire, du Cameroun et du Gabon racontent leur parcours avec Wicka
+              Assistance, de l'inscription à l'installation au Maroc.
             </p>
           </div>
 
@@ -448,16 +462,17 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* ===== RÉUSSITES ===== */}
+      {/* ===== GALERIE VIE ÉTUDIANTE ===== */}
       <section class="success-band">
         <div class="container">
           <div class="section-header">
             <span class="section-badge">
-              <i class="fas fa-heart"></i> Une nouvelle vie vous attend
+              <i class="fas fa-heart"></i> Votre future vie étudiante
             </span>
-            <h2 class="section-title">Épanouissez-vous sur les campus marocains</h2>
+            <h2 class="section-title">Étudier au Maroc : une nouvelle vie vous attend</h2>
             <p class="section-subtitle">
-              Étudiants heureux, diplômés fiers : construisez votre avenir au Maroc avec un accompagnement personnalisé.
+              Campus modernes, vie étudiante animée, diplôme à la clé : construisez votre avenir au Maroc, avec un
+              accompagnement du premier dossier à l'installation.
             </p>
           </div>
 
@@ -474,10 +489,10 @@ export const Home = () => {
 
           <div class="success-cta">
             <a href="/candidature" class="btn-primary">
-              <i class="fas fa-paper-plane"></i> Je veux réussir moi aussi
+              <i class="fas fa-paper-plane"></i> Commencer ma candidature
             </a>
             <a
-              href={waLink("Bonjour Wicka, je veux réussir mes études au Maroc comme vos étudiants.")}
+              href={waLink("Bonjour Wicka, je souhaite des informations pour étudier au Maroc.")}
               target="_blank"
               rel="noopener noreferrer"
               class="btn-secondary"
@@ -500,12 +515,12 @@ export const Home = () => {
           <div class="cta-photo-content">
             <span class="cta-band-kicker light">
               <i class="fas fa-graduation-cap"></i> Rentrée {promo.rentree}
-              {promo.active && <> · Il reste peu de places</>}
+              {promo.active && <> · Offre de lancement −50 %</>}
             </span>
             <h2>Votre avenir au Maroc commence par un simple message.</h2>
             <p>
-              Admission garantie, visa, carte consulaire jusqu'à l'ambassade, navette aéroport et carte de séjour : on
-              s'occupe de tout. Parlez à un conseiller dès maintenant.
+              Inscription, visa, accueil à l'aéroport, carte consulaire et carte de séjour : nous vous accompagnons à
+              chaque étape. Écrivez à un conseiller dès maintenant, il vous répond sous 72 h maximum.
             </p>
 
             {/*
@@ -515,7 +530,7 @@ export const Home = () => {
             {promo.active && (
               <div class="promo-countdown promo-only" id="promoCountdown" data-promo-deadline={promo.deadline}>
                 <span class="pc-label">
-                  <i class="fas fa-hourglass-half"></i> Fin de la PROMO −50% dans :
+                  <i class="fas fa-hourglass-half"></i> L'offre de lancement −50 % se termine dans :
                 </span>
                 <div class="pc-units">
                   <div>
@@ -548,10 +563,10 @@ export const Home = () => {
                 rel="noopener noreferrer"
                 class="btn-cta-white btn-cta-lg"
               >
-                <i class="fab fa-whatsapp"></i> Discuter avec un conseiller
+                <i class="fab fa-whatsapp"></i> Parler à un conseiller
               </a>
               <a href="/candidature" class="btn-cta-ghost btn-cta-lg light">
-                <i class="fas fa-rocket"></i> Je démarre ma candidature
+                <i class="fas fa-rocket"></i> Démarrer ma candidature
               </a>
             </div>
           </div>
@@ -563,12 +578,12 @@ export const Home = () => {
         <div class="container">
           <div class="section-header">
             <span class="section-badge">
-              <i class="fas fa-question-circle"></i> Questions Clés
+              <i class="fas fa-question-circle"></i> Questions fréquentes
             </span>
-            <h2 class="section-title">Foire Aux Questions Parents et Candidats</h2>
+            <h2 class="section-title">Étudier au Maroc : vos questions, nos réponses</h2>
             <p class="section-subtitle">
-              Tout savoir sur les admissions en universités privées, les visas, le transport sécurisé et le coût de la
-              vie au Maroc.
+              Admission, visa, carte consulaire, carte de séjour, budget et accueil : les réponses aux questions que se
+              posent les parents et les candidats.
             </p>
           </div>
 
@@ -576,16 +591,15 @@ export const Home = () => {
 
           <div class="faq-cta-box">
             <div>
-              <h3>Une autre question ? Un conseiller vous répond en quelques minutes.</h3>
+              <h3>Une autre question ?</h3>
               <p>
-                {promo.active
-                  ? "Ne restez pas dans le doute : profitez de la promo −50% avant la fin du compte à rebours."
-                  : "Ne restez pas dans le doute : un conseiller vous accompagne à chaque étape de votre projet."}
+                Écrivez-nous sur WhatsApp : un conseiller vous répond sous 72 h maximum. Vous pouvez aussi démarrer
+                directement votre candidature.
               </p>
             </div>
             <div class="faq-cta-actions">
               <a
-                href={waLink("Bonjour Wicka, j'ai une question avant de souscrire.")}
+                href={waLink("Bonjour Wicka, j'ai une question avant de déposer ma candidature.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-cta-white"
@@ -593,7 +607,7 @@ export const Home = () => {
                 <i class="fab fa-whatsapp"></i> Poser ma question sur WhatsApp
               </a>
               <a href="/candidature" class="btn-cta-ghost">
-                <i class="fas fa-paper-plane"></i> Postuler maintenant
+                <i class="fas fa-paper-plane"></i> Démarrer ma candidature
               </a>
             </div>
           </div>
