@@ -1,5 +1,5 @@
 import type { Context } from "hono";
-import { getEnv, type Env } from "../lib/env";
+import { getEnv, parseSiteUrls, siteOrigin, type Env } from "../lib/env";
 
 /**
  * API POST /api/send-email  (contact, rappel, candidature) — envoi via Brevo (API REST, fetch).
@@ -7,7 +7,7 @@ import { getEnv, type Env } from "../lib/env";
  * compatible Cloudflare Workers ET Vercel (Edge).
  *
  * Variables : BREVO_API_KEY (secret), BREVO_FROM_EMAIL, BREVO_FROM_NAME, BREVO_COMPANY_EMAIL,
- *             PUBLIC_SITE_URL, BREVO_LOGO_URL.
+ *             PUBLIC_SITE_URL (1 à 3 adresses séparées par des virgules), BREVO_LOGO_URL.
  *
  * Envois :
  *  - contact et candidature : 1 e-mail à l'entreprise (reply-to = visiteur) + 1 e-mail de confirmation au visiteur ;
@@ -59,20 +59,29 @@ function requiredText(value: unknown, label: string, max = 4000): string {
   if (!result) throw new Error(`${label} est obligatoire.`);
   return result;
 }
-function config(env: Env): Cfg {
+/**
+ * `origin` = adresse du site réellement visitée (siteOrigin(c)) : .com ou workers.dev, donc toujours une URL qui fonctionne.
+ * PUBLIC_SITE_URL peut contenir plusieurs adresses : on ne l'utilise jamais telle quelle pour fabriquer un lien.
+ */
+function config(env: Env, origin: string): Cfg {
   const required = ["BREVO_API_KEY", "BREVO_FROM_EMAIL", "BREVO_COMPANY_EMAIL"] as const;
   const missing = required.filter((key) => !env[key]);
   if (missing.length) throw new Error(`Configuration Brevo manquante: ${missing.join(", ")}`);
   if (!validEmail(env.BREVO_FROM_EMAIL) || !validEmail(env.BREVO_COMPANY_EMAIL)) {
     throw new Error("Configuration Brevo invalide: vérifiez les adresses e-mail.");
   }
-  const siteUrl = text(env.PUBLIC_SITE_URL, 300).replace(/\/$/, "");
+  const base = text(origin, 300).replace(/\/+$/, "");
+  const configuredLogo = text(env.BREVO_LOGO_URL, 500);
+  const siteUrls = parseSiteUrls(env.PUBLIC_SITE_URL);
+  // Logo hébergé ailleurs que sur le site (CDN...) : utilisé tel quel.
+  // Logo hébergé sur l'un des domaines du site : reconstruit sur l'adresse qui fonctionne.
+  const logoIsExternal = configuredLogo !== "" && !siteUrls.some((u) => configuredLogo.startsWith(u));
   return {
     apiKey: env.BREVO_API_KEY as string,
     fromEmail: text(env.BREVO_FROM_EMAIL, 160),
     fromName: text(env.BREVO_FROM_NAME, 80) || "Wicka Assistance",
     companyEmail: text(env.BREVO_COMPANY_EMAIL, 160),
-    logoUrl: text(env.BREVO_LOGO_URL, 500) || (siteUrl ? `${siteUrl}/assets/images/logo.png` : "")
+    logoUrl: logoIsExternal ? configuredLogo : base ? `${base}/assets/images/logo.png` : configuredLogo
   };
 }
 function emailLayout(title: string, content: string, cfg: Cfg): string {
@@ -220,7 +229,7 @@ export async function sendEmailHandler(c: Context) {
     if (contentLength > 50_000) return c.json({ error: "Requête trop volumineuse." }, 413);
     const body: Body = await c.req.json().catch(() => ({}));
     if (body.website) return c.json({ ok: true });
-    const cfg = config(getEnv(c));
+    const cfg = config(getEnv(c), siteOrigin(c));
     const type = text(body.type, 20);
     if ((type === "contact" || type === "candidature") && body.consent !== "accepted") {
       return c.json({ error: "Le consentement est obligatoire." }, 400);
