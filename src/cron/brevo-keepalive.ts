@@ -80,13 +80,13 @@ export async function sendMonthlyBrevoCheck(env: BrevoEnv): Promise<void> {
 
   const site = await resolveSiteUrl(env);
 
-  // Le logo configuré n'est utilisé que s'il appartient à l'adresse qui fonctionne ;
-  // sinon on le reconstruit à partir de cette adresse.
-  const configuredLogo = env.BREVO_LOGO_URL?.trim();
-  const logoUrl =
-    configuredLogo && configuredLogo.startsWith(site)
-      ? configuredLogo
-      : `${site}/assets/images/logo.png`;
+  // Logo hébergé ailleurs que sur le site (CDN...) : utilisé tel quel.
+  // Logo hébergé sur l'un des domaines du site : reconstruit sur l'adresse qui fonctionne.
+  const configuredLogo = env.BREVO_LOGO_URL?.trim() ?? "";
+  const siteUrls = [...parseSiteUrls(env.PUBLIC_SITE_URL), COM_URL, WORKERS_DEV_URL];
+  const logoIsExternal =
+    configuredLogo !== "" && !siteUrls.some((u) => configuredLogo.startsWith(u));
+  const logoUrl = logoIsExternal ? configuredLogo : `${site}/assets/images/logo.png`;
 
   const dateFr = new Intl.DateTimeFormat("fr-FR", {
     dateStyle: "full",
