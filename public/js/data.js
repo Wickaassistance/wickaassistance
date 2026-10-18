@@ -1,6 +1,10 @@
 /**
  * Wicka Assistance - Données du site web (Version Enrichie et Spécial Parents)
- * Universités privées d'excellence, Tarifs par Pays, Étude de vie au Maroc et Transport Aéroport
+ * Universités privées, Tarifs par Pays, Étude de vie au Maroc et Transport Aéroport
+ *
+ * Version mise à jour avec la page Tarifs : promo, notes par pays, villes du simulateur,
+ * packs et FAQ reformulés. Les blocs « universities », « moroccoAdvantages » et
+ * « testimonials » sont conservés tels quels : ils seront traités avec leurs pages.
  */
 
 const WICKA_DATA = {
@@ -17,13 +21,13 @@ const WICKA_DATA = {
   // Bandeau Promotion Rentrée (affiché sur tout le site)
   promo: {
     active: true,
-    label: "PROMO RENTRÉE 2026-2027",
+    label: "OFFRE DE LANCEMENT RENTRÉE 2026-2027",
     discount: "-50%",
-    deadline: "Offre de lancement à durée limitée",
-    disclaimer: "Tarifs promotionnels de lancement, susceptibles d'évoluer à tout moment. Le prix est bloqué et garanti dès la signature de votre contrat."
+    deadline: "Tarifs réduits valables jusqu'au 15 novembre",
+    disclaimer: "Tarifs de lancement valables jusqu'au 15 novembre. Le tarif est confirmé dès la signature de votre contrat."
   },
 
-  // Taux de conversion et Grille par pays (prix promotionnels + prix barrés d'origine)
+  // Taux de conversion et Grille par pays (prix promotionnels + prix d'origine)
   countryPricings: {
     senegal: {
       name: "Sénégal 🇸🇳",
@@ -35,7 +39,7 @@ const WICKA_DATA = {
       packAdmission: "60 000 FCFA",
       packVIPOld: "235 000 FCFA",
       packVIP: "120 000 FCFA",
-      note: "Paiement local sans frais de change via Wave / Orange Money. Réglable en 2 tranches."
+      note: "Paiement local via Wave ou Orange Money, sans frais de change. Règlement possible en 2 tranches. Un contrat et un reçu vous sont remis lors du paiement."
     },
     ivory_coast: {
       name: "Côte d'Ivoire 🇨🇮",
@@ -47,7 +51,7 @@ const WICKA_DATA = {
       packAdmission: "60 000 FCFA",
       packVIPOld: "235 000 FCFA",
       packVIP: "120 000 FCFA",
-      note: "Disponible en règlement échelonné en 2 tranches sans frais."
+      note: "Règlement possible en 2 tranches, sans frais supplémentaires. Un contrat et un reçu vous sont remis lors du paiement."
     },
     cameroon: {
       name: "Cameroun 🇨🇲",
@@ -59,7 +63,7 @@ const WICKA_DATA = {
       packAdmission: "60 000 FCFA",
       packVIPOld: "235 000 FCFA",
       packVIP: "120 000 FCFA",
-      note: "Suivi consulaire rigoureux pour le visa d'études à Douala / Yaoundé."
+      note: "Suivi et accompagnement de la procédure de visa d'études depuis Douala ou Yaoundé."
     },
     gabon: {
       name: "Gabon 🇬🇦",
@@ -71,7 +75,7 @@ const WICKA_DATA = {
       packAdmission: "60 000 FCFA",
       packVIPOld: "235 000 FCFA",
       packVIP: "120 000 FCFA",
-      note: "Assistance rapide pour l'équivalence du Bac gabonais."
+      note: "Accompagnement pour les démarches d'équivalence du bac gabonais."
     },
     guinea: {
       name: "Guinée 🇬🇳",
@@ -83,7 +87,7 @@ const WICKA_DATA = {
       packAdmission: "850 000 GNF (~92 €)",
       packVIPOld: "3 300 000 GNF",
       packVIP: "1 700 000 GNF (~185 €)",
-      note: "Accompagnement complet depuis Conakry."
+      note: "Accompagnement à distance depuis Conakry."
     },
     congo: {
       name: "Congo et RDC 🇨🇬 🇨🇩",
@@ -95,7 +99,7 @@ const WICKA_DATA = {
       packAdmission: "99 $ (~60 000 FCFA)",
       packVIPOld: "385 $",
       packVIP: "199 $ (~120 000 FCFA)",
-      note: "Transfert sécurisé avec reçu officiel instantané."
+      note: "Un contrat et un reçu vous sont remis lors du règlement."
     },
     diaspora_europe: {
       name: "France / Europe / Diaspora 🇫🇷 🇪🇺",
@@ -107,7 +111,7 @@ const WICKA_DATA = {
       packAdmission: "92 €",
       packVIPOld: "360 €",
       packVIP: "185 €",
-      note: "Facture professionnelle aux normes européennes."
+      note: "Une facture vous est remise lors du règlement."
     },
     maroc: {
       name: "Maroc (Sur place) 🇲🇦",
@@ -119,65 +123,65 @@ const WICKA_DATA = {
       packAdmission: "990 DH",
       packVIPOld: "3 890 DH",
       packVIP: "1 990 DH",
-      note: "Reçu et contrat signés dans nos bureaux à Casablanca ou Rabat."
+      note: "Contrat et reçu signés dans nos bureaux de Casablanca ou de Rabat."
     }
   },
 
-  // Données pour le simulateur de coût de la vie par ville (en MAD par mois)
+  // Données pour le simulateur de coût de la vie par ville (en MAD par mois, estimations indicatives)
   citiesCost: {
     casablanca: {
       name: "Casablanca",
       food: 1300,
       transport: 250,
       lifestyle: 450,
-      badge: "Pôle Économique et Cosmopolite (Stages et Emplois)",
-      tram: "Réseau Tramway et Busway moderne",
-      advantages: "Immense vivier de stages, sièges de multinationales, transports 24/7."
+      badge: "Pôle économique (stages et emplois)",
+      tram: "Réseau de tramway et de bus",
+      advantages: "Grande métropole économique avec de nombreuses entreprises, des possibilités de stages et un réseau de tramway et de bus."
     },
     rabat: {
       name: "Rabat",
       food: 1200,
       transport: 200,
       lifestyle: 400,
-      badge: "Capitale Verte et Cité Universitaire d'Excellence",
-      tram: "Tramway reliant Rabat et Salé, ville calme et ultra sécurisée",
-      advantages: "Atmosphère paisible, ministères, bibliothèques nationales, sécurité maximale."
+      badge: "Capitale administrative et ville universitaire",
+      tram: "Tramway reliant Rabat et Salé",
+      advantages: "Ville calme et verte, tramway reliant Rabat et Salé, institutions nationales et bibliothèques."
     },
     fes: {
       name: "Fès",
       food: 950,
       transport: 150,
       lifestyle: 300,
-      badge: "Capitale Spirituelle et Pôle Académique Euromed",
-      tram: "Réseau de bus et taxis très abordables",
-      advantages: "Coût de la vie très bas, campus Euromed ultra moderne, riche patrimoine."
+      badge: "Ville historique et pôle académique Euromed",
+      tram: "Réseau de bus et taxis",
+      advantages: "Coût de la vie plus modéré que dans les grandes métropoles, campus Euromed et riche patrimoine historique."
     },
     marrakech: {
       name: "Marrakech",
       food: 1100,
       transport: 180,
       lifestyle: 350,
-      badge: "Cadre de Vie Idéal, Climat Ensoleillé et Dynamique",
-      tram: "Bus à haut niveau de service et transports fluides",
-      advantages: "Cadre agréable, écoles de commerce et tourisme prestigieuses, aéroport international."
+      badge: "Ville dynamique et ensoleillée",
+      tram: "Réseau de bus à haut niveau de service",
+      advantages: "Cadre de vie agréable, écoles de commerce et de tourisme, aéroport international."
     },
     tanger: {
       name: "Tanger",
       food: 1150,
       transport: 200,
       lifestyle: 350,
-      badge: "Pôle Industriel, Tech et Proche de l'Europe",
-      tram: "TGV Al Boraq vers Rabat et Casa en 1h20",
-      advantages: "Tanger Med, usines automobiles/aéronautiques, ouvert sur le monde."
+      badge: "Pôle industriel et technologique, proche de l'Europe",
+      tram: "TGV Al Boraq vers Rabat et Casablanca",
+      advantages: "Zone industrielle de Tanger Med, industries automobile et aéronautique, liaison TGV Al Boraq vers Rabat et Casablanca."
     },
     ifrane: {
       name: "Ifrane",
       food: 900,
       transport: 120,
       lifestyle: 280,
-      badge: "Campus d'Élite Al Akhawayn et Cadre Nature",
-      tram: "Petite ville sécurisée, tout accessible à pied",
-      advantages: "La « petite Suisse marocaine » : campus américain, air pur, sécurité totale et vie étudiante dynamique."
+      badge: "Campus Al Akhawayn et cadre de montagne",
+      tram: "Petite ville, déplacements à pied",
+      advantages: "Petite ville de montagne surnommée « la petite Suisse marocaine », campus de type américain et cadre calme."
     }
   },
 
@@ -192,6 +196,7 @@ const WICKA_DATA = {
   ],
 
   // Universités et Grandes Écoles privées réputées au Maroc
+  // (conservé tel quel : sera revu avec la page Universités)
   universities: [
     {
       id: "euromed_fes",
@@ -436,6 +441,7 @@ const WICKA_DATA = {
   ],
 
   // Les avantages du Maroc pour les études des enfants (Guide Parents et Étudiants)
+  // (conservé tel quel : sera revu avec la page d'accueil)
   moroccoAdvantages: [
     {
       icon: "shield-check",
@@ -469,7 +475,7 @@ const WICKA_DATA = {
     }
   ],
 
-  // Packs de services (Mis à jour : Transport aéroport inclus, logement retiré)
+  // Packs de services (mêmes textes que la page Tarifs)
   packs: [
     {
       id: "orientation",
@@ -477,14 +483,14 @@ const WICKA_DATA = {
       badge: "Pour démarrer",
       price: "290 DH",
       oldPrice: "590 DH",
-      equivalentPrice: "~18 000 FCFA / 27 €",
-      subprice: "Prix PROMO de lancement · Sans engagement",
+      equivalentPrice: "environ 18 000 FCFA / 27 €",
+      subprice: "Tarif de lancement · Sans engagement",
       features: [
-        "Audit complet du profil et relevés de notes",
-        "Sélection stratégique des 3 meilleures universités",
-        "Estimation détaillée du budget et des frais de scolarité",
-        "Guide complet de la vie étudiante et sécurité au Maroc",
-        "Session de questions/réponses de 30 min avec un conseiller"
+        "Analyse de vos relevés de notes",
+        "Recommandation de 3 universités privées adaptées à votre profil",
+        "Estimation des frais de scolarité selon la ville",
+        "Guide pratique sur la vie au Maroc",
+        "Entretien d'orientation de 30 minutes avec un conseiller"
       ],
       cta: "Souscrire au Diagnostic",
       highlight: false
@@ -495,47 +501,47 @@ const WICKA_DATA = {
       badge: "⭐ Pack recommandé",
       price: "990 DH",
       oldPrice: "1 990 DH",
-      equivalentPrice: "~60 000 FCFA / 92 €",
-      subprice: "Prix PROMO de lancement · Paiement local par pays (Wave, Orange Money, etc.)",
+      equivalentPrice: "environ 60 000 FCFA / 92 €",
+      subprice: "Tarif de lancement · Paiement local par pays (Wave, Orange Money, etc.)",
       popular: true,
       features: [
-        "Toutes les prestations du Pack Orientation",
-        "Dépôt prioritaire de 3 à 5 candidatures universitaires",
-        "Optimisation sur-mesure du CV et de la lettre de motivation",
-        "Préparation personnalisée aux entretiens oraux d'admission",
-        "Suivi direct auprès des jurys jusqu'à la Lettre d'Admission Officielle",
-        "Assistance complète pour la demande de bourse universitaire",
-        "Constitution du dossier de Carte Consulaire auprès de l'ambassade du Maroc",
-        "Délivrance de l'attestation officielle pour la demande de visa"
+        "Toutes les prestations du Pack Diagnostic et Orientation",
+        "Préparation et dépôt de 3 à 5 candidatures universitaires",
+        "Aide à la rédaction du CV et des lettres de motivation",
+        "Accompagnement pour les tests et examens exigés par certaines universités",
+        "Suivi de vos candidatures jusqu'à la décision des universités",
+        "Accompagnement dans votre demande de bourse d'études (dossier déposé par l'étudiant)",
+        "Aide au montage et au dépôt du dossier de carte consulaire"
       ],
       cta: "Choisir le Pack Admission",
       highlight: true
     },
     {
       id: "vip",
-      name: "Pack VIP All-Inclusive et Navette Aéroport",
-      badge: "Sérénité Totale des Parents et Étudiants",
+      name: "Pack VIP et Navette Aéroport",
+      badge: "Accompagnement complet et navette",
       price: "1 990 DH",
       oldPrice: "3 890 DH",
-      equivalentPrice: "~120 000 FCFA / 185 €",
-      subprice: "Prix PROMO de lancement · Prise en charge complète dès l'atterrissage",
+      equivalentPrice: "environ 120 000 FCFA / 185 €",
+      subprice: "Tarif de lancement · De l'admission à votre installation au Maroc",
       popular: false,
       features: [
         "Toutes les prestations du Pack Admission Réussie",
-        "Montage et validation rigoureuse du Dossier Consulaire de Visa",
-        "🏛️ Accompagnement complet pour la Carte Consulaire jusqu'au dépôt à l'ambassade du Maroc",
-        "🚗 Navette Privée Sécurisée : Accueil à la sortie de l'aéroport et transfert direct avec chauffeur vers votre ville d'affectation (Casablanca, Rabat, Fès, Marrakech, Tanger, Ifrane)",
-        "📱 Carte SIM 4G marocaine remise en main propre avec forfait internet",
-        "🏦 Accompagnement physique pour l'ouverture du compte bancaire marocain",
-        "📑 Prise en charge intégrale du dossier de Carte de Séjour (Titre de séjour) jusqu'à l'obtention",
-        "📞 Ligne d'assistance et contact d'urgence 7j/7 pour rassurer les parents"
+        "Suivi et accompagnement de la procédure de visa, selon votre nationalité",
+        "Carte consulaire : accompagnement pour le montage et le dépôt du dossier",
+        "Navette aéroport : accueil à l'aéroport de Casablanca avec chauffeur privé et transfert vers votre ville et votre université",
+        "Carte SIM 4G locale avec forfait internet, remise à l'arrivée",
+        "Suivi et accompagnement pour l'ouverture d'un compte étudiant dans une banque de la place",
+        "Carte de séjour : accompagnement dans la préparation du dossier (dépôt effectué par l'étudiant à la préfecture)",
+        "Ligne d'assistance prioritaire pour l'étudiant et ses parents"
       ],
       cta: "Choisir le Pack VIP et Navette",
       highlight: false
     }
   ],
 
-  // Avis et témoignages d'étudiants vérifiés
+  // Avis et témoignages d'étudiants
+  // (conservé tel quel : sera revu avec la page d'accueil)
   testimonials: [
     {
       id: "tem_1",
@@ -591,19 +597,19 @@ const WICKA_DATA = {
     }
   ],
 
-  // Questions Fréquentes Spéciales Parents et Étudiants
+  // Questions fréquentes (parents et étudiants) : textes alignés sur la page Tarifs
   faqs: [
     {
-      q: "En tant que parent, comment puis-je m'assurer de la sécurité de mon enfant au Maroc ?",
-      a: "Le Maroc est réputé pour sa sécurité et sa grande hospitalité. Dès l'atterrissage, notre équipe prend en charge l'étudiant avec notre chauffeur privé qui assure le transfert direct et sécurisé depuis l'aéroport jusqu'à sa ville d'accueil. Nous remettons immédiatement une carte SIM marocaine avec connexion internet pour que l'étudiant puisse appeler ses parents dès les premières minutes."
+      q: "Comment l'étudiant est-il accueilli à son arrivée au Maroc ?",
+      a: "Avec le Pack VIP, un chauffeur privé accueille l'étudiant à l'aéroport de Casablanca et le conduit vers sa ville d'études et son université. Une carte SIM marocaine avec forfait internet lui est remise à l'arrivée, afin qu'il puisse contacter ses parents dès les premières minutes."
     },
     {
-      q: "Comment fonctionne le service de Transport / Navette Aéroport vers la ville ?",
-      a: "Avec notre Pack VIP, dès que vous communiquez votre billet d'avion, notre chauffeur privé vous attend dans le hall des arrivées de l'aéroport avec une pancarte à votre nom. Il vous conduit confortablement en véhicule climatisé jusqu'à votre ville et lieu de résidence à Casablanca, Rabat, Fès, Marrakech ou Tanger."
+      q: "Comment fonctionne la navette depuis l'aéroport ?",
+      a: "Avec le Pack VIP, communiquez-nous votre billet d'avion : un chauffeur privé vous accueille à l'aéroport de Casablanca et vous conduit vers votre ville d'études et votre université."
     },
     {
       q: "Quels sont les modes de paiement acceptés selon mon pays ?",
-      a: "Nous facilitons les paiements locaux sans frais cachés : Wave et Orange Money (Sénégal, Côte d'Ivoire, Mali, Guinée), MTN Mobile Money / Moov (Cameroun, Côte d'Ivoire, Bénin), Airtel Money / BGFI (Gabon, Congo), Virement bancaire direct ou Western Union. Un reçu officiel et un contrat d'assistance vous sont immédiatement délivrés."
+      a: "Le paiement se fait localement selon votre pays : Wave et Orange Money (Sénégal, Côte d'Ivoire, Mali, Guinée), MTN Mobile Money ou Moov (Cameroun, Côte d'Ivoire, Bénin), Airtel Money ou BGFI (Gabon, Congo), virement bancaire ou Western Union. Un contrat et un reçu vous sont remis lors du règlement."
     },
     {
       q: "Pourquoi choisir des universités privées comme l'UEMF Euromed, l'ESTEM, l'UM6P ou l'UIR ?",
@@ -611,11 +617,15 @@ const WICKA_DATA = {
     },
     {
       q: "Wicka Assistance s'occupe-t-elle des démarches de visa d'études ?",
-      a: "Oui ! Nous fournissons tous les justificatifs officiels requis par le consulat (attestation d'inscription agréée, suivi de dossier consulaire) et nous vous guidons pas à pas pour que votre demande de visa soit acceptée sans encombre dès le premier dépôt."
+      a: "Selon votre nationalité, un visa peut être requis ou non. Wicka vous accompagne dans la procédure qui correspond à votre situation : préparation du dossier et suivi des démarches. La décision relève des autorités compétentes et ne peut pas être garantie."
+    },
+    {
+      q: "Wicka Assistance garantit-elle mon admission ?",
+      a: "Non. L'admission est décidée par chaque établissement. Wicka vous conseille, prépare et dépose vos candidatures, puis suit leur avancement jusqu'à la décision des universités."
     },
     {
       q: "Comment contacter directement vos conseillers au Maroc ?",
-      a: "Vous pouvez joindre notre équipe 7j/7 directement sur WhatsApp ou par email à wickaassistance@gmail.com. Nous organisons également des rendez-vous téléphoniques ou des visios avec les parents pour répondre à toutes leurs questions."
+      a: "Vous pouvez joindre notre équipe sur WhatsApp ou par e-mail à wickaassistance@gmail.com. Des rendez-vous téléphoniques ou en visio sont possibles pour répondre aux questions des parents."
     }
   ]
 };
