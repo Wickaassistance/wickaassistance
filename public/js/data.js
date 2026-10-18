@@ -5,6 +5,7 @@
  * Version mise à jour avec la page Tarifs : promo, notes par pays, villes du simulateur,
  * packs et FAQ reformulés. Les blocs « universities », « moroccoAdvantages » et
  * « testimonials » sont conservés tels quels : ils seront traités avec leurs pages.
+ * La FAQ de la page d'accueil (« faqs ») a été remplacée par la version validée (10 questions).
  */
 
 const WICKA_DATA = {
@@ -597,35 +598,50 @@ const WICKA_DATA = {
     }
   ],
 
-  // Questions fréquentes (parents et étudiants) : textes alignés sur la page Tarifs
+  // Questions fréquentes (parents et étudiants) : version validée pour la page d'accueil (10 questions)
   faqs: [
     {
-      q: "Comment l'étudiant est-il accueilli à son arrivée au Maroc ?",
-      a: "Avec le Pack VIP, un chauffeur privé accueille l'étudiant à l'aéroport de Casablanca et le conduit vers sa ville d'études et son université. Une carte SIM marocaine avec forfait internet lui est remise à l'arrivée, afin qu'il puisse contacter ses parents dès les premières minutes."
+      q: "Qui délivre la lettre d'admission ?",
+      a: "L'école ou l'université elle-même. Nous constituons et déposons votre dossier, puis nous suivons la réponse de l'école."
     },
     {
-      q: "Comment fonctionne la navette depuis l'aéroport ?",
-      a: "Avec le Pack VIP, communiquez-nous votre billet d'avion : un chauffeur privé vous accueille à l'aéroport de Casablanca et vous conduit vers votre ville d'études et votre université."
+      q: "Combien de temps faut-il pour avoir une réponse ?",
+      a: "Un conseiller vous répond sous 72 h maximum après votre candidature. Le délai de réponse de l'école varie selon l'établissement."
     },
     {
-      q: "Quels sont les modes de paiement acceptés selon mon pays ?",
-      a: "Le paiement se fait localement selon votre pays : Wave et Orange Money (Sénégal, Côte d'Ivoire, Mali, Guinée), MTN Mobile Money ou Moov (Cameroun, Côte d'Ivoire, Bénin), Airtel Money ou BGFI (Gabon, Congo), virement bancaire ou Western Union. Un contrat et un reçu vous sont remis lors du règlement."
+      // À VÉRIFIER avant publication : exigence de visa selon la nationalité (liste par pays)
+      q: "Faut-il un visa pour étudier au Maroc ?",
+      a: "Cela dépend de votre nationalité. Nous vous indiquons les documents à fournir et vous guidons dans la préparation du départ."
     },
     {
-      q: "Pourquoi choisir des universités privées comme l'UEMF Euromed, l'ESTEM, l'UM6P ou l'UIR ?",
-      a: "Ces établissements sont reconnus par l'État marocain et proposent des équipements adaptés ainsi que des partenariats de double diplomation avec des universités en France, aux USA et en Europe. Leurs formations couvrent plusieurs domaines."
+      q: "Quelle différence entre carte consulaire et carte de séjour ?",
+      a: "La carte consulaire se fait auprès de l'ambassade de votre pays, une fois au Maroc. La carte de séjour est le titre de séjour marocain, à demander aussi sur place. Nous accompagnons et suivons les deux dossiers."
     },
     {
-      q: "Wicka Assistance s'occupe-t-elle des démarches de visa d'études ?",
-      a: "Selon votre nationalité, un visa peut être requis ou non. Wicka vous accompagne dans la procédure qui correspond à votre situation : préparation du dossier et suivi des démarches. La décision relève des autorités compétentes et ne peut pas être garantie."
+      // À VÉRIFIER avant publication : scolarité (environ 30 000 MAD/an) et budget de vie (3 500 à 6 000 MAD/mois)
+      q: "Combien coûtent les études et la vie au Maroc ?",
+      a: "Compter environ 30 000 MAD par an pour une école privée, et 3 500 à 6 000 MAD par mois pour la vie courante. Détails sur la page Tarifs."
     },
     {
-      q: "Wicka Assistance garantit-elle mon admission ?",
-      a: "Non. L'admission est décidée par chaque établissement. Wicka vous conseille, prépare et dépose vos candidatures, puis suit leur avancement jusqu'à la décision des universités."
+      q: "Que comprend l'accueil à l'aéroport ?",
+      a: "Un chauffeur vous attend à l'atterrissage, vous conduit dans votre ville d'accueil et vous remet une carte SIM 4G."
     },
     {
-      q: "Comment contacter directement vos conseillers au Maroc ?",
-      a: "Vous pouvez joindre notre équipe sur WhatsApp ou par e-mail à wickaassistance@gmail.com. Des rendez-vous téléphoniques ou en visio sont possibles pour répondre aux questions des parents."
+      q: "Les paiements donnent-ils lieu à un reçu ?",
+      a: "Oui : chaque paiement donne lieu à une facture et à un reçu officiel remis immédiatement."
+    },
+    {
+      // À VÉRIFIER avant publication : liste exacte des documents selon l'école
+      q: "Quels documents faut-il pour candidater ?",
+      a: "En général : relevés de notes, diplôme ou attestation de réussite, pièce d'identité et lettre de motivation. La liste exacte dépend de l'école."
+    },
+    {
+      q: "Puis-je choisir mon école, ma filière et ma ville ?",
+      a: "Oui. Après l'étude de vos relevés et de votre budget, nous vous proposons des écoles adaptées. La décision finale vous appartient, à vous et à vos parents."
+    },
+    {
+      q: "Comment les parents suivent-ils le dossier ?",
+      a: "Un conseiller identifié reste votre interlocuteur, avec des points réguliers par appel ou visio WhatsApp."
     }
   ]
 };
