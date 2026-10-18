@@ -1991,11 +1991,9 @@ function waLink(text2) {
 }
 var NAV_LINKS = [
   { label: "Accueil", href: "/" },
-  { label: "Espace Parents", href: "/#parents" },
+  { label: "Parents", href: "/#parents" },
   { label: "Universit\xE9s", href: "/universites" },
-  { label: "Tarifs par Pays", href: "/tarifs" },
-  { label: "Simulateur de Budget", href: "/tarifs#simulateur" },
-  { label: "Packs et Navette", href: "/tarifs#packs" }
+  { label: "Tarifs", href: "/tarifs" }
 ];
 var FOOTER_LINKS = [
   { label: "Accueil", href: "/" },
@@ -4939,9 +4937,9 @@ var Header = ({ path }) => {
       /* @__PURE__ */ jsxDEV("a", { href: "/", class: "brand-logo", children: /* @__PURE__ */ jsxDEV(Brand, {}) }),
       /* @__PURE__ */ jsxDEV("ul", { class: "nav-links", children: NAV_LINKS.map((link2) => /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: link2.href, class: link2.href === path ? "nav-link active" : "nav-link", children: link2.label }) })) }),
       /* @__PURE__ */ jsxDEV("div", { class: "nav-actions", children: [
-        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "nav-callback-btn", id: "triggerCallbackModal", children: [
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "nav-callback-btn", id: "triggerCallbackModal", "data-callback-trigger": true, children: [
           /* @__PURE__ */ jsxDEV("i", { class: "fas fa-phone-alt" }),
-          /* @__PURE__ */ jsxDEV("span", { children: "\xCAtre Rappel\xE9" })
+          /* @__PURE__ */ jsxDEV("span", { children: "Rappelez-moi" })
         ] }),
         /* @__PURE__ */ jsxDEV("a", { href: "/candidature", class: "btn-primary btn-sm", children: [
           /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
@@ -4965,9 +4963,9 @@ var Header = ({ path }) => {
           /* @__PURE__ */ jsxDEV("i", { class: "fas fa-paper-plane" }),
           " D\xE9marrer ma Candidature"
         ] }),
-        /* @__PURE__ */ jsxDEV("a", { href: waLink(), target: "_blank", rel: "noopener noreferrer", class: "btn-secondary btn-full", children: [
-          /* @__PURE__ */ jsxDEV("i", { class: "fab fa-whatsapp text-rose" }),
-          " WhatsApp"
+        /* @__PURE__ */ jsxDEV("button", { type: "button", class: "btn-secondary btn-full mobile-callback-trigger", "data-callback-trigger": true, children: [
+          /* @__PURE__ */ jsxDEV("i", { class: "fas fa-phone-alt" }),
+          " Rappelez-moi"
         ] })
       ] })
     ] })

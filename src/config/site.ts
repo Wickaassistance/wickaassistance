@@ -90,16 +90,13 @@ export function waLink(text?: string): string {
 
 export type NavLink = { label: string; href: string };
 
-/** Menu principal (desktop + mobile). */
+/** Menu principal (desktop + mobile) : liens essentiels uniquement. */
 export const NAV_LINKS: NavLink[] = [
   { label: "Accueil", href: "/" },
-  { label: "Espace Parents", href: "/#parents" },
+  { label: "Parents", href: "/#parents" },
   { label: "Universités", href: "/universites" },
-  { label: "Tarifs par Pays", href: "/tarifs" },
-  { label: "Simulateur de Budget", href: "/tarifs#simulateur" },
-  { label: "Packs et Navette", href: "/tarifs#packs" },
+  { label: "Tarifs", href: "/tarifs" }
 ];
-
 /** Colonne « Navigation » du footer. */
 export const FOOTER_LINKS: NavLink[] = [
   { label: "Accueil", href: "/" },

@@ -61,9 +61,9 @@ export const Header = ({ path }: { path: string }) => {
             </ul>
 
             <div class="nav-actions">
-              <button type="button" class="nav-callback-btn" id="triggerCallbackModal">
+              <button type="button" class="nav-callback-btn" id="triggerCallbackModal" data-callback-trigger>
                 <i class="fas fa-phone-alt"></i>
-                <span>Être Rappelé</span>
+                <span>Rappelez-moi</span>
               </button>
               <a href="/candidature" class="btn-primary btn-sm">
                 <i class="fas fa-paper-plane"></i>
@@ -97,9 +97,9 @@ export const Header = ({ path }: { path: string }) => {
           <a href="/candidature" class="btn-primary btn-full mobile-nav-link">
             <i class="fas fa-paper-plane"></i> Démarrer ma Candidature
           </a>
-          <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn-secondary btn-full">
-            <i class="fab fa-whatsapp text-rose"></i> WhatsApp
-          </a>
+          <button type="button" class="btn-secondary btn-full mobile-callback-trigger" data-callback-trigger>
+            <i class="fas fa-phone-alt"></i> Rappelez-moi
+          </button>
         </div>
       </div>
     </>
