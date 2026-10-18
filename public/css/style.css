@@ -1972,73 +1972,186 @@ button {
 
 /* ============================================================
    SECTION FAQ ACCORDÉON
+   Design : cartes numérotées en grille à 2 colonnes (1 colonne sur mobile),
+   icône « + » qui devient « × » à l'ouverture, trait rose sur la carte ouverte.
+   Le HTML et le JS (js/main.js → initFaqAccordion) ne changent pas.
    ============================================================ */
 .faq-section {
   padding: 90px 0;
   background-color: var(--white);
 }
 
-
 .faq-accordion-wrap {
-  max-width: 820px;
+  max-width: 1080px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+  align-items: start; /* une carte qui s'ouvre n'étire pas sa voisine */
+  counter-reset: faq;
 }
 
 .faq-item {
+  counter-increment: faq;
+  position: relative;
   border: 1px solid var(--rose-100);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background-color: var(--white);
+  box-shadow: var(--shadow-sm);
   transition: var(--transition);
   overflow: hidden;
 }
 
-.faq-item.active {
+/* Trait de couleur à gauche (visible seulement quand la carte est ouverte) */
+.faq-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
   border-color: var(--rose-300);
   box-shadow: var(--shadow-md);
 }
 
+.faq-item.active {
+  border-color: var(--rose-300);
+  background: linear-gradient(180deg, var(--white) 0%, var(--rose-soft) 100%);
+  box-shadow: var(--shadow-lg);
+}
+
+.faq-item.active::before {
+  background: linear-gradient(180deg, var(--rose-800) 0%, var(--rose-500) 100%);
+}
+
 .faq-question-btn {
   width: 100%;
+  min-height: 68px;
   text-align: left;
-  padding: 18px 24px;
+  padding: 18px 20px 18px 22px;
   background: none;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.05rem;
+  gap: 14px;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--slate-800);
+}
+
+.faq-question-btn:focus-visible {
+  outline: 2px solid var(--rose-600);
+  outline-offset: -3px;
+  border-radius: var(--radius-lg);
+}
+
+/* Numéro de la question : 01, 02, 03… */
+.faq-question-btn::before {
+  content: counter(faq, decimal-leading-zero);
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--rose-800);
+  background-color: var(--rose-100);
+  transition: var(--transition);
 }
 
 .faq-item.active .faq-question-btn {
   color: var(--rose-900);
 }
 
-.faq-icon {
-  font-size: 0.9rem;
-  color: var(--rose-600);
-  transition: transform 0.3s ease;
+.faq-item.active .faq-question-btn::before {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--rose-800) 0%, var(--rose-600) 100%);
 }
 
+.faq-q-text {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+/* Icône « + » (la flèche Font Awesome est masquée, le signe est dessiné en CSS) */
+.faq-icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rose-800);
+  background-color: var(--rose-50);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.faq-icon i {
+  display: none;
+}
+
+.faq-icon::before {
+  content: "+";
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Ouverte : le « + » pivote et devient « × » */
 .faq-item.active .faq-icon {
-  transform: rotate(180deg);
+  transform: rotate(45deg);
+  color: var(--white);
+  background-color: var(--rose-800);
 }
 
 .faq-answer-panel {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.35s ease;
-  padding: 0 24px;
+  padding: 0 22px 0 72px; /* 22 + 36 (numéro) + 14 (écart) : le texte s'aligne sous la question */
 }
 
 .faq-answer-panel p {
-  padding-bottom: 20px;
-  font-size: 0.92rem;
+  padding-bottom: 22px;
+  font-size: 0.93rem;
   color: var(--slate-600);
-  line-height: 1.6;
+  line-height: 1.65;
+}
+
+/* Tablette et mobile : une seule colonne */
+@media (max-width: 900px) {
+  .faq-accordion-wrap {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-question-btn {
+    padding: 16px 14px 16px 16px;
+    gap: 12px;
+    font-size: 0.95rem;
+  }
+  .faq-question-btn::before {
+    width: 32px;
+    height: 32px;
+    font-size: 0.78rem;
+  }
+  .faq-answer-panel {
+    padding: 0 16px 0 60px; /* 16 + 32 + 12 */
+  }
 }
 
 /* ============================================================
