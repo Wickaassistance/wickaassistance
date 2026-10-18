@@ -10,9 +10,17 @@ keep_vars = true
 directory = "./public"
 binding = "ASSETS"
 
-# Variables non secrètes. PUBLIC_SITE_URL vide = l'origine de la requête est utilisée.
+# Cron : le 1er de chaque mois à 09h00 UTC (10h00 à Casablanca)
+# -> envoie un e-mail de contrôle Brevo à BREVO_COMPANY_EMAIL (src/cron/brevo-keepalive.ts)
+[triggers]
+crons = ["0 9 1 * *"]
+
+# Variables non secrètes.
+# PUBLIC_SITE_URL : 1 à 3 adresses séparées par des virgules. Le site utilise celle qui
+# correspond au domaine visité (.com ou workers.dev) ; le cron prend la première qui répond.
+# Vide = l'origine de la requête est utilisée.
 [vars]
-PUBLIC_SITE_URL = ""
+PUBLIC_SITE_URL = "https://wickaassistance.com,https://wickaassistance.wickaassistance.workers.dev"
 BREVO_COMPANY_EMAIL = "wickaassistance@gmail.com"
 
 # Secrets et variables à ajouter (npx wrangler secret put NOM, ou tableau de bord Cloudflare) :
