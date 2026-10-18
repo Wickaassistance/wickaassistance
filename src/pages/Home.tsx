@@ -66,8 +66,11 @@ const buildExplore = (
     title: "Estimer mon budget",
     text: promoActive ? (
       <>
-        Tarifs par pays, simulateur de budget et formules d'accompagnement. Offre de lancement{" "}
-        <strong>−50 %</strong> pour la rentrée {rentree}.
+        Tarifs par pays, simulateur de budget et formules d'accompagnement.
+        <span class="promo-only">
+          {" "}
+          Offre de lancement <strong>−50 %</strong> pour la rentrée {rentree}.
+        </span>
       </>
     ) : (
       "Tarifs par pays, simulateur de budget et formules d'accompagnement."
@@ -515,7 +518,7 @@ export const Home = () => {
           <div class="cta-photo-content">
             <span class="cta-band-kicker light">
               <i class="fas fa-graduation-cap"></i> Rentrée {promo.rentree}
-              {promo.active && <> · Offre de lancement −50 %</>}
+              {promo.active && <span class="promo-only"> · Offre de lancement −50 %</span>}
             </span>
             <h2>Votre avenir au Maroc commence par un simple message.</h2>
             <p>
