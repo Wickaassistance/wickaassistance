@@ -58,6 +58,7 @@
 
   .pricing-card.featured {
     transform: none;
+    margin: 0;
   }
 
   .pricing-card.featured:hover {
@@ -474,7 +475,9 @@ button,
 @media (max-width: 768px) {
   .hero-glow-circle-1, .cta-band-glow { display: none; }
   .pricing-grid { width: 100%; max-width: 100%; grid-template-columns: minmax(0, 1fr); }
-  .pricing-card, .pricing-card.featured { width: 100%; min-width: 0; transform: none; overflow: hidden; }
+  .pricing-card, .pricing-card.featured { width: 100%; min-width: 0; transform: none; margin: 0; overflow: hidden; }
+  .pack-header { min-height: 0; }
+  .pricing-card > .btn-full { margin-left: 20px; margin-right: 20px; }
   .promo-ribbon-bar { flex-wrap: wrap; gap: 10px; padding: 14px 16px; }
   .promo-ribbon-text { min-width: 0; flex: 1 1 180px; }
   .promo-badge-pct { flex: 0 0 auto; font-size: 1rem; padding: 7px 11px; }

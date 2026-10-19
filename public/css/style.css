@@ -1487,102 +1487,95 @@ button {
 }
 
 /* ============================================================
-   SECTION PACKS & SERVICES
+   SECTION PACKS & SERVICES — cartes de formules
    ============================================================ */
 .pricing-section {
   padding: 90px 0;
-  background-color: var(--rose-soft);
+  background: linear-gradient(180deg, var(--rose-soft) 0%, #ffffff 100%);
 }
-
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  align-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 34px;
 }
-
 .pricing-card {
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: 36px 30px;
-  border: 1px solid var(--rose-100);
-  box-shadow: var(--shadow-md);
   position: relative;
-  transition: var(--transition);
-}
-
-.pricing-card.featured {
-  background: linear-gradient(180deg, #ffffff 0%, #fff5f7 100%);
-  border: 2px solid var(--rose-600);
-  box-shadow: var(--shadow-xl);
-  transform: scale(1.04);
-}
-
-.pricing-card.featured:hover {
-  transform: scale(1.06);
-}
-
-.pricing-badge-popular {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--rose-800) 0%, var(--rose-600) 100%);
-  color: var(--white);
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 6px 18px;
-  border-radius: var(--radius-full);
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  box-shadow: 0 4px 12px rgba(159, 18, 57, 0.3);
-}
-
-.pack-header {
-  margin-bottom: 24px;
-}
-
-.pack-name {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-}
-
-.pack-price-box {
-  margin-top: 16px;
-  margin-bottom: 6px;
-}
-
-.pack-price {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: var(--rose-900);
-  font-family: var(--font-heading);
-}
-
-.pack-subprice {
-  font-size: 0.82rem;
-  color: var(--slate-500);
-}
-
-.pack-features-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin: 28px 0 34px;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--rose-200);
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(76, 5, 25, 0.08);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-
-.pack-features-list li {
-  font-size: 0.9rem;
-  color: var(--slate-700);
+.pricing-card::before {
+  content: '';
+  display: block;
+  height: 5px;
+  flex: 0 0 5px;
+  background: linear-gradient(90deg, var(--rose-300), var(--rose-600));
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--rose-300);
+  box-shadow: 0 20px 44px rgba(76, 5, 25, 0.14);
+}
+.pricing-card.featured {
+  border: 2px solid var(--rose-600);
+  background: linear-gradient(180deg, #fff 0%, #fff7f9 100%);
+  box-shadow: 0 22px 50px rgba(159, 18, 57, 0.18);
+  transform: translateY(-10px);
+}
+.pricing-card.featured::before { height: 7px; flex-basis: 7px; background: linear-gradient(90deg, var(--rose-900), var(--gold)); }
+.pricing-card.featured:hover { transform: translateY(-14px); }
+.pricing-badge-popular {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  background: var(--rose-900);
+  color: var(--white);
+  font-size: .68rem;
+  font-weight: 800;
+  padding: 7px 11px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+}
+.pack-header {
+  min-height: 238px;
+  padding: 28px 28px 24px;
+  margin: 0;
+  border-bottom: 1px solid var(--rose-100);
+}
+.pack-header .badge-rose-soft { display: inline-flex; align-items: center; min-height: 28px; }
+.pack-name {
+  min-height: 2.7em;
+  margin: 14px 0 8px;
+  font-size: 1.34rem;
+  line-height: 1.25;
+  color: var(--slate-900);
+}
+.pack-header > p { min-height: 2.9em; line-height: 1.45; margin-bottom: 0; }
+.pack-price-box { margin: 18px 0 5px; }
+.pack-price { font-size: clamp(2.15rem, 3vw, 2.7rem); font-weight: 900; line-height: 1; color: var(--rose-900); font-family: var(--font-heading); }
+.pack-subprice { display: block; min-height: 2.6em; font-size: .78rem; line-height: 1.4; color: var(--slate-500); }
+.pack-features-list {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 13px;
+  margin: 0;
+  padding: 26px 28px 28px;
 }
-
-.pack-features-list li i {
-  color: var(--rose-600);
-  margin-top: 3px;
-}
+.pack-features-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; line-height: 1.48; color: var(--slate-700); }
+.pack-features-list li i { flex: 0 0 auto; margin-top: 3px; color: var(--rose-600); }
+.pricing-card > .btn-full { width: auto; margin: 0 28px 28px; }
 
 /* ============================================================
    SECTION À PROPOS
