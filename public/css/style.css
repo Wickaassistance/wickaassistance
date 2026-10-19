@@ -2155,115 +2155,32 @@ button {
 }
 
 /* ============================================================
-   FOOTER
+   FOOTER — version claire et unifiée
    ============================================================ */
-.site-footer {
-  background: linear-gradient(135deg, var(--rose-900) 0%, var(--slate-950) 75%);
-  color: var(--slate-300);
-  padding: 80px 0 30px;
-  border-top: 4px solid var(--rose-500);
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 0.9fr 0.9fr 1.1fr;
-  gap: 40px;
-  margin-bottom: 50px;
-}
-
-.footer-brand .brand-title {
-  color: var(--white);
-}
-
-.footer-brand p {
-  margin: 16px 0 24px;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  max-width: 320px;
-}
-
-.footer-social-links {
-  display: flex;
-  gap: 12px;
-}
-
-.social-icon-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-}
-
-.social-icon-btn:hover {
-  background: var(--rose-600);
-  transform: translateY(-3px);
-}
-
-.footer-col-title {
-  color: var(--white);
-  font-size: 1.05rem;
-  margin-bottom: 20px;
-  position: relative;
-  padding-bottom: 8px;
-}
-
-.footer-col-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 24px;
-  height: 2px;
-  background-color: var(--rose-600);
-}
-
-.footer-links-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-links-list a {
-  font-size: 0.92rem;
-  color: var(--slate-300);
-}
-
-.footer-links-list a:hover {
-  color: var(--rose-300);
-  padding-left: 4px;
-}
-
-.footer-contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.contact-line {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 0.92rem;
-}
-
-.contact-line i {
-  color: var(--rose-500);
-  margin-top: 4px;
-}
-
-.footer-bottom-bar {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.86rem;
-}
+.site-footer { background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%); color: var(--slate-700); padding: 64px 0 24px; border-top: 3px solid var(--rose-200); }
+.footer-grid { display: grid; grid-template-columns: 1.35fr 0.85fr 1fr 1.15fr; gap: 36px; margin-bottom: 40px; }
+.footer-brand .brand-title, .footer-col-title { color: var(--rose-900); }
+.footer-brand .brand-subtitle { color: var(--rose-900); }
+.footer-brand p { margin: 16px 0 24px; font-size: 0.92rem; line-height: 1.65; max-width: 350px; }
+.footer-social-links { display: flex; gap: 12px; }
+.social-icon-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--white); color: var(--rose-900); border: 1px solid var(--rose-200); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+.social-icon-btn:hover { background: var(--rose-800); color: var(--white); border-color: var(--rose-800); transform: translateY(-2px); }
+.footer-col-title { font-size: 1.05rem; margin-bottom: 18px; position: relative; padding-bottom: 8px; }
+.footer-col-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 24px; height: 2px; background-color: var(--rose-600); }
+.footer-links-list { display: flex; flex-direction: column; gap: 10px; }
+.footer-links-list a { font-size: 0.92rem; color: var(--slate-700); }
+.footer-links-list a:hover { color: var(--rose-900); }
+.footer-contact-info { display: flex; flex-direction: column; gap: 12px; }
+.contact-line { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; }
+.contact-line i { color: var(--rose-700); margin-top: 4px; flex: 0 0 auto; }
+.site-footer .contact-line a { color: var(--rose-800); font-weight: 700; }
+.site-footer .contact-line a:hover { color: var(--rose-600); }
+.footer-response-time { margin: 2px 0 0; color: var(--slate-600); font-size: 0.84rem; font-weight: 600; }
+.footer-bottom-bar { border-top: 1px solid var(--rose-200); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.86rem; }
+.footer-copyright { color: var(--rose-900); font-weight: 600; }
+.footer-legal-links { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px 18px; }
+.footer-legal-links a { color: var(--slate-600); }
+.footer-legal-links a:hover { color: var(--rose-900); }
 
 /* ============================================================
    BOUTON FLOTTANT WHATSAPP & TOASTS SOCIAUX
@@ -3517,35 +3434,6 @@ button {
   display: none !important;
 }
 
-
-/* Footer clair, cohérent avec le fond rose et blanc du site. */
-.site-footer {
-  background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%);
-  color: var(--slate-700);
-  border-top: 3px solid var(--rose-200);
-}
-.site-footer .footer-brand .brand-title,
-.site-footer .footer-col-title { color: var(--rose-900); }
-.site-footer .footer-brand .brand-subtitle { color: var(--rose-900); }
-.site-footer .footer-brand p,
-.site-footer .footer-contact-info,
-.site-footer .footer-bottom-bar { color: var(--slate-700); }
-.site-footer .footer-links-list a { color: var(--slate-700); }
-.site-footer .footer-links-list a:hover { color: var(--rose-900); }
-.site-footer .social-icon-btn {
-  background: var(--white);
-  color: var(--rose-900);
-  border: 1px solid var(--rose-200);
-  box-shadow: var(--shadow-sm);
-}
-.site-footer .social-icon-btn:hover {
-  background: var(--rose-800);
-  color: var(--white);
-  border-color: var(--rose-800);
-}
-.site-footer .footer-bottom-bar { border-top-color: var(--rose-200); }
-.site-footer .contact-line a { color: var(--rose-800); font-weight: 700; }
-.site-footer .contact-line a:hover { color: var(--rose-600); }
 
 /* Carte université sans taux : grille pleine largeur. */
 .uni-meta-grid-single { grid-template-columns: 1fr; }

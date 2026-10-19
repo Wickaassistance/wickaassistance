@@ -13,8 +13,8 @@ export const SITE = {
   ogImage: "/assets/images/og-share.jpg",
   locale: "fr_FR",
   themeColor: "#9f1239",
-  /** Année affichée dans le copyright du footer (valeur fixe, comme sur le site d'origine). */
-  copyrightYear: 2026,
+  /** Année du copyright calculée automatiquement à chaque rendu. */
+  copyrightYear: new Date().getFullYear(),
   defaultKeywords:
     "étudier au Maroc, admission Maroc, orientation étudiant, visa étudiant Maroc, études supérieures Maroc, accompagnement étudiant, Wicka Assistance",
   offices: [
@@ -98,30 +98,27 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Tarifs", href: "/tarifs" },
   { label: "Contact", href: "/contact" }
 ];
-/** Colonne « Navigation » du footer. */
+/** Navigation courte du footer. */
 export const FOOTER_LINKS: NavLink[] = [
   { label: "Accueil", href: "/" },
-  { label: "Espace Parents", href: "/#parents" },
-  { label: "Universités Privées", href: "/universites" },
-  { label: "Tarifs par Pays", href: "/tarifs" },
-  { label: "Packs et Navette Aéroport", href: "/tarifs#packs" },
-  { label: "Avis et Témoignages", href: "/#avis" },
-  { label: "Contact", href: "/contact" },
+  { label: "Parents", href: "/#parents" },
+  { label: "Universités", href: "/universites" },
+  { label: "Tarifs", href: "/tarifs" },
+  { label: "Contact", href: "/contact" }
+];
+/** Liens orientés projet étudiant. */
+export const FOOTER_PROJECTS: NavLink[] = [
+  { label: "Choisir mon école", href: "/universites" },
+  { label: "Estimer mon budget", href: "/tarifs#simulateur" },
+  { label: "Voir les packs et la navette", href: "/tarifs#packs" },
+  { label: "Déposer ma candidature", href: "/candidature" }
+];
+/** Liens légaux affichés dans la barre basse. */
+export const LEGAL_LINKS: NavLink[] = [
   { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
+  { label: "Confidentialité", href: "/politique-confidentialite" },
   { label: "CGV", href: "/cgv" }
 ];
-
-/** Colonne « Grandes Écoles Privées » du footer. */
-export const FOOTER_SCHOOLS: NavLink[] = [
-  { label: "UEMF Euromed Fès", href: "/universites" },
-  { label: "ESTEM Casablanca", href: "/universites" },
-  { label: "UIASS Santé Rabat", href: "/universites" },
-  { label: "ESCA Management CFC", href: "/universites" },
-  { label: "EMSI Maroc (Honoris)", href: "/universites" },
-  { label: "UIR Rabat et UM6P", href: "/universites" }
-];
-
 /** Réseaux sociaux affichés dans le footer : uniquement TikTok et WhatsApp. */
 export const SOCIAL_LINKS = [
   { label: "WhatsApp", icon: "fab fa-whatsapp", href: "https://wa.me/212789095498" },

@@ -142,6 +142,9 @@
     text-align: center;
   }
 
+  .footer-legal-links { justify-content: center; gap: 8px 14px; }
+  .footer-brand p { max-width: none; }
+
   .social-proof-container {
     left: 12px;
     bottom: 90px;
