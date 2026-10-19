@@ -95,7 +95,8 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Accueil", href: "/" },
   { label: "Parents", href: "/#parents" },
   { label: "Universités", href: "/universites" },
-  { label: "Tarifs", href: "/tarifs" }
+  { label: "Tarifs", href: "/tarifs" },
+  { label: "Contact", href: "/contact" }
 ];
 /** Colonne « Navigation » du footer. */
 export const FOOTER_LINKS: NavLink[] = [
